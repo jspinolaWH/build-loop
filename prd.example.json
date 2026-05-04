@@ -1,0 +1,54 @@
+[
+  {
+    "id": "REQ-001",
+    "summary": "Add time-off approval flow for EOR employees",
+    "squad": "nexus",
+    "priority": 1,
+    "acceptance_criteria": [
+      "Manager can see a list of pending time-off requests for their direct reports",
+      "Manager can approve or reject a request with a mandatory comment on rejection",
+      "Employee receives an in-app notification when their request is approved or rejected",
+      "Approved time-off is reflected in the employee's entitlement balance immediately",
+      "Request history is visible to both the employee and manager with status and timestamps"
+    ],
+    "skills": ["nexus", "ux-patterns", "testing"],
+    "passes": false,
+    "needs_review": false,
+    "iteration_count": 0,
+    "notes": ""
+  },
+  {
+    "id": "REQ-002",
+    "summary": "Export time-off report as CSV for a given date range",
+    "squad": "nexus",
+    "priority": 2,
+    "acceptance_criteria": [
+      "Admin can select a date range and download a CSV of all time-off requests in that period",
+      "CSV includes: employee name, employee ID, request type, start date, end date, status, approver name, approved/rejected date",
+      "Export respects the admin's legal entity scope — they only see employees in their entities",
+      "Export is available from the Time Off section in the admin panel"
+    ],
+    "skills": ["nexus", "testing"],
+    "passes": false,
+    "needs_review": false,
+    "iteration_count": 0,
+    "notes": ""
+  },
+  {
+    "id": "REQ-003",
+    "summary": "Time-off request model and base API",
+    "squad": "nexus",
+    "priority": 0,
+    "acceptance_criteria": [
+      "TimeOffRequest entity exists with fields: id, employeeId, managerId, type, startDate, endDate, status (PENDING/APPROVED/REJECTED), comment, createdAt, updatedAt",
+      "GET /api/v1/time-off/requests returns paginated list filterable by status, employeeId, dateRange",
+      "POST /api/v1/time-off/requests creates a new request with status PENDING",
+      "PATCH /api/v1/time-off/requests/{id}/status updates status (APPROVED or REJECTED) with comment"
+    ],
+    "skills": ["nexus", "testing"],
+    "passes": false,
+    "needs_review": false,
+    "iteration_count": 0,
+    "notes": ""
+  }
+]

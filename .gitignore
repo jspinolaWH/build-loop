@@ -1,0 +1,17 @@
+# Platform codebases — dropped in for the loop to use, not versioned here
+wastehero_backend_v1-master/
+wastehero_frontend-development/
+
+# Build loop runtime outputs — generated, not versioned
+build-loop/context/
+build-loop/plans/
+build-loop/gaps/
+build-loop/state.json
+build-loop/loop.log
+build-loop/loop-summary.md
+build-loop/req-graph.json
+build-loop/req-graph.md
+
+# OS
+.DS_Store
+Thumbs.db

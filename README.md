@@ -113,6 +113,29 @@ Or with a custom iteration limit per requirement (default: 4):
 
 The loop is fully resumable — if interrupted, re-run `/build-loop` and it picks up from `build-loop/state.json`.
 
+### Resetting a build
+
+`/bl-reset` undoes everything the loop produced — restoring original files, clearing artifacts, and resetting `prd.json` — so a requirement can be rebuilt cleanly from scratch.
+
+**Reset a single requirement:**
+```
+/bl-reset PD-291
+```
+
+**Reset all requirements:**
+```
+/bl-reset all
+```
+
+What it does:
+- **Restores** all modified source files to their pre-build state (from snapshots)
+- **Deletes** any new files the build created
+- **Removes** the plan, gap report, and snapshot for the requirement
+- **Resets** `prd.json` — `passes → false`, `iteration_count → 0`, `notes` cleared
+- **Resets** `state.json` — ready to re-run the loop from graph analysis
+
+When resetting `all`, the dependency graph (`req-graph.json`, `req-graph.md`) is also deleted so it gets re-analysed on the next run. Context scan output is kept — no need to re-scan the codebase architecture.
+
 ---
 
 ## Oliver's designer loop
@@ -151,7 +174,8 @@ build-loop/                    ← this repo
 │   ├── bl-graph-analysis.md   ← maps requirement dependencies, sorts build order
 │   ├── bl-design.md           ← writes implementation plan for one requirement
 │   ├── bl-build.md            ← implements the code from a plan or gap report
-│   └── bl-gap-check.md        ← verifies code against acceptance criteria
+│   ├── bl-gap-check.md        ← verifies code against acceptance criteria
+│   └── bl-reset.md            ← resets one or all requirements back to unbuilt state
 │
 ├── skills/                    ← skill files loaded during design phase
 │   ├── ux-patterns.md         ← Oliver's interaction patterns (fill this in)

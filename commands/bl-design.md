@@ -1,7 +1,7 @@
 ---
 description: Designs the full implementation plan for a single requirement. Reads the requirement graph, architecture context, and relevant skill modules. Writes a concrete plan covering which files to create/edit, BE logic, FE components, and routing. Called by the build-loop orchestrator.
 argument-hint: <requirement-id>
-allowed-tools: [Read, Write, Glob, Grep, Bash]
+allowed-tools: [Read, Write, Glob, Grep, Bash, Skill, mcp__claude_ai_Figma__get_design_context, mcp__claude_ai_Figma__search_design_system, mcp__claude_ai_Figma__get_screenshot, mcp__claude_ai_Figma__get_metadata]
 ---
 
 # BL Design
@@ -38,6 +38,20 @@ From the requirement in prd.json, read the `skills` array. For each skill listed
    - Load whichever is found
 
 Silently load all skill content into your context. Skills inform your design decisions — business rules from domain files must be respected.
+
+### Brand & Design System (always for FE requirements)
+
+If the plan will include **any** frontend component, page, or UI change:
+
+1. Invoke the `/wastehero-brand` skill using the Skill tool. Read and apply all brand guidelines, design tokens, and component rules it provides before designing any FE layer.
+
+2. Search the WasteHero Figma design system for relevant component designs:
+   - File key: `SoMkCuI8zdqg7bo9hzeYmp`
+   - Use `mcp__claude_ai_Figma__search_design_system` to find components matching the requirement (e.g. search "login", "form", "button", "input")
+   - For any matching node, call `mcp__claude_ai_Figma__get_design_context` with the fileKey and nodeId to get the exact design spec
+   - Record the Figma node IDs and design specs in the plan's Context Used section so bl-build can reference them
+
+The Figma design spec is the source of truth for layout, spacing, colors, and component structure. The plan must describe implementation that matches it.
 
 ---
 
@@ -129,7 +143,7 @@ Plan the complete FE implementation. For each layer, specify:
 - What to import and where to render the new component
 - If a new route is needed: file to create, route path, navigation wiring
 
-Apply UX skill rules if `ux-patterns` or `ui-guidelines` is in the skills list.
+Apply brand guidelines from `/wastehero-brand` skill and Figma design specs loaded in Step 1. Every component description must reference the Figma node it implements and the design tokens it uses.
 
 ---
 

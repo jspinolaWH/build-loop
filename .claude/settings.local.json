@@ -33,7 +33,22 @@
       "Bash(sudo -S apt install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev)",
       "Bash(/home/jack/.pyenv/versions/3.8.20/bin/python -m venv .venv)",
       "Bash(.venv/bin/pip install *)",
-      "Bash(node *)"
+      "Bash(node *)",
+      "Bash(netstat -tlnp)",
+      "Bash(docker-compose up *)",
+      "Bash(.venv/bin/python manage.py migrate --run-syncdb)",
+      "Bash(sudo apt-get *)",
+      "Bash(sudo -S apt-get install -y gdal-bin libgdal-dev libgeos-dev libproj-dev)",
+      "Bash(gdal-config --version)",
+      "Bash(python3 -c \"from osgeo import gdal; print\\(gdal.__version__\\)\")",
+      "Bash(.venv/bin/python manage.py migrate)",
+      "Bash(.venv/bin/python *)",
+      "Bash(curl -s http://localhost:8000/)",
+      "Bash(nohup .venv/bin/python manage.py runserver 0.0.0.0:8000)",
+      "Bash(echo \"PID: $!\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:8000/graph-api/)",
+      "Bash(pkill -f \"manage.py runserver\")",
+      "Bash(awk '{print $1}')"
     ]
   }
 }

@@ -1,7 +1,7 @@
 ---
 description: Implements the code for a single requirement. Reads the implementation plan (first iteration) or gap report (subsequent iterations). Implements BE then FE. Runs build check and auto-fixes compile errors. Called by the build-loop orchestrator.
 argument-hint: <requirement-id>
-allowed-tools: [Read, Edit, Write, Glob, Grep, Bash]
+allowed-tools: [Read, Edit, Write, Glob, Grep, Bash, Skill, mcp__claude_ai_Figma__get_design_context, mcp__claude_ai_Figma__search_design_system, mcp__claude_ai_Figma__get_screenshot]
 ---
 
 # BL Build
@@ -15,6 +15,40 @@ PROJECT_ROOT=$(git rev-parse --show-toplevel 2>/dev/null || pwd)
 ```
 
 The argument is `$ARGUMENTS` — a requirement ID (e.g. `REQ-001`).
+
+### Snapshot setup
+
+Before modifying or creating any file outside of `build-loop/`, snapshot it:
+
+```bash
+SNAP_DIR="$PROJECT_ROOT/build-loop/snapshots/$ARGUMENTS"
+mkdir -p "$SNAP_DIR"
+```
+
+**For every existing file you are about to edit:**
+```bash
+# Record original content (mirrors the file's path relative to PROJECT_ROOT)
+DEST="$SNAP_DIR/$(echo 'path/to/file' | sed 's|/|__|g').orig"
+cp "path/to/file" "$DEST"
+```
+
+**For every new file you are about to create:**
+```bash
+# Record that this file did not exist (empty marker)
+touch "$SNAP_DIR/$(echo 'path/to/file' | sed 's|/|__|g').new"
+```
+
+Write a manifest at `$SNAP_DIR/manifest.json` listing every file touched:
+```json
+{
+  "requirement_id": "[REQ_ID]",
+  "timestamp": "[ISO timestamp]",
+  "modified": ["path/to/file1", "path/to/file2"],
+  "created": ["path/to/new/file1"]
+}
+```
+
+Do this before the first edit. Never skip snapshotting.
 
 ### Determine mode
 
@@ -60,9 +94,19 @@ For each item in the plan's backend section, in build order:
 
 ### Frontend implementation order
 
+**Before writing a single line of FE code:**
+
+1. Invoke the `/wastehero-brand` skill using the Skill tool. Read everything it outputs. All design tokens, color values, typography rules, spacing, and component patterns it defines are mandatory — not optional. Do not use any color, font size, spacing value, or shadow that isn't in the design system.
+
+2. If the plan's Context Used section lists Figma node IDs, call `mcp__claude_ai_Figma__get_design_context` for each one (fileKey: `SoMkCuI8zdqg7bo9hzeYmp`) to get the exact design spec before implementing. Match the design exactly — spacing, border radius, font weight, color.
+
+3. If no Figma node IDs are in the plan, use `mcp__claude_ai_Figma__search_design_system` to search for the component you're building (e.g. "login form", "input field", "button") and pull the design context before implementing.
+
+Only after loading brand guidelines and Figma design context, implement in this order:
+
 1. **Types** — create or edit type/interface files.
 2. **API layer** — create or edit API call functions. Wire to the correct endpoint.
-3. **Components** — create or edit each component as planned.
+3. **Components** — create or edit each component as planned, strictly following the Figma spec and brand tokens.
 4. **Page integration** — edit the page file to import and render new components. Add routing if needed.
 
 ---

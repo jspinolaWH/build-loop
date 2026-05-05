@@ -1,0 +1,25 @@
+[
+  {
+    "id": "PD-291",
+    "summary": "Fix the FE UI",
+    "squad": "ledger",
+    "priority": 0,
+    "acceptance_criteria": [
+      "The login page uses a single centred card layout with the application logo at the top, an email field, a password field with a show/hide toggle, a primary 'Sign in' button, and a 'Forgot password?' link beneath the form.",
+      "Email and password inputs have visible labels, sufficient padding, a consistent border radius, and a clear focus state that meets WCAG AA contrast requirements.",
+      "The 'Sign in' button is full-width within the card, uses the primary brand colour, and shows a loading spinner with the button disabled while authentication is in flight.",
+      "Inline validation errors appear directly under the relevant field in red with an icon, and a generic 'Invalid email or password' error appears above the form when authentication fails — without ever indicating which of the two was wrong.",
+      "The layout is responsive and renders correctly at 320px, 768px, and 1440px widths, with the card filling the viewport on mobile and centred with whitespace on desktop.",
+      "The page meets baseline accessibility requirements: every input has an associated label, the form is fully keyboard-navigable in logical tab order, and the password show/hide toggle has an aria-label that updates between 'Show password' and 'Hide password'.",
+      "Pressing Enter inside either input submits the form, and the email field receives autofocus on initial page load."
+    ],
+    "skills": [
+      "ledger",
+      "ux-patterns"
+    ],
+    "passes": false,
+    "needs_review": false,
+    "iteration_count": 0,
+    "notes": ""
+  }
+]

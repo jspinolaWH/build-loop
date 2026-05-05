@@ -1,0 +1,1286 @@
+[
+  {
+    "id": "PD-291",
+    "summary": "Billing cycles",
+    "squad": "ledger",
+    "priority": 0,
+    "acceptance_criteria": [
+      "Each service or event type is linked to a predefined billing cycle, such as monthly, quarterly, or annually. The system automatically sorts and processes events according to their assigned schedules, preventing conflicts between different billing cycles. Users can define and adjust billing intervals through an intuitive user interface, ensuring that changes in customer preferences or contracts are reflected without affecting other services.",
+      "During the billing process, events are grouped according to their billing period. The system validates events before invoices are generated, ensuring that only relevant events are included. This minimizes manual work and improves accuracy.",
+      "Automatic billing cycle assignment: Services or events are assigned specific billing intervals (e.g. monthly, quarterly, annually).",
+      "Independent service-based billing: Different services under the same customer account can follow individual billing schedules.",
+      "Automatic event grouping: Events are automatically sorted and billed according to their assigned schedules.",
+      "Flexible user configuration: Office users can modify service- or property-specific billing cycles without impacting other billing settings.",
+      "Invoice preview and confirmation: Users can review upcoming invoices to ensure correctness before finalization.",
+      "Seamless integration: Billing schedules are synchronized with external financial and accounting systems to ensure consistency."
+    ],
+    "skills": [
+      "ledger",
+      "ux-patterns"
+    ],
+    "passes": false,
+    "needs_review": false,
+    "iteration_count": 0,
+    "notes": ""
+  },
+  {
+    "id": "PD-292",
+    "summary": "Billing restrictions",
+    "squad": "ledger",
+    "priority": 1,
+    "acceptance_criteria": [
+      "Billing interval: Immediate invoicing for certain events (e.g. urgent or one-off services) and scheduled invoicing for recurring services.",
+      "Service types: Different service categories, such as waste collection, septic tank emptying, or other utility services, can have separate invoicing criteria.",
+      "Customer preferences: Customized invoicing options based on customer contracts, ensuring that tailored, service-type-specific invoices are generated.",
+      "Invoice grouping: The system should also prevent conflicting groupings. For example, a one-off service such as septic tank emptying should not be delayed by other recurring services in the invoicing process. In contrast, mixed waste services can be bundled into a semi-annual invoice based on predefined customer rules.",
+      "From an operational perspective, this configuration improves cash flow management, minimizes invoicing errors, and provides customers with clear and timely invoices for different services. Users can easily define and manage these rules through the ERP user interface, ensuring that the applied invoicing terms are fully traceable.",
+      "The invoicing system also integrates with external financial management tools to ensure that separate invoices are processed correctly and comply with industry billing standards. Reporting enables finance teams to track both immediate and periodic invoices, helping to ensure compliance and financial accuracy."
+    ],
+    "skills": [
+      "ledger",
+      "ux-patterns"
+    ],
+    "passes": false,
+    "needs_review": false,
+    "iteration_count": 0,
+    "notes": ""
+  },
+  {
+    "id": "PD-295",
+    "summary": "Account and cost center data",
+    "squad": "ledger",
+    "priority": 2,
+    "acceptance_criteria": [
+      "The WasteHero system assigns products and services to the correct accounts based on rules defined during the waste management company’s implementation. Based on these rules, the system can direct charges for the same product or service in the invoicing data to different accounts and/or cost centers as part of the FINVOICE data.",
+      "The cost center information for an event may consist of multiple components and data points. These may include, for example, the product’s cost center, the reception point’s cost center, and the service responsibility information defined in the contract.",
+      "The structure and content of cost centers are defined during implementation, and for any change needs, WasteHero support can assist in modifying the formats.",
+      "Accounts for different products are defined in connection with product price lists. For example, VAT may be posted to a VAT account, waste treatment fees to their own account, and transport fees to a separate account.",
+      "When entering account information, automatic completion is used: the user can start typing an account, and the system will suggest matching account options.",
+      "Accounts are managed in the settings, where properties such as account number, name, and validity period can be defined. All accounts in use within the system are visible in the settings. Account management can be performed by the waste management company’s main users.",
+      "Account information can be set for each individual pricing component of a product.",
+      "Cost centers are determined for events according to configuration rules.",
+      "Cost center and accounting account information is exported as part of the FINVOICE data.",
+      "Accounting accounts can be centrally managed within the system.",
+      "Define the desired cost center logic."
+    ],
+    "skills": [
+      "ledger",
+      "ux-patterns"
+    ],
+    "passes": false,
+    "needs_review": false,
+    "iteration_count": 0,
+    "notes": ""
+  },
+  {
+    "id": "PD-296",
+    "summary": "Cost centers and accounts",
+    "squad": "ledger",
+    "priority": 3,
+    "acceptance_criteria": [
+      "Financial data is defined through a structured pricing and cost framework in which price lists, cost centers, VAT classifications, and accounting accounts are predefined at the product and service level. This ensures that the correct pricing and financial data are automatically applied when services are used, minimizing manual input and reducing errors.",
+      "The system allows office users to manage and adjust financial configurations such as cost allocations, service pricing, and accounting accounts. All relevant financial data flows consistently from event creation through invoicing, accounting, and reporting. This ensures that waste management companies can handle large product catalogs with varying pricing structures while maintaining financial accuracy and compliance with municipal tariffs and national regulations.",
+      "Price lists: The system assigns a predefined price list to each event or service, ensuring consistent pricing based on established tariffs and contracts.",
+      "Cost centers: Cost centers can be defined and linked to each product, service, or event, reflecting cost allocation for budgeting and financial analysis.",
+      "Accounting accounts: Events are linked to the appropriate accounts for financial reporting. For example, transport revenue, waste treatment fees, and VAT liabilities are posted to their respective accounts.",
+      "VAT rates: The system supports multiple VAT rates, including rates that vary based on the event date, ensuring compliance with national regulations.",
+      "Other metadata: Custom fields can store additional financial data required by the organization for accurate invoicing and reporting.",
+      "Assigning accounts to different services or products during product creation.",
+      "Dynamically linking financial data to transactions based on tariff rules (e.g. primary and secondary service responsibility pricing).",
+      "Modifying product financial settings when tariffs or regulations change annually.",
+      "Automatic synchronization of cost centers, revenue, and VAT between the ERP and external systems.",
+      "Generation of reports detailing revenue, costs, and VAT breakdowns for audits and statutory inspections.",
+      "The system ensures that financial data flows through all stages of the invoicing process, from event creation to final reporting. Data consistency prevents discrepancies between invoicing and accounting records, thereby minimizing errors.",
+      "Due to the complexity of waste management operations, the system supports hundreds of products, each with unique pricing and accounting requirements. Structured export capabilities enable companies to maintain accurate data across diverse services and customer types."
+    ],
+    "skills": [
+      "ledger",
+      "ux-patterns"
+    ],
+    "passes": false,
+    "needs_review": false,
+    "iteration_count": 0,
+    "notes": ""
+  },
+  {
+    "id": "PD-300",
+    "summary": "Reverse charge VAT",
+    "squad": "ledger",
+    "priority": 4,
+    "acceptance_criteria": [
+      "The WasteHero system supports reverse charge VAT invoicing, enabling the waste companies to issue invoices where the VAT liability is transferred to the buyer for applicable goods and services, such as the sale of scrap metal and the handling of construction waste.",
+      "Automatic application of reverse charge VAT: The system automatically applies reverse charge VAT when a product or service marked as subject to reverse VAT is added to an invoice.",
+      "Support for mixed VAT scenarios: A single invoice can include both standard VAT and reverse charge VAT transactions.",
+      "Invoice compliance requirements: The invoice includes required legal references, the buyer's VAT number, and a clear indication that reverse charge VAT applies.",
+      "Integration with VAT reporting: Reverse charge VAT transactions are included in sales reports as required.",
+      "Data transfer to external invoicing systems: Reverse charge VAT information is exported as part of the invoice metadata in FINVOICE format.",
+      "Auditability and traceability: The system records all invoices containing reverse charge VAT.",
+      "Product master data administrator rights must be assigned to responsible persons. A basic user does not need to define prices, accounting accounts, or identification information."
+    ],
+    "skills": [
+      "ledger",
+      "ux-patterns"
+    ],
+    "passes": false,
+    "needs_review": false,
+    "iteration_count": 0,
+    "notes": ""
+  },
+  {
+    "id": "PD-301",
+    "summary": "Gross or net invoicing",
+    "squad": "ledger",
+    "priority": 5,
+    "acceptance_criteria": [
+      "The WasteHero system supports the automatic creation of invoices either as gross or net invoices, in accordance with company policies and customer-specific settings. Gross invoices display amounts inclusive of VAT, while net invoices display amounts exclusive of VAT.",
+      "Information on whether a customer is invoiced using a gross or net invoice is stored in the customer profile in WasteHero and is automatically applied when invoices are generated.",
+      "Default gross/net settings: Ensures consistency and reduces manual adjustments.",
+      "Customer-specific overrides: Authorized users can override the default setting at the customer level.",
+      "Automatic VAT calculation: The system dynamically calculates and displays VAT based on the selected invoice type.",
+      "Dynamic invoice formatting: Invoice templates automatically adapt to display either net or gross amounts.",
+      "Data transfer to external invoicing systems: The gross/net setting is exported as part of the invoice metadata.",
+      "Access control: Only authorized personnel can modify the gross/net setting.",
+      "The system must show the VAT breakdown line by line on the invoice. A VAT summary breakdown must also be visible."
+    ],
+    "skills": [
+      "ledger",
+      "ux-patterns"
+    ],
+    "passes": false,
+    "needs_review": false,
+    "iteration_count": 0,
+    "notes": ""
+  },
+  {
+    "id": "PD-308",
+    "summary": "Invoice data based on language selection",
+    "squad": "ledger",
+    "priority": 6,
+    "acceptance_criteria": [
+      "When generating invoice data, the system selects the correct language version based on the language setting saved in the customer's profile.",
+      "The selected language is integrated into the external invoicing system in the same way as other criteria and elements defined for the invoice template. The system's default primary language is Finnish.",
+      "A language code can be defined for a customer account (Finnish, Swedish, or English).",
+      "Products have separate names defined for each language.",
+      "Translations are defined for product units.",
+      "Addresses can be stored in two languages, and the address is exported to the FINVOICE file according to the selected language.",
+      "The system sets the invoice template language according to the customer's selection, and exports this in the FINVOICE file.",
+      "PJH does not use customer-specific language selection. The invoice form has headings in both Finnish and Swedish."
+    ],
+    "skills": [
+      "ledger",
+      "ux-patterns"
+    ],
+    "passes": false,
+    "needs_review": false,
+    "iteration_count": 0,
+    "notes": ""
+  },
+  {
+    "id": "PD-309",
+    "summary": "Invoice numbering sequence determination",
+    "squad": "ledger",
+    "priority": 7,
+    "acceptance_criteria": [
+      "Waste management companies can define, during the implementation phase, the required format for entering numbers, and the system will apply that model going forward when validating numbering.",
+      "During invoice creation, invoicing users can either define the invoice number series manually, or select the series to be used from pre-defined invoice number series (e.g., sludge invoice, credit invoice, public or private waste collection, annual invoice).",
+      "The waste company can define the structure of the invoice number in an invoicing template. The invoice number must always be unique for each invoice.",
+      "Waste management companies have full control over defining and managing invoice number series.",
+      "The system can prevent duplicate and invalid numbering by applying numbering restrictions.",
+      "Authorized users can select an appropriate invoice number series based on pre-defined categories.",
+      "When performing invoicing, the user selects the desired invoice template, which has an invoice number series defined for the type of invoicing in question.",
+      "Currently the invoice number is formed so that the first digit indicates whether it is private law or public law, and the second digit represents the year. The same invoice number must not be reused (accounts receivable). The Ropo collaboration may still bring changes to this. The logic can be changed if there is a better approach."
+    ],
+    "skills": [
+      "ledger",
+      "ux-patterns"
+    ],
+    "passes": false,
+    "needs_review": false,
+    "iteration_count": 0,
+    "notes": ""
+  },
+  {
+    "id": "PD-310",
+    "summary": "FINVOICE data",
+    "squad": "ledger",
+    "priority": 8,
+    "acceptance_criteria": [
+      "The FINVOICE material is to be generated during the invoicing run.",
+      "The FINVOICE specification/definition is to be agreed during implementation.",
+      "The current latest standard is Finvoice 3.",
+      "The system generates a dataset that contains all the mandatory FINVOICE fields as well as the information required for accounting as described in the requirement. A single invoice line visible to the customer may be split in the FINVOICE data across different ledger accounts for accounting purposes.",
+      "FINVOICE compatibility: The solution will generate invoices in the FINVOICE format and transmit them to an external invoicing system along with the required company-specific accounting identifiers such as cost center, service responsibility, and waste type.",
+      "The solution will support multiple VAT rates, apply the correct VAT rate, and allow VAT rates with decimals to ensure compliance with tax regulations.",
+      "The solution will be integrated with external systems.",
+      "The current latest standard is Finvoice 3."
+    ],
+    "skills": [
+      "ledger",
+      "ux-patterns"
+    ],
+    "passes": false,
+    "needs_review": false,
+    "iteration_count": 0,
+    "notes": ""
+  },
+  {
+    "id": "PD-427",
+    "summary": "Invoicing REST API",
+    "squad": "ledger",
+    "priority": 9,
+    "acceptance_criteria": [],
+    "skills": [
+      "ledger",
+      "ux-patterns"
+    ],
+    "passes": false,
+    "needs_review": true,
+    "iteration_count": 0,
+    "notes": "No testable acceptance criteria found in Jira — needs manual review"
+  },
+  {
+    "id": "PD-269",
+    "summary": "Credit invoices",
+    "squad": "ledger",
+    "priority": 1000,
+    "acceptance_criteria": [
+      "An invoice can be fully credited or partially credited. A partial credit can be issued, for example, when the customer has not yet paid the invoice. Users can define custom text for the credit note and also add an internal comment explaining the reason for the credit. Credited transactions are visible in the customer’s transaction history.",
+      "A credit note can be created directly from an invoice generated in the WasteHero system, or as a separate batch run if, for example, credit notes are to be created for several different invoices at the same time.",
+      "A FINVOICE-formatted file is generated for the credit note and can be delivered to an external invoicing system.",
+      "The credit note is assigned the number of the invoice being credited.",
+      "A credit note can be created for the entire invoice or only for selected invoice rows.",
+      "A FINVOICE-formatted file is generated for the credit note.",
+      "Text can be added to the credit note.",
+      "An internal note can be written in connection with the credit note.",
+      "Historical entries of the transactions are stored in the transaction records.",
+      "The customer has already paid the invoice and an incorrect charge is discovered. A separate credit note is created for the customer and the overcharged amount is refunded directly to the customer.",
+      "Only part of the invoice transactions is credited before the customer has paid the invoice."
+    ],
+    "skills": [
+      "ledger",
+      "ux-patterns"
+    ],
+    "passes": false,
+    "needs_review": false,
+    "iteration_count": 0,
+    "notes": ""
+  },
+  {
+    "id": "PD-271",
+    "summary": "Automatic checks on billing data",
+    "squad": "ledger",
+    "priority": 1001,
+    "acceptance_criteria": [
+      "An automatic error-checking function ensures that all required invoicing data fields are correct before invoices are finalized. Validation rules are configurable.",
+      "Checks are performed during invoice creation. If an error is detected, the system blocks invoice processing until the issues are corrected.",
+      "When invoice data is created, the system performs automatic validation checks.",
+      "If an error is found, the invoice is flagged and users are notified.",
+      "Companies can define their own error-checking rules based on their invoicing requirements.",
+      "Missing billing address.",
+      "Invalid or missing account numbers.",
+      "Missing VAT rate or incorrect VAT calculations.",
+      "Events without assigned cost centers or accounting identifiers.",
+      "If a validation check fails, the system prevents the invoice from being finalized.",
+      "Users must correct the flagged errors before the invoice can be processed.",
+      "A summary report of detected errors is generated, allowing users to review and resolve issues efficiently.",
+      "Errors are categorized (e.g. missing mandatory fields, incorrect financial data) to streamline corrections.",
+      "Creation of validation rules."
+    ],
+    "skills": [
+      "ledger",
+      "ux-patterns"
+    ],
+    "passes": false,
+    "needs_review": false,
+    "iteration_count": 0,
+    "notes": ""
+  },
+  {
+    "id": "PD-272",
+    "summary": "Simulation run of billing data",
+    "squad": "ledger",
+    "priority": 1002,
+    "acceptance_criteria": [
+      "The WasteHero system includes a feature that allows the simulation of invoice data generation before the actual invoicing process is initiated. Through this simulation, users can preview invoice data under the same conditions as in a real invoicing run, ensuring accuracy before invoices are finalized and sent to customers. The simulation generates data that reflects the invoice structure but is marked as test data, preventing accidental processing.",
+      "The simulation feature is particularly useful for large invoicing batches, as it allows billing staff to review and verify the accuracy of all invoice data before sending. The system also generates a summary report from the simulation, providing insights into potential errors, missing information, and financial overviews.",
+      "Users can run a test run that generates invoice data without finalizing or sending invoices.",
+      "The system applies all invoicing rules, such as billing cycles, pricing models, VAT calculations, and cost allocations.",
+      "Total number of generated invoices.",
+      "Breakdown of billed events by category (e.g. waste collection, rental fees).",
+      "VAT calculations and cost center allocations.",
+      "Missing or incorrect data identified during the simulation.",
+      "The system checks for missing invoice data (e.g. incomplete customer information, missing VAT rates, or incorrect pricing).",
+      "If errors are detected, the system flags the affected invoices for correction before the actual invoicing process is started.",
+      "Designed for large invoice batches, the simulation helps prevent mass errors that could impact financial reporting and customer satisfaction.",
+      "Users can filter and analyze simulation results to ensure the correctness of all invoices.",
+      "Each simulation run is logged for traceability, allowing companies to track changes and corrections made prior to final invoicing.",
+      "The simulation process does not modify live invoice data, ensuring a controlled testing environment."
+    ],
+    "skills": [
+      "ledger",
+      "ux-patterns"
+    ],
+    "passes": false,
+    "needs_review": false,
+    "iteration_count": 0,
+    "notes": ""
+  },
+  {
+    "id": "PD-274",
+    "summary": "Invoice simulation",
+    "squad": "ledger",
+    "priority": 1003,
+    "acceptance_criteria": [
+      "The WasteHero system provides a simulation feature that allows users to preview invoices before they are finalized and sent. This functionality ensures that billing clerks can review invoice details, verify financial accuracy, and identify potential errors prior to dispatch. The simulation run generates data that mirrors the final invoice but does not officially issue the invoice, enabling pre-validation of invoice content.",
+      "Invoice simulation preview: Users can generate a draft invoice that replicates the final invoice, including all financial and service-related data.",
+      "Event records: Retrieves event-based transactions such as container emptying, weighing events, and time-based service fees.",
+      "Customer profiles: Extracts customer-specific billing information, such as invoicing method, VAT classification, and contract terms.",
+      "Pricing configurations: Calculates the correct charges by referencing tariff structures, shared service agreements, and regional pricing rules.",
+      "Accounting and cost centers: Ensures that each event is assigned to the appropriate financial accounts and service responsibilities before finalization.",
+      "Mass invoice simulation: Designed to handle bulk invoice processing, allowing large volumes of invoices to be reviewed simultaneously.",
+      "Error detection and validation: The system automatically checks for inconsistencies such as missing VAT information, incorrect pricing, or unassigned accounting accounts, allowing errors to be corrected before invoices are sent.",
+      "Audit and compliance support: Users can review system logs to track invoice changes during the simulation phase, ensuring full traceability."
+    ],
+    "skills": [
+      "ledger",
+      "ux-patterns"
+    ],
+    "passes": false,
+    "needs_review": false,
+    "iteration_count": 0,
+    "notes": ""
+  },
+  {
+    "id": "PD-275",
+    "summary": "Transfer and copy of billed events",
+    "squad": "ledger",
+    "priority": 1004,
+    "acceptance_criteria": [
+      "The user can copy or transfer invoiced events to the same or a different customer or property. Copying and transferring are done in the system either via the invoice or via the event lines.",
+      "In a crediting situation, some of the events can be transferred to be re-invoiced.",
+      "In a situation where the customer for a property changes, the original invoice and the credit note must remain visible for the previous customer, and a new invoice is to be created for the new customer based on the copied events.",
+      "Generated events can be transferred or copied to the same or a different customer or property.",
+      "For invoiced and credited events, information remains visible showing what has been invoiced from whom and what has been credited.",
+      "Invoicing system integration.",
+      "The system must allow creating a credit note and a new invoice with corrected information, either for the same customer or for another customer."
+    ],
+    "skills": [
+      "ledger",
+      "ux-patterns"
+    ],
+    "passes": false,
+    "needs_review": false,
+    "iteration_count": 0,
+    "notes": ""
+  },
+  {
+    "id": "PD-276",
+    "summary": "Transfer of unbilled events",
+    "squad": "ledger",
+    "priority": 1005,
+    "acceptance_criteria": [
+      "Uninvoiced events can be edited until they are included in an invoice. If a customer change or operational error is detected before invoicing, the system allows office staff to manually reassign these events line by line, ensuring accurate customer invoicing and reporting. The updated event data is reflected in all subsequent invoicing, cost allocation, and reporting processes.",
+      "Users can transfer uninvoiced events from one customer to another when property ownership or responsibility changes.",
+      "The system keeps a record of the original customer and ensures that the new customer is billed correctly for the applicable services.",
+      "Previous billing adjustments are recorded accurately to ensure regulatory compliance.",
+      "If an event (e.g. waste collection) has been incorrectly assigned to the wrong address, the system allows it to be moved to the correct location before invoicing.",
+      "Events can be corrected individually or in bulk while preserving the original service details.",
+      "The system supports precise transfers of events, ensuring that only the relevant service lines are moved while other charges remain unchanged.",
+      "This prevents incorrect total amounts from being transferred and ensures that only valid services are reallocated.",
+      "Only authorised personnel can perform transfers, ensuring controlled and secure redistribution of events.",
+      "Every event adjustment is logged, tracking who made the change, when, and why.",
+      "This feature is of minor importance for PJH."
+    ],
+    "skills": [
+      "ledger",
+      "ux-patterns"
+    ],
+    "passes": false,
+    "needs_review": false,
+    "iteration_count": 0,
+    "notes": ""
+  },
+  {
+    "id": "PD-277",
+    "summary": "Manual editing of events",
+    "squad": "ledger",
+    "priority": 1006,
+    "acceptance_criteria": [
+      "Authorized users can edit key event data within predefined limits, ensuring that corrections are properly recorded and tracked for auditing. Changes can be made directly in the event record, and all updates are automatically reflected in the invoicing material before the final invoice is generated.",
+      "Product quantities (e.g., correcting an incorrect number of waste containers).",
+      "Event type (e.g., changing a misclassified emptying event).",
+      "Contractor fees and adjustments.",
+      "Customer price (if applicable through contracts).",
+      "These edits ensure that final invoices reflect correct service details and cost allocations.",
+      "Users can access a list of pre-invoicing events and make corrections based on customer reports or operational updates.",
+      "The system automatically updates financial calculations, ensuring consistency with pricing and tariff structures.",
+      "All events marked for correction are flagged in the system so they cannot be included in an invoicing batch until they have been reviewed and approved.",
+      "Every change is logged, including the user who made the change, a timestamp, and the reason for the correction.",
+      "The system generates before-and-after records, ensuring transparency and providing references for customer inquiries or internal audits.",
+      "Only authorized personnel (e.g., customer service agents, invoicing clerks) have access to manual corrections.",
+      "Users can be granted different levels of permissions, such as being allowed to edit pricing but not contractor payments."
+    ],
+    "skills": [
+      "ledger",
+      "ux-patterns"
+    ],
+    "passes": false,
+    "needs_review": false,
+    "iteration_count": 0,
+    "notes": ""
+  },
+  {
+    "id": "PD-283",
+    "summary": "Manual creation of billing events",
+    "squad": "ledger",
+    "priority": 1007,
+    "acceptance_criteria": [
+      "The application enables users to manually enter invoicing events for services that do not originate from automated integrations, such as weighbridge systems or route management. Users can select the appropriate product from the catalogue, enter the invoicing details, and create an invoice while ensuring that the related cost centres, ledger accounts, and VAT rates are applied correctly.",
+      "Manual invoicing is fully integrated into the WasteHero application, allowing waste management companies to process a wide range of events outside their core services while maintaining structured financial administration.",
+      "Manual entry of invoicing events: Users can create invoices manually by selecting the appropriate product in the system, ensuring that financial classifications remain consistent.",
+      "Product-based invoicing: Even when an event is created manually, it is linked to an existing product (e.g., “land rent” or “expert work”), ensuring that financial allocations are applied correctly.",
+      "Predefined financial allocations: The system ensures that manual invoicing events follow predefined accounting rules and automatically assigns cost centres, VAT percentages, and revenue accounts.",
+      "Support for non-core business events: Enables waste management companies to invoice services outside waste management, such as equipment rental, land rent, water consumption, or consulting services.",
+      "Customisable invoice lines: Users can enter event-specific details while still following predefined pricing structures, enabling flexibility while maintaining structured invoicing.",
+      "Audit and reporting integration: Manual invoices are logged and reported in the same way as automated events, ensuring financial traceability and audit compliance."
+    ],
+    "skills": [
+      "ledger",
+      "ux-patterns"
+    ],
+    "passes": false,
+    "needs_review": false,
+    "iteration_count": 0,
+    "notes": ""
+  },
+  {
+    "id": "PD-290",
+    "summary": "Billing data generation, bundling",
+    "squad": "ledger",
+    "priority": 1008,
+    "acceptance_criteria": [
+      "The WasteHero system provides a flexible invoicing structure that allows companies to define how events are grouped on invoices. This ensures that customers receive invoices formatted according to their preferences, with relevant events either combined into single line items or separated by type. The system supports customer-specific bundling, enabling waste management companies to tailor invoice layouts based on contracts or operational requirements.",
+      "When creating invoice data, users can define grouping rules based on product types, services, or other predefined criteria. The system then applies these settings during invoice generation and ensures that similar events—such as storage location emptying, base charges, and pallet deliveries—are handled either as separate or bundled line items.",
+      "The bundling logic is managed through customer-specific settings, allowing each company to define which event types are combined and which are listed separately. This prevents invoices from containing an excessive number of line items, reducing complexity for both customers and finance teams. The system also ensures that changes to invoice grouping do not affect the underlying event data, preserving the accuracy of financial reporting and accounting.",
+      "Customer-specific bundling rules: Users can define event bundling settings per customer, specifying which events are combined into a single line item and which remain separate.",
+      "All storage location emptying events shown as one consolidated line item.",
+      "Base service fees shown as a separate line item.",
+      "Pallet deliveries listed as individual events.",
+      "Automatic application in invoicing: Once defined, bundling rules are automatically applied when invoices are generated, reducing manual work and ensuring consistency.",
+      "Customization according to business requirements: Each waste management company can define how events should be structured, ensuring alignment with internal practices and customer preferences.",
+      "Integration with financial reporting: Bundled events remain separate in financial records while appearing grouped on invoices, ensuring reporting accuracy without compromising data integrity.",
+      "Audit and compliance support: The system logs all bundling configurations and changes made, ensuring transparency and audit readiness."
+    ],
+    "skills": [
+      "ledger",
+      "ux-patterns"
+    ],
+    "passes": false,
+    "needs_review": false,
+    "iteration_count": 0,
+    "notes": ""
+  },
+  {
+    "id": "PD-318",
+    "summary": "Editing billing events",
+    "squad": "ledger",
+    "priority": 1009,
+    "acceptance_criteria": [
+      "Manual exclusion: Users can exclude an individual event from invoicing. This allows flexibility to resolve ambiguities or clarify details with the customer before invoicing the event.",
+      "Bulk exclusion: Office staff can select and exclude multiple events from invoicing in a single step. This is particularly useful when handling large transaction volumes, such as for housing companies or customers delivering bulk waste to reception facilities.",
+      "Selective invoicing: The system allows users to extract specific components (e.g., base fees) from events and process them separately. This feature is useful in cases where only certain charges need to be invoiced immediately, while others are temporarily left out of billing.",
+      "Events marked as excluded remain in the system but are flagged as non-billable. Users can update the status of these events later once the issue has been resolved. In addition, excluded events are tracked in the system with details such as the reason for exclusion, user actions, and timestamps.",
+      "The system also supports situations where services or products are not invoiced to the customer but still require contractor compensation. In these cases, the system separates customer billing from contractor payment workflows, ensuring that contractors are paid for completed services even if customer invoicing is delayed or omitted.",
+      "Products of a specific service.",
+      "Billing events must be viewable and filterable according to the ongoing billing run, for example by date, products of a specific service, municipality, or service responsibility."
+    ],
+    "skills": [
+      "ledger",
+      "ux-patterns"
+    ],
+    "passes": false,
+    "needs_review": false,
+    "iteration_count": 0,
+    "notes": ""
+  },
+  {
+    "id": "PD-319",
+    "summary": "Price changes for unbilled events",
+    "squad": "ledger",
+    "priority": 1010,
+    "acceptance_criteria": [
+      "Selecting a date range: The system identifies all unbilled events for the specified time period.",
+      "Applying new prices: Users can change prices based on percentage or fixed euro adjustments. These updates can be linked to products, services, or customer contracts.",
+      "Mass updates or single updates: Users can flexibly update the prices of a single event or perform batch changes across multiple events at the same time.",
+      "The system ensures that retroactive changes do not affect events that have already been invoiced, preserving data integrity and compliance with financial reporting requirements. Once the new prices have been applied, the system recalculates the affected events, updates their pricing information, and prepares them for invoicing according to the corrected prices.",
+      "In addition, price adjustments are logged, including the reason for the change, the user who performed the update, and the events affected by the change. This increases transparency and supports auditability for regulatory compliance and internal control.",
+      "The solution also includes tools for validating and previewing the impact of retroactive price changes before they are finalised. Users can review the updated pricing information to ensure that the changes have been applied correctly and that they comply with tariff or contractual terms."
+    ],
+    "skills": [
+      "ledger",
+      "ux-patterns"
+    ],
+    "passes": false,
+    "needs_review": false,
+    "iteration_count": 0,
+    "notes": ""
+  },
+  {
+    "id": "PD-344",
+    "summary": "Transfer of billing events",
+    "squad": "ledger",
+    "priority": 1011,
+    "acceptance_criteria": [
+      "Billing events must be transferable from one customer to another, for example when a resident changes.",
+      "Events related to shared services and waste reception must also be transferable from one customer to another.",
+      "A billing event refers to an action to be invoiced from the customer, such as a container emptying or a weighbridge weighing."
+    ],
+    "skills": [
+      "ledger",
+      "ux-patterns"
+    ],
+    "passes": false,
+    "needs_review": false,
+    "iteration_count": 0,
+    "notes": ""
+  },
+  {
+    "id": "PD-363",
+    "summary": "Alert when euro limit is exceeded according to responsibility classification",
+    "squad": "ledger",
+    "priority": 1012,
+    "acceptance_criteria": [
+      "Admin users can configure and adjust annual euro billing thresholds per service responsibility classification.",
+      "The system continuously monitors annual billed amounts for business customers and creates a trigger when the configured threshold is exceeded.",
+      "Back-office users can filter and search for business customers by service responsibility classification and billing threshold status (exceeded / not exceeded).",
+      "Users can convert triggers into tickets for structured case management and follow-up.",
+      "From a trigger or ticket, users can view the customer's details, billing history, and current service responsibility classification.",
+      "Users can either update the customer's service responsibility to a market-based classification, or document a justification for retaining the current municipal classification.",
+      "All trigger events, review decisions, and service responsibility changes are recorded in a full audit trail for compliance and reporting purposes.",
+      "Only authorised personnel (based on assigned roles) can configure billing thresholds, create triggers, and manage tickets."
+    ],
+    "skills": [
+      "ledger",
+      "ux-patterns"
+    ],
+    "passes": false,
+    "needs_review": false,
+    "iteration_count": 0,
+    "notes": ""
+  },
+  {
+    "id": "PD-364",
+    "summary": "Retroactive changes to service responsibilities",
+    "squad": "ledger",
+    "priority": 1013,
+    "acceptance_criteria": [
+      "Retroactive changes are applied to service records, reports, and invoicing management tools so that service responsibility classifications remain accurate.",
+      "Users with sufficient access rights can define a start date for when the change to service responsibility comes into effect, at which point the system identifies and updates all related uninvoiced events accordingly.",
+      "Service event logs (e.g. waste collections and container services).",
+      "Eligibility for certain services or pricing based on the updated responsibility.",
+      "Compliance reporting to distinguish between municipal and market-based service categories.",
+      "Retroactive updates are propagated throughout the system, ensuring consistency across modules such as route planning, service management, and dashboards.",
+      "Users can generate reports based on either the original or updated service responsibility classifications, providing flexibility for internal and external audits.",
+      "The system logs all retroactive changes and stores details such as the user who made the change, timestamps, and the events affected by the change.",
+      "Role-based access rights ensure that only authorised personnel can make retroactive changes, improving both data security and regulatory compliance.",
+      "The system limits retroactive changes to events that have not yet been invoiced. This safeguards the integrity of issued invoices while still allowing administrative corrections to pending data.",
+      "Thanks to retroactive changes in service responsibility, waste companies can correct administrative data while ensuring data accuracy and compliance."
+    ],
+    "skills": [
+      "ledger",
+      "ux-patterns"
+    ],
+    "passes": false,
+    "needs_review": false,
+    "iteration_count": 0,
+    "notes": ""
+  },
+  {
+    "id": "PD-273",
+    "summary": "Cancellation option for billing data",
+    "squad": "ledger",
+    "priority": 2000,
+    "acceptance_criteria": [
+      "The system includes confirmation and cancellation functionality for invoice data that has been created but has not yet been sent to the customer or to a third-party invoicing system. The user reviews, confirms, and, if necessary, cancels the invoice data before finalization.",
+      "When an invoice dataset is canceled, its status is reverted to the previous state or the invoice data is deleted entirely. The status of the invoice rows is updated to reflect the current invoicing state.",
+      "If an entire invoice dataset is canceled, the invoice numbers are returned and released for reuse. If an error is detected during invoicing, invoices are not created, the status does not change, no invoice numbers are generated, and no invoice dataset is created.",
+      "If the invoice data has been transferred to an external system but has not yet been sent to the customer, the system allows cancellation if the waste management company permits it and the integration supports it.",
+      "Invoice datasets are available in a consolidated view, where both the status of the invoice data can be seen and the invoice data can be canceled.",
+      "Cancellation of invoice data before sending: Users can cancel invoice datasets that have been created but not yet sent.",
+      "Cancellation in a third-party system: Invoices can be canceled in a third-party system if the invoice has not yet been sent to the customer, provided that the integration and the waste management company allow this functionality.",
+      "Default invoice dataset statuses: Draft, ready, and sent.",
+      "Integration with an invoicing system.",
+      "PJH wants the billing data not to be sent automatically in the first phase, but this operating model may change after go-live. PJH wants the billing data to be sent by the billing user."
+    ],
+    "skills": [
+      "ledger",
+      "ux-patterns"
+    ],
+    "passes": false,
+    "needs_review": false,
+    "iteration_count": 0,
+    "notes": ""
+  },
+  {
+    "id": "PD-278",
+    "summary": "Error listing of events",
+    "squad": "ledger",
+    "priority": 2001,
+    "acceptance_criteria": [
+      "An event must have mandatory data, such as accounts and cost centers, in order for it to be transferred to billing.",
+      "The system must support automated checks that users can define on a case-by-case basis, such as verifying that the event price matches the price list price."
+    ],
+    "skills": [
+      "ledger",
+      "ux-patterns"
+    ],
+    "passes": false,
+    "needs_review": false,
+    "iteration_count": 0,
+    "notes": ""
+  },
+  {
+    "id": "PD-293",
+    "summary": "Invoice batch filtering",
+    "squad": "ledger",
+    "priority": 2002,
+    "acceptance_criteria": [
+      "A monetary threshold for the total amount (€), below which invoices are not generated.",
+      "Invoicing period, i.e. customer-specific invoicing frequency (e.g. preferred every 3 months vs every 1 month).",
+      "Customer type (e.g. weighbridge customer, regional collection customer).",
+      "Events of a certain type of service (e.g. sludge events).",
+      "Reception location (if events from a specific reception facility for weighbridge customers should be invoiced separately).",
+      "Service responsibility for the invoicing events.",
+      "Different selection criteria must be definable for invoice printing. It must be possible to invoice only a subset of the events linked to a customer.",
+      "The user sets the conditions according to which events are excluded.",
+      "Municipality: include/exclude events from specific municipalities.",
+      "Minimum invoice amount: monetary threshold (e.g. invoices under €10 are carried over to the next invoicing period and accumulated with future events until the threshold is reached).",
+      "Invoicing frequency: customer-specific invoicing periods (e.g. monthly, quarterly, yearly).",
+      "Time period: events based on date.",
+      "Customer type: invoicing restrictions applied to specific customer groups.",
+      "Events of a specific contract/service type: restrict invoicing to events related to certain services (e.g. sludge collection events).",
+      "Reception location: separate invoicing based on waste reception facilities for certain customer segments.",
+      "Service responsibility: ensure that only those events are invoiced which meet the defined service responsibility conditions.",
+      "In addition, other fields can also be configured as criteria for invoicing selection.",
+      "The fields to be visible as selection criteria in the invoice printing view need to be defined."
+    ],
+    "skills": [
+      "ledger",
+      "ux-patterns"
+    ],
+    "passes": false,
+    "needs_review": false,
+    "iteration_count": 0,
+    "notes": ""
+  },
+  {
+    "id": "PD-297",
+    "summary": "Billing event status information",
+    "squad": "ledger",
+    "priority": 2003,
+    "acceptance_criteria": [
+      "The status of invoices created from events must be visible at the event level.",
+      "In progress: events that have been recorded, but for which an invoice has not yet been created.",
+      "Sent: events for which an invoice and invoice data have been generated, but the invoice data has not yet been sent to the invoicing system.",
+      "Error: events that contain incorrect data or where errors occurred during the transfer.",
+      "Completed: an invoice has been created from the event and the invoice data has been successfully sent to and confirmed by the invoicing system.",
+      "For example: events transferred to invoicing are updated to the status Sent. An invoice in Sent status can still be updated if necessary. The invoice data can then be corrected and re-sent. Once the transfer is successful, the data can be updated to status Completed. The naming of statuses can also be implemented differently, as long as the functionality remains the same.",
+      "Events have process-based statuses that update automatically as the workflow progresses.",
+      "Event statuses are visible both in a summary view and in customer-specific information.",
+      "Events can be edited until they are marked as completed and the invoice has been successfully transferred to the invoicing system.",
+      "Incorrect event data can be corrected after an invoicing run if the invoicing data has not yet been received by the external system.",
+      "The default billing event status categories in WasteHero are: In Progress (events recorded but no invoice generated yet), Sent (invoice and billing file generated but not yet sent to the billing system), Error (events with incorrect data or transfer errors), and Done (invoice generated and billing file successfully sent and confirmed). PJH requests that these be partially redefined: the “Sent” status should mean the billing file has actually been sent, at which point no further changes to the invoice content should be allowed.",
+      "Invoicing system."
+    ],
+    "skills": [
+      "ledger",
+      "ux-patterns"
+    ],
+    "passes": false,
+    "needs_review": false,
+    "iteration_count": 0,
+    "notes": ""
+  },
+  {
+    "id": "PD-298",
+    "summary": "Billing data details",
+    "squad": "ledger",
+    "priority": 2004,
+    "acceptance_criteria": [
+      "When generating invoicing data, the WasteHero application extracts the invoice delivery–related information from the data stored in the customer profiles, in accordance with the waste management companies’ requirements.",
+      "The mandatory data required by the system includes.",
+      "the invoice delivery method, and.",
+      "the billing address.",
+      "Waste management companies can define additional mandatory fields to meet their own needs. A customer identifier refers to a CustomerID, which is a 6–9 digit numeric sequence. The sequence is running/serial and uniquely identifies the customer record.",
+      "records how the invoice was sent (e.g., as an e-invoice, by email, or on paper).",
+      "ensures that the required customer details (e.g., Business ID, e-invoice address) exist before generating an invoice. If critical information is missing, the system must prevent the finalisation of an invoice until the missing data has been added.",
+      "notifies invoicing users of invalid data and lists the issues for the users to correct the data before continuing invoicing.",
+      "Automatic extraction of customer data from customer records.",
+      "The invoice data file must comply with the FINVOICE 3.0 standard.",
+      "Validation and error prevention.",
+      "Transfer of invoicing data to external invoicing systems.",
+      "The waste management companies are responsible for defining the information that guides invoicing data generation.",
+      "The basic FINVOICE data is defined as common for all companies, and if deviations are needed, this is possible company-specifically as a change request."
+    ],
+    "skills": [
+      "ledger",
+      "ux-patterns"
+    ],
+    "passes": false,
+    "needs_review": false,
+    "iteration_count": 0,
+    "notes": ""
+  },
+  {
+    "id": "PD-299",
+    "summary": "Billing event details",
+    "squad": "ledger",
+    "priority": 2005,
+    "acceptance_criteria": [
+      "Product name / Service name.",
+      "Total price with 0% VAT.",
+      "Total price with 24% VAT.",
+      "Price according to the shared collection point's group percentage.",
+      "Eco-fee (also a price formation component that must be visible on the event).",
+      "The WasteHero system will store event-specific data as part of the invoicing data for events. Events must include all the information required to generate an invoice, including the VAT rates tied to the event date. The application must also be able to generate events that are not intended to be invoiced.",
+      "During the implementation phase, the data that drives what information is generated for an event will be defined.",
+      "For each event, only the information relevant to that event type is generated.",
+      "Event data has to be included in the FINVOICE material in accordance with the FINVOICE specification.",
+      "The same invoice can include multiple VAT rates and cost centres.",
+      "Event data can also be generated via a weighbridge integration or a cashier/POS system integration.",
+      "The eco fee is also a price component that must be visible on the event, in addition to the others listed."
+    ],
+    "skills": [
+      "ledger",
+      "ux-patterns"
+    ],
+    "passes": false,
+    "needs_review": false,
+    "iteration_count": 0,
+    "notes": ""
+  },
+  {
+    "id": "PD-302",
+    "summary": "Custom and bulk invoice texts",
+    "squad": "ledger",
+    "priority": 2006,
+    "acceptance_criteria": [
+      "With the WasteHero system, users can add custom text to invoices either on a per-customer basis or across multiple invoices at once. The text is displayed directly on the invoice and is also included in the FINVOICE material exported to external invoicing systems.",
+      "Custom text input: Users can enter individual messages for single invoices or apply the same message to a batch of invoices in one step.",
+      "Free-text field: A dedicated section on the invoice allows additional text to be displayed.",
+      "Bulk application: The system supports mass application of messages to selected invoices.",
+      "Export to FINVOICE format: All added text is included in the FINVOICE data and transferred to the external invoicing system.",
+      "Audit and accounting: All added text is stored as part of the invoicing history.",
+      "Seamless template integration: The custom text field integrates with invoice templates."
+    ],
+    "skills": [
+      "ledger",
+      "ux-patterns"
+    ],
+    "passes": false,
+    "needs_review": false,
+    "iteration_count": 0,
+    "notes": ""
+  },
+  {
+    "id": "PD-303",
+    "summary": "Displaying invoice image",
+    "squad": "ledger",
+    "priority": 2007,
+    "acceptance_criteria": [
+      "The external system must provide an API endpoint through which WasteHero ERP can request and retrieve invoice attachments.",
+      "The API must support parameters such as invoice number, customer identifier, and attachment type in order to retrieve specific files.",
+      "Each attachment must be stored in the external system with metadata linking it to the correct invoice, including: invoice number, attachment identifier (as defined in FINVOICE AttachmentDetails), file type (e.g. PDF/A, JPEG, PNG), and attachment name and description.",
+      "The external system must securely store invoice attachments and allow authorised ERP users to access and retrieve them.",
+      "Role-based access control must be implemented to comply with security policies.",
+      "The external invoicing system should support real-time retrieval of attachments when a user selects an invoice for review in WasteHero ERP.",
+      "WasteHero must be able to request attachments dynamically via the API rather than relying on preloaded storage.",
+      "Supported formats include PDF/A, JPEG, and PNG, and the metadata must specify the file type and file size.",
+      "If an attachment is missing or cannot be retrieved, the external system must return a structured error response.",
+      "WasteHero ERP must be able to display an appropriate error message to inform users of missing or inaccessible attachments."
+    ],
+    "skills": [
+      "ledger",
+      "ux-patterns"
+    ],
+    "passes": false,
+    "needs_review": false,
+    "iteration_count": 0,
+    "notes": ""
+  },
+  {
+    "id": "PD-304",
+    "summary": "PDF attachment to invoice batch",
+    "squad": "ledger",
+    "priority": 2008,
+    "acceptance_criteria": [
+      "The WasteHero system enables a single PDF document to be attached to an entire invoice batch (e.g. up to 10,000 invoices) by integrating with external invoicing services in accordance with the FINVOICE guidelines. The ERP system generates the invoice data, including the required metadata and a unique identifier in the FINVOICE message, allowing the invoicing service to correctly associate the attachment with the corresponding invoices.",
+      "When an invoice batch is created, users can define a PDF attachment—such as a service update notice—that is to be included with all invoices in the batch. The ERP system includes an AttachmentDetails section in the FINVOICE message, containing an AttachmentIdentifier that links the attachment to the invoices. The invoicing service then uses this identifier to associate the attachment file with the correct invoice batch.",
+      "The ERP system ensures that attachment references are correctly formatted and included in the FINVOICE message, and validates that the correct metadata is sent. This guarantees that attachments remain properly linked to invoices, even when the files themselves are stored externally in the invoicing service.",
+      "Invoice data generation: Ensures that the invoicing service can correctly associate the attachment with the invoice batch.",
+      "Attachment reference in the FINVOICE message: The ERP system includes the required AttachmentDetails in the FINVOICE message, indicating that an attachment exists and providing the AttachmentIdentifier for correct linking.",
+      "Correct attachment linking: The ERP system ensures that the correct attachments are linked to the correct invoices by sending structured metadata to the invoicing service.",
+      "Integration with external invoicing services: The ERP system integrates seamlessly with external invoicing systems to ensure smooth attachment handling and compliance with FINVOICE standards.",
+      "Batch-level attachments: Users can attach a single document (e.g. a service update notice) to an entire invoice batch, eliminating the need to manually attach it to each individual invoice.",
+      "Attachment metadata in FINVOICE: The ERP system includes the AttachmentDetails section in the FINVOICE message, ensuring that attachments are correctly linked to invoices in the external invoicing system.",
+      "Automatic validation: The system validates attachment metadata before submission to prevent missing or incompatible attachments.",
+      "Audit and compliance support: The system logs all invoice–attachment associations, ensuring traceability and regulatory compliance.",
+      "Error handling: If the attachment identifier does not match a file in the invoicing service, the system flags the issue before submission so the user can correct it."
+    ],
+    "skills": [
+      "ledger",
+      "ux-patterns"
+    ],
+    "passes": false,
+    "needs_review": false,
+    "iteration_count": 0,
+    "notes": ""
+  },
+  {
+    "id": "PD-305",
+    "summary": "PDF attachment to invoice",
+    "squad": "ledger",
+    "priority": 2009,
+    "acceptance_criteria": [
+      "The WasteHero ERP system supports attaching PDF documents to invoicing data in accordance with the FINVOICE format guidelines. This ensures that the invoicing data sent via external invoicing systems can include the necessary attachments, such as service agreements, waste reports, or terms and conditions.",
+      "Users can upload and link attachment files directly to the invoicing data before transmission. Each attachment follows the FINVOICE AttachmentDetails structure, which defines metadata such as AttachmentIdentifier, AttachmentName, and AttachmentMimeType. The ERP system encodes attachments in Base64 format, ensuring secure data transfer while complying with size limitations (a maximum of 10 attachments, with a total size of less than 1 MB before encoding). Only certain file formats, such as PDF/A, JPEG, and PNG, are permitted, and automatic validation prevents the upload of invalid files.",
+      "The system integrates with external invoicing services to enable seamless transmission of both invoicing data and attachments. When invoicing data is generated, the ERP system automatically validates that attachment formats and limitations comply with FINVOICE standards. If errors are detected—such as exceeded size limits or unsupported file types—the system notifies the user before transmission.",
+      "To ensure confidentiality, attachments can be classified using SEI codes (e.g. SEI01 for restricted documents), ensuring compliance with security standards. The ERP system also generates a SHA1 checksum for each attachment, maintaining data integrity and verification across systems.",
+      "Invoice vs. invoicing data: The ERP system produces invoicing data (not the final invoice), including all required attachments, before sending it to the external invoicing system for processing.",
+      "Invoice selection in the ERP: When the solution description states that an official selects an invoice, this refers to selecting the invoicing data in the ERP system for further processing, validation, and attachment management prior to sending it to the external system.",
+      "Attachment handling in the ERP vs. invoicing system: Depending on the service provider and the outcome of the procurement process, attachment management may take place either in the ERP system or in the external invoicing system. The ERP system ensures that all required metadata and compliance checks are fulfilled before invoicing data is sent externally.",
+      "PDF attachments in invoicing data: Users can upload and link attachment files to invoicing data in the ERP system before transmission.",
+      "Integration with external invoicing systems: The ERP system ensures that all attachments are included and validated in accordance with FINVOICE guidelines before invoicing data is sent.",
+      "Validation and compliance: Automatic checks ensure that attachments comply with FINVOICE requirements (file types, size limits, completeness of metadata, and checksum validation).",
+      "Security and confidentiality: SEI codes classify attachments, and SHA1 checksums ensure document integrity.",
+      "Error handling and notifications: The system notifies users if attachments exceed size limits or use unsupported formats before the invoicing data is sent externally."
+    ],
+    "skills": [
+      "ledger",
+      "ux-patterns"
+    ],
+    "passes": false,
+    "needs_review": false,
+    "iteration_count": 0,
+    "notes": ""
+  },
+  {
+    "id": "PD-306",
+    "summary": "Invoice image display in ERP",
+    "squad": "ledger",
+    "priority": 2010,
+    "acceptance_criteria": [
+      "The WasteHero system enables real-time retrieval and display of invoice images stored in external invoicing systems. This functionality ensures that waste management company staff can view invoice details directly within the ERP system, even when the invoices have been generated and stored in an external system. The integration provides a seamless user experience, allowing users to access invoice images without switching between platforms.",
+      "When a user selects an invoice in the ERP system, the system sends a request to the external invoicing system to retrieve the corresponding invoice image. The image is then displayed in a dedicated viewing window within WasteHero ERP, eliminating the need to manually download files or open them in a separate system. This process ensures that users can quickly verify invoice details and that all financial information is readily accessible.",
+      "The integration is designed to work with multiple external invoicing service providers, ensuring flexibility regardless of where invoices are archived. In addition, role-based access controls determine which users are allowed to view invoice images, ensuring compliance with information security policies. If an invoice image cannot be retrieved, the system provides clear error messages and troubleshooting guidance.",
+      "Accounts receivable is not stored in the ERP system: WasteHero ERP does not maintain accounts receivable data. Instead, it retrieves invoice images from the external invoicing system and displays them in the ERP for user review.",
+      "Consistent invoice image viewing: The ERP displays invoice images exclusively via integration; invoices remain stored in the external system.",
+      "Ensured compatibility: The ERP communicates with external invoicing systems via APIs, enabling smooth retrieval of invoice images without additional manual steps.",
+      "User access control: Only authorised users can view invoice images, ensuring compliance with financial and security regulations.",
+      "Real-time invoice image retrieval: Users can select an invoice in the ERP system, triggering an automatic request to fetch the corresponding invoice image from the external system.",
+      "Seamless integration with external systems: The ERP connects to external invoicing systems via APIs or integration interfaces to ensure smooth image retrieval.",
+      "Invoice display within the ERP: Retrieved invoice images are displayed in a dedicated viewing window within the WasteHero platform, avoiding manual downloads or system switching.",
+      "Consistent invoice tracking: Each invoice remains linked to its image, ensuring that financial data, payment details, and invoicing history are easily accessible.",
+      "Error handling and validation: If an invoice image cannot be retrieved, the system presents appropriate error messages and troubleshooting options to the user."
+    ],
+    "skills": [
+      "ledger",
+      "ux-patterns"
+    ],
+    "passes": false,
+    "needs_review": false,
+    "iteration_count": 0,
+    "notes": ""
+  },
+  {
+    "id": "PD-307",
+    "summary": "Invoice template selection",
+    "squad": "ledger",
+    "priority": 2011,
+    "acceptance_criteria": [
+      "During an invoicing run.",
+      "The WasteHero system will not create or manage invoice templates but rather send information about the desired invoice template to the invoicing system as a part of the FINVOICE data.",
+      "The WasteHero application will send the template setting to an external invoicing system using invoice template codes, which will ensure compatibility between the invoice template information configured in WasteHero and the templates managed in the external invoicing system."
+    ],
+    "skills": [
+      "ledger",
+      "ux-patterns"
+    ],
+    "passes": false,
+    "needs_review": false,
+    "iteration_count": 0,
+    "notes": ""
+  },
+  {
+    "id": "PD-107",
+    "summary": "E-invoice integration",
+    "squad": "ledger",
+    "priority": 3000,
+    "acceptance_criteria": [
+      "WasteHero receives information via integration from an invoice intermediary or a billing system about a customer’s e-invoice and direct debit orders. The integration transmits information indicating either the start or the termination of an order. The data content includes information that allows the order to be matched to the correct customer. This data may include, for example, an invoice reference, a customer number, or an invoice number. Two different identifiers can also be used for matching. An agreement on which identifiers are used for matching is made between the companies and the bank (or the invoice intermediary / billing system).",
+      "The customer’s billing channel is changed to e-invoice.",
+      "An e-invoice address is added for the customer.",
+      "The change is recorded.",
+      "The customer’s billing channel is changed to paper invoicing.",
+      "The customer’s e-invoice information is removed.",
+      "The change is recorded.",
+      "It must be agreed how the data retrieval or import from the billing system is carried out. The recommended approach is that changes are delivered to the system once per day."
+    ],
+    "skills": [
+      "ledger",
+      "ux-patterns"
+    ],
+    "passes": false,
+    "needs_review": false,
+    "iteration_count": 0,
+    "notes": ""
+  },
+  {
+    "id": "PD-163",
+    "summary": "Billing list",
+    "squad": "ledger",
+    "priority": 3001,
+    "acceptance_criteria": [
+      "PJH currently has no need for an event-specific billing list. It is still unclear how it will be generated in the future. For now, a document on invoice number series is created once per year."
+    ],
+    "skills": [
+      "ledger",
+      "ux-patterns"
+    ],
+    "passes": false,
+    "needs_review": true,
+    "iteration_count": 0,
+    "notes": "No testable acceptance criteria — requirement is a placeholder pending future definition."
+  },
+  {
+    "id": "PD-171",
+    "summary": "Right of authorities to view invoices",
+    "squad": "ledger",
+    "priority": 3002,
+    "acceptance_criteria": [
+      "Authorities must have the ability to view invoices sent to customers and open the invoice view independently.",
+      "The UI must display the invoice image exactly as it was sent to the customer.",
+      "Invoices are reviewed when a customer applies to the authority for a change to the waste fee (a so-called objection to the waste fee) or inquires about another matter related to waste charges. The authority must also be able to see the status of the invoice (if the status is available in the system).",
+      "An authority user opens the customer’s invoice in a viewing screen and checks the invoice status (for example, whether the invoice has already been paid)."
+    ],
+    "skills": [
+      "ledger",
+      "ux-patterns"
+    ],
+    "passes": false,
+    "needs_review": false,
+    "iteration_count": 0,
+    "notes": ""
+  },
+  {
+    "id": "PD-177",
+    "summary": "Billing event data for reporting",
+    "squad": "ledger",
+    "priority": 3003,
+    "acceptance_criteria": [
+      "The data fields are linked to events at the time of entry, and they remain traceable throughout the invoicing and reporting process. The ERP system provides structured export capabilities that ensure seamless integration with third-party financial and reporting tools, eliminating the need for manual adjustments.",
+      "The system generates and stores event-level financial and operational data for reporting and internal accounting.",
+      "Each event is enriched at creation time with the required metadata, ensuring consistency across reports.",
+      "Each event must include the following data fields: accounting account, responsibility area, product group, waste type, service responsibility, location, municipality, project code, cost center, and receiving site.",
+      "The system supports seamless export of data to external finance, business intelligence, and reporting applications.",
+      "Data is structured to ensure compatibility with company-specific financial reporting requirements.",
+      "The ERP enables customization of data fields to meet different waste management companies’ reporting needs.",
+      "Users can adjust settings to align with organisational or regulatory requirements."
+    ],
+    "skills": [
+      "ledger",
+      "ux-patterns"
+    ],
+    "passes": false,
+    "needs_review": false,
+    "iteration_count": 0,
+    "notes": ""
+  },
+  {
+    "id": "PD-270",
+    "summary": "System behavior during billing run",
+    "squad": "ledger",
+    "priority": 3004,
+    "acceptance_criteria": [
+      "The WasteHero system ensures that customer data can be processed and updated even during billing runs, allowing users to carry out their daily tasks without disrupting the invoicing process. At the same time, the system implements safeguards to prevent changes to critical invoice-related data that could affect the accuracy of the generated billing material.",
+      "During a billing run, the system dynamically manages access to different customer data fields and classifies them as either editable or restricted in order to preserve data integrity while maintaining operational flexibility. A notification mechanism ensures that users are aware when a billing run is in progress and prevents unintentional changes that could impact invoice generation.",
+      "The ERP remains fully operational for users, allowing them to handle other customer-related tasks while invoices are being generated.",
+      "Users can continue managing customer data that is not related to invoicing without affecting the billing process.",
+      "Billing address: Cannot be changed if it affects invoices currently being generated.",
+      "Billing groups: Cannot be modified to prevent changes to invoice bundling.",
+      "Waste collection schedules: Editable only if changes do not affect past or current billing periods.",
+      "General customer data: Contact details, contract terms, and other non-financial information can be updated.",
+      "The system alerts users when a billing run is active and informs them of restricted changes.",
+      "If a restricted action is attempted, the system displays a warning message that prevents unauthorized changes.",
+      "The invoicing user can generate large batches of invoices (e.g. 5,000 invoices) without system slowdowns or disruption to other users.",
+      "The ERP ensures that once the billing run is complete, all functionalities are fully restored.",
+      "All changes made to customer data during a billing run are logged for audit purposes.",
+      "The system ensures that invoice generation remains compliant with contractual and regulatory requirements."
+    ],
+    "skills": [
+      "ledger",
+      "ux-patterns"
+    ],
+    "passes": false,
+    "needs_review": false,
+    "iteration_count": 0,
+    "notes": ""
+  },
+  {
+    "id": "PD-279",
+    "summary": "Dynamic updates to shared service events",
+    "squad": "ledger",
+    "priority": 3005,
+    "acceptance_criteria": [
+      "A new participant can also be added to a shared service retroactively, in which case all events falling within the specified date range are redistributed based on the updated participation data.",
+      "Shared service events are dynamically distributed based on the participant allocation.",
+      "New events may be generated, for example, when a new participant is added to the shared service retroactively.",
+      "Participants can be linked to a shared service retroactively as members of the shared service."
+    ],
+    "skills": [
+      "ledger",
+      "ux-patterns"
+    ],
+    "passes": false,
+    "needs_review": false,
+    "iteration_count": 0,
+    "notes": ""
+  },
+  {
+    "id": "PD-280",
+    "summary": "Shared service events on the invoice",
+    "squad": "ledger",
+    "priority": 3006,
+    "acceptance_criteria": [
+      "Each subscriber in a shared service is assigned an individual invoice line, with the amount determined according to their percentage share. The payment share for each subscriber can range from 0–100%, with the total across all subscribers required to equal exactly 100% — neither more nor less. When an invoicing user manually defines the percentage shares within an agreement, the application issues a warning if the total exceeds or falls below 100%. It is also possible to configure whether a participant with a 0% share should appear on the invoice or be excluded from it.",
+      "By default, the application should divide the invoiceable sum equally among the subscribers to a shared service but can also allow for the total sum to be split based on user-defined agreements. Each exported invoice entry includes information about the shared service, the customer’s percentage share, and the total service cost.",
+      "This functionality is implemented by defining the shared service as a property group within the system. The property group includes the relevant properties, and the desired service is shared among them. Usage shares for the service are then defined individually for each participant."
+    ],
+    "skills": [
+      "ledger",
+      "ux-patterns"
+    ],
+    "passes": false,
+    "needs_review": false,
+    "iteration_count": 0,
+    "notes": ""
+  },
+  {
+    "id": "PD-281",
+    "summary": "Updating billing information via API",
+    "squad": "ledger",
+    "priority": 3007,
+    "acceptance_criteria": [
+      "The ERP system acts as the master system for invoicing data, and all changes to the billing address (postal address, email address, or e-invoicing company address) made in the ERP system are synchronised with the invoicing system.",
+      "When a customer’s billing address changes, the ERP system updates the correct billing address via the integration interface. Once the new billing address has been updated, it is applied to all open invoices and payment reminders for that customer in the invoicing system.",
+      "Payment reminders must be sent to the updated address after a change, for example when a property management company changes.",
+      "If a customer had property manager A until the end of January and from the beginning of February has property manager B, reminders and other open invoices must be sent to the new property manager B. This ensures that invoices and reminders are delivered to the correct address even if the property manager has changed.",
+      "In the ERP system, the new billing address is updated and then transferred to the invoice operator via the integration interface.",
+      "Billing address details are updated in the invoicing system whenever they change.",
+      "New billing details are applied to open invoices."
+    ],
+    "skills": [
+      "ledger",
+      "ux-patterns"
+    ],
+    "passes": false,
+    "needs_review": false,
+    "iteration_count": 0,
+    "notes": ""
+  },
+  {
+    "id": "PD-282",
+    "summary": "Editing e-invoice data",
+    "squad": "ledger",
+    "priority": 3008,
+    "acceptance_criteria": [
+      "Users can manually add an e-invoicing address to the customer information.",
+      "Users can override or modify e-invoicing addresses and at the same time prevent future integration updates from automatically replacing them.",
+      "E-invoicing addresses are also retrieved automatically via integration, without requiring user approval. The e-invoicing integration is handled in requirement 3.11.24.",
+      "E-invoicing addresses can be edited and added manually.",
+      "A setting can be added to an e-invoicing address indicating that the recorded e-invoicing address must not be overwritten via integration. This is implemented using a field where a checkbox indicates that this field must not be overwritten by the integration."
+    ],
+    "skills": [
+      "ledger",
+      "ux-patterns"
+    ],
+    "passes": false,
+    "needs_review": false,
+    "iteration_count": 0,
+    "notes": ""
+  },
+  {
+    "id": "PD-284",
+    "summary": "Public and private law sales – billing",
+    "squad": "ledger",
+    "priority": 3009,
+    "acceptance_criteria": [
+      "The WasteHero system enables waste management companies to handle public-law and private-law sales transactions flexibly, allowing them to be invoiced either together on the same invoice or separately, according to user preferences. Because public and private transactions follow different collection and enforcement processes, the system ensures that each transaction is correctly classified and that this classification is transferred at the invoice line level in the FINVOICE data.",
+      "Combine public and private sales transactions on a single invoice while maintaining a clear identifier at the invoice line level.",
+      "Separate public and private sales into different invoices, ensuring that each follows the correct collection process.",
+      "Customize invoice processing rules at the company level, taking into account that waste management companies may have different billing structures and internal practices.",
+      "The system ensures that public-law and private-law transactions are distinguished using metadata, enabling correct enforcement, VAT application, and financial reporting.",
+      "User-defined invoice grouping: Users can choose whether public and private sales transactions are invoiced on the same invoice or on separate invoices. This configuration can be defined at the customer level or by transaction type.",
+      "Legal classification at the line level: Each invoice line includes a classification indicating whether the charge falls under public law or private law.",
+      "Automatic compliance with legislation in collection processes: The system identifies statutory, tariff-based public services and distinguishes them from commercial/private sales.",
+      "Integration with FINVOICE and external systems: The system automatically exports the public/private classification as part of the FINVOICE data.",
+      "Customizable enforcement handling: Waste management companies can define whether invoices are handled through separate enforcement authorities or general enforcement processes."
+    ],
+    "skills": [
+      "ledger",
+      "ux-patterns"
+    ],
+    "passes": false,
+    "needs_review": false,
+    "iteration_count": 0,
+    "notes": ""
+  },
+  {
+    "id": "PD-285",
+    "summary": "Private and public law invoices",
+    "squad": "ledger",
+    "priority": 3010,
+    "acceptance_criteria": [
+      "The WasteHero system supports both private-law and public-law invoicing, ensuring that invoices comply with applicable legislation. The system automatically determines the correct classification based on predefined criteria such as customer type, product or service classification, or regional regulations. This information is then included in the invoicing material and transferred via FINVOICE to external invoicing and collection systems.",
+      "The system can automatically distinguish between public-law transactions (e.g. municipal waste collection) and private-law transactions (e.g. commercial waste services).",
+      "When an invoice is created, the system applies statutory classification rules and determines whether transactions should be invoiced separately.",
+      "This ensures that the correct legal collection processes, VAT application, and enforcement mechanisms are applied under the appropriate legal framework.",
+      "The system supports the creation of a single invoice that includes both public-law and private-law transactions.",
+      "Each invoice line includes a legally compliant classification identifier indicating whether the transaction falls under public law or private law.",
+      "When exported via FINVOICE, the system attaches metadata indicating which transactions fall under public law or private law."
+    ],
+    "skills": [
+      "ledger",
+      "ux-patterns"
+    ],
+    "passes": false,
+    "needs_review": false,
+    "iteration_count": 0,
+    "notes": ""
+  },
+  {
+    "id": "PD-286",
+    "summary": "Minimum fee",
+    "squad": "ledger",
+    "priority": 3011,
+    "acceptance_criteria": [
+      "The system ensures that the minimum charge complies with the contract dates, preventing overbilling in cases where customer contracts start or end mid-season. This logic is particularly relevant for services such as seasonal waste collection, where some customers may have few or no events but are still subject to an annual minimum fee in accordance with municipal waste management regulations.",
+      "Automatic minimum fee calculation: The system calculates the total amount of the invoice for the billing period and checks whether it meets the minimum charge requirement. If the final invoice amount is below the defined minimum, the system adds a surcharge to cover the difference.",
+      "Tariff-based minimum amounts: The system reads the minimum charge levels from the tariffs, ensuring that the correct amount is applied automatically.",
+      "Customer contract validation: The system checks the contract period before applying the minimum charge. If the customer’s contract starts or ends mid-season, the system ensures that the minimum charge is not incorrectly applied to the new owner.",
+      "Case-specific application: The minimum charge feature is configurable, allowing companies to enable or disable it according to business needs.",
+      "Seamless integration with invoicing: Minimum charge adjustments are automatically included in the invoicing material.",
+      "No other comments, but to note: If the previous owner has not met the minimum charge requirement by November, the system adjusts the final invoice accordingly. If ownership changes during the year, the minimum charge adjustment should also not apply to the old owner. Additionally, the total amount used for comparison must be VAT 0% (net invoicing)."
+    ],
+    "skills": [
+      "ledger",
+      "ux-patterns"
+    ],
+    "passes": false,
+    "needs_review": false,
+    "iteration_count": 0,
+    "notes": ""
+  },
+  {
+    "id": "PD-287",
+    "summary": "Projects",
+    "squad": "ledger",
+    "priority": 3012,
+    "acceptance_criteria": [
+      "Project-based invoicing allows the user to link multiple projects to a single customer. The user can create detailed, site-specific invoices that comply with the customer's requirements and the structures of financial reporting.",
+      "As separate properties linked to the customer.",
+      "As separate contracts for a property or a customer.",
+      "As a customer hierarchy, where projects are customers linked to a main customer, each with its own contracts.",
+      "For weighbridge customers, separate work sites can be set up as separate contracts for the customer, and a work site field can be added to the contract. If desired, the WasteHero application can be configured so that different projects are invoiced on separate invoices and that each of them can have its own references.",
+      "Projects can be created for customers: as separate projects for a property, as separate projects via a contract, or as separate customers with a hierarchy between accounts.",
+      "Invoicing can be configured so that a separate invoice is generated for each project.",
+      "Projects must also be considered in areas other than billing, such as waste reception and corporate services. No comments on the billing part."
+    ],
+    "skills": [
+      "ledger",
+      "ux-patterns"
+    ],
+    "passes": false,
+    "needs_review": false,
+    "iteration_count": 0,
+    "notes": ""
+  },
+  {
+    "id": "PD-288",
+    "summary": "Seasonal fees",
+    "squad": "ledger",
+    "priority": 3013,
+    "acceptance_criteria": [
+      "The WasteHero application enables the configuration of recurring fees based on predefined schedules and customer contracts. Once these fees have been configured, they are automatically recognised as billable events, ensuring that all relevant charges are generated correctly and on time. In addition, the system supports variable pricing models, meaning that seasonal fees can be updated annually without manual adjustments for each billing period.",
+      "Automatic identification of time-based fees: The system recognises and processes non event-based billing items and ensures that scheduled fees (e.g. annual property charges) are included on invoices.",
+      "Configurable billing rules: Users can define billing frequencies (monthly, quarterly, annually) and specify which products or services are eligible for automatic billing.",
+      "Flexible fee management: Seasonal fees can be adjusted dynamically based on property type, contracts, or regulatory updates.",
+      "Customer-specific fee configuration: The system allows different types of properties or customer classes to have separate billing rules. For example, permanent residences and holiday homes can have different annual fees.",
+      "Seamless integration with invoicing workflows: These fees are processed in the same way as other billable events, ensuring consistency in financial reporting and customer account management.",
+      "Support for auditing and compliance: The system logs all automatically generated charges and provides a clear audit trail for regulatory compliance and internal financial audits."
+    ],
+    "skills": [
+      "ledger",
+      "ux-patterns"
+    ],
+    "passes": false,
+    "needs_review": false,
+    "iteration_count": 0,
+    "notes": ""
+  },
+  {
+    "id": "PD-289",
+    "summary": "Accounts receivable data",
+    "squad": "ledger",
+    "priority": 3014,
+    "acceptance_criteria": [
+      "The system retrieves and applies reporting data automatically from customer and event records stored in the WasteHero application. This data is structured into invoice line-item fields and seamlessly integrated into the invoice file that is transferred to an external invoicing system. Users can define reporting settings at the customer, product, or service level, ensuring flexibility and compliance with financial administration regulations.",
+      "Automatic inclusion of reporting data: Mandatory reporting information—such as public-law/private-law classification, accounting ledger codes, and VAT breakdowns—is automatically assigned to invoice lines based on customer and event data.",
+      "Integration between WasteHero and the invoicing system: Data is stored in the WasteHero application and exported in the FINVOICE format to an external invoicing system.",
+      "Predefined data configuration: Reporting data is defined at the customer or service level to enable automatic use without manual intervention.",
+      "Transaction type classification: The system determines whether each event falls under public law or private law and marks it accordingly in the invoice file.",
+      "Ledger account mapping: Each service is linked to a predefined accounting account, ensuring accurate financial classification.",
+      "VAT breakdown calculation: VAT amounts are itemised per invoice line, reflecting applicable tax rates.",
+      "Error prevention and validation: The system verifies that all required reporting data is included before finalising an invoice.",
+      "Audit and compliance support: All defined reporting data is logged in the system, ensuring full traceability.",
+      "The examples are missing accounting cost object information, which must also be taken into account."
+    ],
+    "skills": [
+      "ledger",
+      "ux-patterns"
+    ],
+    "passes": false,
+    "needs_review": false,
+    "iteration_count": 0,
+    "notes": ""
+  },
+  {
+    "id": "PD-294",
+    "summary": "Billing surcharge",
+    "squad": "ledger",
+    "priority": 3015,
+    "acceptance_criteria": [
+      "An invoicing surcharge must be able to be added to an invoice depending on the invoicing method, e.g. a paper invoice surcharge, email invoice surcharge, direct payment surcharge. The invoicing-method surcharge must be generated automatically for customers to whom the given invoicing method applies. However, it must be possible to globally toggle the invoicing-method surcharge on and off.",
+      "The invoicing-method surcharges can be different in amount for different customers, such as business customers and consumer customers. In the WasteHero system, an invoicing surcharge can by default be linked to paper invoices, direct payments, and email invoices.",
+      "The invoicing surcharge function works as follows: a separate product is created for the invoicing surcharge (e.g. paper invoice surcharge). The surcharge is shown automatically whenever the customer is to receive a paper invoice. The invoicing user can switch it off if necessary. It is possible to define the value of the invoicing surcharge according to the customer type.",
+      "Removing the surcharge from the first invoice.",
+      "Preventing the application of surcharges when they are not included in the tariff.",
+      "Allowing different surcharges for business and consumer customers.",
+      "Manually removing individual surcharges from individual invoices.",
+      "Defining different surcharge amounts for business and consumer customers.",
+      "Waste companies can define cases in which the system does not apply surcharges.",
+      "Surcharges can vary based on customer types.",
+      "Users at waste companies can manually remove surcharges from individual invoices.",
+      "The surcharge amount is visible on the invoice sent to the customer.",
+      "PJH does not currently use a paper invoice surcharge, but it must be possible in the future if so decided."
+    ],
+    "skills": [
+      "ledger",
+      "ux-patterns"
+    ],
+    "passes": false,
+    "needs_review": false,
+    "iteration_count": 0,
+    "notes": ""
+  }
+]

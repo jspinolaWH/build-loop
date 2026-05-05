@@ -1,11 +1,13 @@
 ---
 name: ux-patterns
-description: UX design patterns and interaction principles for WasteHero platform features. Designer-maintained. Loaded by bl-design when a requirement touches user-facing flows.
+description: UX design patterns and interaction principles for WasteHero platform features. Maintained by Oliver (designer). Loaded by bl-design when a requirement touches user-facing flows.
 ---
 
 # UX Patterns
 
-> **For the designer:** Fill in each section with WasteHero-specific patterns. The build agent reads this file before designing any frontend. Be specific — vague guidance will be ignored in favour of the agent's defaults.
+> **For Oliver:** Fill in each section with WasteHero-specific patterns. The build agent reads this file before designing any frontend. Be specific — vague guidance will be ignored in favour of the agent's defaults.
+>
+> **Related:** Visual design tokens (colors, typography, spacing) live in `.claude/skills/wastehero-brand/wastehero-design-system.md`. This file covers interaction behaviour and information architecture — not visual styling. Both files are read together when a UI requirement is processed.
 
 ---
 

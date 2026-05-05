@@ -1,0 +1,34 @@
+Pull all issues from this Jira release and format them as a prd.json file.
+
+Release URL: [PASTE YOUR JIRA RELEASE URL HERE]
+
+---
+
+FIELD MAPPING:
+
+- `id`: Jira issue key (e.g. "PD-427")
+- `summary`: Jira issue summary, one line, no numbering prefix (e.g. strip "3.4.5 " from the front)
+- `squad`: derive from component/label, map to one of: nexus, forge, compass, ledger, beacon, bridge, access
+- `priority`: assign based on dependency order — requirements that other requirements build on get lower numbers. Use 0 for foundational data models/APIs, 1 for core business logic, 2 for UI features, 3 for reporting/edge cases. No two related requirements should share the same priority.
+- `acceptance_criteria`: see cleaning rules below
+- `skills`: always ["{squad}", "ux-patterns"] using the squad value you derived
+- `passes`: false
+- `needs_review`: false
+- `iteration_count`: 0
+- `notes`: ""
+
+---
+
+ACCEPTANCE CRITERIA CLEANING RULES — apply all of these before writing:
+
+1. STRIP all markdown formatting: remove **bold**, ### headers, and any other markdown syntax. Keep only plain text.
+2. SKIP any entry that is just a section header — i.e. a line ending with ":" and containing no actual requirement (e.g. "Customer-specific bundling rules:" → skip it).
+3. SKIP any entry that is a single dash "—" or "–" or "-" or empty/whitespace only.
+4. SKIP any entry that is a fragment of 1-3 words with no verb (e.g. "A customer", "Date", "Municipality" alone on a line → skip unless it is clearly a field name in a list of required fields for a data record).
+5. CONVERT incomplete sentences into full testable statements. Example: "Missing billing address" → "The system prevents invoice finalisation if the billing address is missing and displays an error to the user."
+6. MERGE broken sentences: if a line ends with a colon and the next line is its continuation, join them into one criterion.
+7. If after cleaning, a requirement has ZERO valid acceptance criteria, set `needs_review: true` and `notes: "No testable acceptance criteria found in Jira — needs manual review"` instead of leaving it with an empty array.
+
+---
+
+Output only a valid JSON array, nothing else, sorted by priority ascending.

@@ -6,21 +6,39 @@
 <title>Build Loop — Flow</title>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Segoe UI', sans-serif; background: #0d0f16; color: #e2e8f0; padding: 40px 24px; }
+body { font-family: 'Segoe UI', sans-serif; background: #0d0f16; color: #e2e8f0; }
+
+/* ══ TABS ══ */
+.tab-bar {
+  display: flex; gap: 4px; justify-content: center;
+  padding: 28px 24px 0;
+}
+.tab-btn {
+  padding: 8px 24px; border-radius: 8px 8px 0 0;
+  font-size: 0.82rem; font-weight: 600; cursor: pointer;
+  border: 1px solid #1e293b; border-bottom: none;
+  background: #0b0d14; color: #475569;
+  transition: all 0.15s;
+}
+.tab-btn.active {
+  background: #13113a; color: #818cf8; border-color: #4f46e5;
+}
+.tab-content { display: none; padding: 32px 24px 60px; }
+.tab-content.active { display: block; }
 
 h1 { text-align: center; font-size: 1.5rem; color: #a78bfa; margin-bottom: 4px; }
-.subtitle { text-align: center; color: #475569; font-size: 0.8rem; margin-bottom: 48px; }
+.subtitle { text-align: center; color: #475569; font-size: 0.8rem; margin-bottom: 40px; }
 
+/* ══════════════════════════════════════════════════
+   DETAILED TAB STYLES
+══════════════════════════════════════════════════ */
 .diagram { max-width: 1000px; margin: 0 auto; }
 
-/* ── SECTION HEADER ── */
 .sec {
   font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em;
   text-transform: uppercase; color: #334155;
   margin-bottom: 10px; margin-top: 32px;
 }
-
-/* ── GENERIC BOX ── */
 .box { border-radius: 10px; padding: 14px 18px; border: 1px solid; display: flex; flex-direction: column; gap: 4px; }
 .box-title { font-weight: 700; font-size: 0.88rem; }
 .box-sub   { font-size: 0.73rem; color: #94a3b8; line-height: 1.5; }
@@ -29,53 +47,41 @@ h1 { text-align: center; font-size: 1.5rem; color: #a78bfa; margin-bottom: 4px; 
 .c-user  { background: #13113a; border-color: #4f46e5; }
 .c-user  .box-title { color: #818cf8; }
 .c-user  .box-cmd   { color: #6366f1; }
-
 .c-boot  { background: #071a2e; border-color: #0284c7; }
 .c-boot  .box-title { color: #38bdf8; }
 .c-boot  .box-cmd   { color: #0ea5e9; }
-
 .c-graph { background: #1a0e2a; border-color: #9333ea; }
 .c-graph .box-title { color: #d8b4fe; }
 .c-graph .box-cmd   { color: #a855f7; }
 
-.c-pass  { background: #062010; border-color: #15803d; }
-.c-pass  .box-title { color: #4ade80; }
-
-.c-flag  { background: #1f0e0e; border-color: #b91c1c; }
-.c-flag  .box-title { color: #f87171; }
-
-.c-done  { background: #071a14; border-color: #0d9488; }
-.c-done  .box-title { color: #2dd4bf; }
-
-/* ── DOWN ARROW ── */
-.down { display: flex; justify-content: center; height: 36px; align-items: center; flex-direction: column; gap: 0; }
+.down { display: flex; justify-content: center; height: 36px; align-items: center; flex-direction: column; }
 .down-line  { width: 2px; height: 14px; background: #334155; }
 .down-arrow { color: #475569; font-size: 1rem; }
 .down-text  { font-size: 0.63rem; color: #475569; text-align: center; }
 
-/* ── ROWS ── */
 .row   { display: grid; gap: 12px; }
 .row-3 { grid-template-columns: 1fr 1fr 1fr; }
-.row-2 { grid-template-columns: 1fr 1fr; }
 
-/* ══ GRAPH BLOCK ══ */
-.graph-block {
-  background: #100a1f; border: 2px solid #7c3aed; border-radius: 14px; padding: 20px;
-}
-.graph-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-top: 14px; }
-.graph-item {
-  background: #0d0818; border: 1px solid #4c1d95; border-radius: 8px; padding: 12px;
-}
+.designer-block { background: #120d00; border: 2px solid #b45309; border-radius: 14px; padding: 20px; position: relative; }
+.designer-pill  { position: absolute; top: -11px; left: 18px; background: #0d0f16; padding: 0 10px; font-size: 0.65rem; font-weight: 700; color: #d97706; letter-spacing: 0.12em; }
+.designer-flow  { display: flex; align-items: flex-start; gap: 10px; flex-wrap: wrap; margin-top: 4px; }
+.designer-node  { background: #1a1100; border: 1px solid #92400e; border-radius: 8px; padding: 10px 14px; flex: 1; min-width: 150px; }
+.designer-node-highlight { background: #1a1100; border: 2px solid #d97706; border-radius: 8px; padding: 10px 14px; flex: 1; min-width: 150px; }
+.designer-node-title { font-size: 0.75rem; font-weight: 700; color: #fbbf24; margin-bottom: 3px; }
+.designer-node-sub   { font-size: 0.63rem; color: #78350f; line-height: 1.5; }
+.designer-arr  { color: #78350f; font-size: 1.1rem; align-self: center; flex-shrink: 0; }
+.hook-badge    { display: inline-block; font-size: 0.6rem; font-weight: 700; padding: 2px 7px; border-radius: 4px; background: #92400e; color: #fbbf24; letter-spacing: 0.06em; }
+.designer-footer { margin-top: 14px; padding-top: 12px; border-top: 1px solid #1f1600; font-size: 0.68rem; color: #57534e; line-height: 1.7; }
+
+.graph-block { background: #100a1f; border: 2px solid #7c3aed; border-radius: 14px; padding: 20px; }
+.graph-grid  { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-top: 14px; }
+.graph-item  { background: #0d0818; border: 1px solid #4c1d95; border-radius: 8px; padding: 12px; }
 .graph-item-title { font-size: 0.78rem; font-weight: 700; color: #c4b5fd; margin-bottom: 4px; }
 .graph-item-cmd   { font-size: 0.65rem; color: #7c3aed; font-family: monospace; margin-bottom: 6px; }
 .graph-item-desc  { font-size: 0.67rem; color: #4b5563; line-height: 1.5; }
-.graph-output {
-  margin-top: 14px; background: #0c0717; border: 1px dashed #6d28d9; border-radius: 8px;
-  padding: 10px 14px; font-size: 0.7rem; color: #9333ea;
-}
+.graph-output { margin-top: 14px; background: #0c0717; border: 1px dashed #6d28d9; border-radius: 8px; padding: 10px 14px; font-size: 0.7rem; color: #9333ea; }
 .graph-output strong { color: #c4b5fd; }
 
-/* ══ QUEUE ══ */
 .queue-block { background: #0b0d14; border: 1px solid #1e293b; border-radius: 10px; padding: 16px 20px; }
 .queue { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-top: 8px; }
 .q-item { padding: 5px 12px; border-radius: 20px; font-size: 0.7rem; font-weight: 700; border: 1px solid; }
@@ -88,41 +94,23 @@ h1 { text-align: center; font-size: 1.5rem; color: #a78bfa; margin-bottom: 4px; 
 .ql-item { display: flex; align-items: center; gap: 5px; font-size: 0.63rem; color: #475569; }
 .ql-dot  { width: 8px; height: 8px; border-radius: 50%; }
 
-/* ══ LIFECYCLE ══ */
-.lifecycle {
-  border: 2px solid #1e293b; border-radius: 14px;
-  padding: 24px; position: relative; background: #0b0d14;
-}
-.lifecycle-label {
-  position: absolute; top: -11px; left: 18px;
-  background: #0d0f16; padding: 0 10px;
-  font-size: 0.68rem; font-weight: 700; color: #4ade80; letter-spacing: 0.1em;
-}
-
-/* phases */
+.lifecycle { border: 2px solid #1e293b; border-radius: 14px; padding: 24px; position: relative; background: #0b0d14; }
+.lifecycle-label { position: absolute; top: -11px; left: 18px; background: #0d0f16; padding: 0 10px; font-size: 0.68rem; font-weight: 700; color: #4ade80; letter-spacing: 0.1em; }
 .phases { display: flex; align-items: stretch; gap: 4px; }
-.phase {
-  flex: 1; border-radius: 8px; padding: 12px 10px;
-  display: flex; flex-direction: column; gap: 3px;
-}
+.phase { flex: 1; border-radius: 8px; padding: 12px 10px; display: flex; flex-direction: column; gap: 3px; }
 .phase-plain  { background: #111827; border: 1px solid #1e293b; }
-.phase-new    { background: #0f0820; border: 2px solid #7c3aed; }
 .phase-updated{ background: #0a1a10; border: 2px solid #16a34a; }
-
+.phase-design { background: #130d00; border: 2px solid #b45309; }
 .phase-num    { font-size: 0.6rem; font-weight: 700; color: #6366f1; letter-spacing: 0.1em; }
 .phase-name   { font-size: 0.8rem; font-weight: 700; color: #e2e8f0; }
 .phase-cmd    { font-size: 0.68rem; color: #8b5cf6; font-family: monospace; }
 .phase-desc   { font-size: 0.67rem; color: #4b5563; line-height: 1.4; margin-top: 3px; }
-.phase-tag    {
-  display: inline-block; font-size: 0.55rem; font-weight: 700; padding: 1px 6px;
-  border-radius: 10px; margin-bottom: 3px; letter-spacing: 0.06em;
-}
-.tag-new      { background: #6d28d9; color: #fff; }
+.phase-tag    { display: inline-block; font-size: 0.55rem; font-weight: 700; padding: 1px 6px; border-radius: 10px; margin-bottom: 3px; letter-spacing: 0.06em; }
 .tag-updated  { background: #15803d; color: #fff; }
 .tag-existing { background: #1e293b; color: #64748b; }
+.tag-brand    { background: #92400e; color: #fbbf24; }
 .phase-arrow  { display: flex; align-items: center; color: #1e293b; font-size: 1.3rem; flex-shrink: 0; padding-bottom: 8px; }
 
-/* outcomes */
 .outcomes { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 14px; }
 .outcome { border-radius: 8px; padding: 10px 12px; border: 1px solid; font-size: 0.7rem; line-height: 1.5; }
 .outcome-title { font-weight: 700; font-size: 0.73rem; margin-bottom: 3px; }
@@ -132,24 +120,19 @@ h1 { text-align: center; font-size: 1.5rem; color: #a78bfa; margin-bottom: 4px; 
 .o-iter .outcome-title { color: #c4b5fd; }
 .o-flag { background: #1f0a0a; border-color: #991b1b; }
 .o-flag .outcome-title { color: #f87171; }
+.iter-back { display: flex; align-items: center; gap: 8px; margin-top: 10px; padding: 6px 10px; background: #0f0a1a; border: 1px dashed #6d28d9; border-radius: 6px; }
+.next-req  { display: flex; align-items: center; gap: 8px; margin-top: 8px; padding: 6px 10px; background: #071a0e; border: 1px dashed #16a34a; border-radius: 6px; }
 
-.iter-back {
-  display: flex; align-items: center; gap: 8px; margin-top: 10px;
-  padding: 6px 10px; background: #0f0a1a; border: 1px dashed #6d28d9; border-radius: 6px;
-}
-.next-req {
-  display: flex; align-items: center; gap: 8px; margin-top: 8px;
-  padding: 6px 10px; background: #071a0e; border: 1px dashed #16a34a; border-radius: 6px;
-}
-
-/* ══ SKILLS ══ */
 .skills { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
 .skill { background: #130d04; border: 1px solid #78350f; border-radius: 8px; padding: 10px 12px; }
 .skill-name { font-size: 0.72rem; font-weight: 700; color: #fbbf24; }
 .skill-src  { font-size: 0.62rem; color: #78350f; margin-top: 2px; }
 .skill-desc { font-size: 0.65rem; color: #57534e; margin-top: 4px; line-height: 1.4; }
+.skill-brand { background: #130d00; border: 2px solid #d97706; border-radius: 8px; padding: 10px 12px; }
+.skill-brand .skill-name { color: #fbbf24; }
+.skill-brand .skill-src  { color: #92400e; }
+.skill-brand .skill-desc { color: #78350f; }
 
-/* ══ FILES ══ */
 .files { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
 .file { background: #080e0c; border: 1px solid #134e4a; border-radius: 8px; padding: 10px 12px; }
 .file-name { font-size: 0.72rem; font-weight: 700; color: #2dd4bf; font-family: monospace; }
@@ -158,35 +141,303 @@ h1 { text-align: center; font-size: 1.5rem; color: #a78bfa; margin-bottom: 4px; 
 .file-desc { font-size: 0.65rem; color: #3d5c58; line-height: 1.4; margin-top: 3px; }
 .file-new .file-desc { color: #4c3a6e; }
 
-/* ══ OUTPUT ══ */
 .output-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
 .output-card { border-radius: 10px; padding: 14px 16px; border: 1px solid; }
 .output-card-title { font-weight: 700; font-size: 0.85rem; margin-bottom: 6px; }
 .output-card-body  { font-size: 0.72rem; color: #94a3b8; line-height: 1.6; }
-.o-green  { background: #062010; border-color: #166534; }
-.o-green  .output-card-title { color: #4ade80; }
-.o-red    { background: #1f0a0a; border-color: #991b1b; }
-.o-red    .output-card-title { color: #f87171; }
-.o-teal   { background: #071a14; border-color: #0d9488; }
-.o-teal   .output-card-title { color: #2dd4bf; }
+.o-green { background: #062010; border-color: #166534; }
+.o-green .output-card-title { color: #4ade80; }
+.o-red   { background: #1f0a0a; border-color: #991b1b; }
+.o-red   .output-card-title { color: #f87171; }
+.o-teal  { background: #071a14; border-color: #0d9488; }
+.o-teal  .output-card-title { color: #2dd4bf; }
 
-/* ── NEW BADGE ── */
-.new-badge {
-  display: inline-block; font-size: 0.6rem; font-weight: 700; padding: 1px 7px;
-  border-radius: 10px; background: #7c3aed; color: #fff; margin-left: 8px; vertical-align: middle;
-}
+.new-badge { display: inline-block; font-size: 0.6rem; font-weight: 700; padding: 1px 7px; border-radius: 10px; background: #7c3aed; color: #fff; margin-left: 8px; vertical-align: middle; }
+
+/* ══════════════════════════════════════════════════
+   SIMPLE TAB STYLES
+══════════════════════════════════════════════════ */
+.s-wrap { max-width: 960px; margin: 0 auto; display: grid; grid-template-columns: 1fr 248px; gap: 24px; align-items: start; }
+
+/* User actions */
+.s-user { background: #13113a; border: 2px solid #4f46e5; border-radius: 14px; padding: 20px 22px; }
+.s-user-label { font-size: 0.65rem; font-weight: 700; color: #6366f1; letter-spacing: 0.12em; margin-bottom: 14px; }
+.s-user-actions { display: flex; gap: 10px; }
+.s-action { flex: 1; background: #1a1840; border: 1px solid #4f46e5; border-radius: 10px; padding: 14px; }
+.s-action-num   { font-size: 1.4rem; font-weight: 700; color: #818cf8; line-height: 1; }
+.s-action-title { font-size: 0.84rem; font-weight: 600; color: #e2e8f0; margin-top: 6px; }
+.s-action-sub   { font-size: 0.7rem; color: #475569; margin-top: 4px; line-height: 1.4; }
+
+/* Down arrows */
+.s-down { display: flex; flex-direction: column; align-items: center; padding: 6px 0; }
+.s-down-line  { width: 2px; height: 18px; background: #334155; }
+.s-down-head  { color: #475569; font-size: 1rem; }
+.s-down-label { font-size: 0.63rem; color: #475569; margin-top: 2px; }
+
+/* Once-off steps */
+.s-once { border-radius: 12px; padding: 16px 20px; }
+.s-once-scan  { background: #071a2e; border: 2px solid #0284c7; }
+.s-once-graph { background: #1a0e2a; border: 2px solid #7c3aed; }
+.s-once-tag   { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.12em; margin-bottom: 5px; }
+.s-once-scan .s-once-tag  { color: #0284c7; }
+.s-once-graph .s-once-tag { color: #9333ea; }
+.s-once-title { font-size: 0.95rem; font-weight: 700; }
+.s-once-scan .s-once-title  { color: #38bdf8; }
+.s-once-graph .s-once-title { color: #d8b4fe; }
+.s-once-desc  { font-size: 0.76rem; color: #475569; margin-top: 6px; line-height: 1.55; }
+
+/* Requirement loop container */
+.s-loop { background: #0a0d14; border: 2px solid #22303f; border-radius: 14px; padding: 20px; position: relative; margin-top: 0; }
+.s-loop-pill { position: absolute; top: -12px; left: 16px; background: #0d0f16; padding: 0 10px; font-size: 0.62rem; font-weight: 700; color: #4ade80; letter-spacing: 0.1em; }
+
+.s-phase { border-radius: 10px; padding: 14px 18px; }
+.s-phase + .s-phase { margin-top: 4px; }
+
+.s-ph-preflight { background: #111827; border: 1px solid #1e293b; }
+.s-ph-design    { background: #071e10; border: 1px solid #166534; }
+.s-ph-build     { background: #130e00; border: 2px solid #d97706; }
+.s-ph-verify    { background: #111827; border: 1px solid #1e293b; }
+
+.s-phase-tag   { font-size: 0.58rem; font-weight: 700; letter-spacing: 0.1em; margin-bottom: 4px; }
+.s-ph-preflight .s-phase-tag { color: #475569; }
+.s-ph-design    .s-phase-tag { color: #16a34a; }
+.s-ph-build     .s-phase-tag { color: #d97706; }
+.s-ph-verify    .s-phase-tag { color: #475569; }
+
+.s-phase-title { font-size: 0.95rem; font-weight: 700; color: #e2e8f0; }
+.s-phase-desc  { font-size: 0.76rem; color: #475569; margin-top: 5px; line-height: 1.55; }
+
+.s-phase-arrow { text-align: center; color: #334155; padding: 3px 0; font-size: 0.85rem; }
+
+/* Oliver hook callout inside Build */
+.s-hook-callout { background: #1a1100; border: 1px solid #92400e; border-radius: 7px; padding: 8px 12px; margin-top: 10px; font-size: 0.7rem; color: #d97706; line-height: 1.5; }
+.s-hook-callout strong { color: #fbbf24; }
+
+/* Exit outcomes */
+.s-exits { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
+.s-exit { border-radius: 8px; padding: 11px 14px; border: 1px solid; font-size: 0.76rem; line-height: 1.5; }
+.s-exit-title { font-weight: 700; margin-bottom: 3px; font-size: 0.8rem; }
+.s-exit-pass { background: #062010; border-color: #166534; }
+.s-exit-pass .s-exit-title { color: #4ade80; }
+.s-exit-gaps { background: #1a0e2e; border-color: #6d28d9; }
+.s-exit-gaps .s-exit-title { color: #c4b5fd; }
+.s-exit-flag { background: #1f0a0a; border-color: #991b1b; grid-column: span 2; }
+.s-exit-flag .s-exit-title { color: #f87171; }
+
+/* Output */
+.s-output { background: #071a14; border: 2px solid #0d9488; border-radius: 12px; padding: 18px 22px; }
+.s-output-title { font-size: 0.98rem; font-weight: 700; color: #2dd4bf; margin-bottom: 10px; }
+.s-output-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.s-output-card { border-radius: 8px; padding: 12px; border: 1px solid; font-size: 0.75rem; line-height: 1.55; color: #94a3b8; }
+.s-output-card-title { font-weight: 700; font-size: 0.8rem; margin-bottom: 4px; }
+.s-oc-pass { background: #062010; border-color: #166534; }
+.s-oc-pass .s-output-card-title { color: #4ade80; }
+.s-oc-flag { background: #1f0a0a; border-color: #991b1b; }
+.s-oc-flag .s-output-card-title { color: #f87171; }
+
+/* Oliver sidebar */
+.s-oliver { position: relative; }
+.s-oliver-inner { background: #120d00; border: 2px solid #b45309; border-radius: 12px; padding: 16px; position: sticky; top: 24px; }
+.s-oliver-title { font-size: 0.62rem; font-weight: 700; color: #d97706; letter-spacing: 0.12em; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid #2a1800; }
+.s-os { margin-bottom: 6px; }
+.s-os-title { font-size: 0.76rem; font-weight: 700; color: #fbbf24; }
+.s-os-desc  { font-size: 0.66rem; color: #78350f; margin-top: 2px; line-height: 1.4; }
+.s-o-arr { text-align: center; color: #78350f; font-size: 0.8rem; padding: 2px 0; }
+.s-o-hook { background: #1a1100; border: 2px solid #d97706; border-radius: 8px; padding: 10px 12px; margin-top: 8px; }
+.s-o-hook-title { font-size: 0.76rem; font-weight: 700; color: #fbbf24; }
+.s-o-hook-desc  { font-size: 0.65rem; color: #92400e; margin-top: 3px; line-height: 1.4; }
+.s-o-note { font-size: 0.64rem; color: #57534e; margin-top: 12px; padding-top: 10px; border-top: 1px dashed #2a1800; line-height: 1.6; }
 </style>
 </head>
 <body>
 
+<!-- ══ TAB BAR ══ -->
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="showTab('simple')">Simple view</button>
+  <button class="tab-btn" onclick="showTab('detailed')">Detailed reference</button>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     SIMPLE TAB
+══════════════════════════════════════════════════ -->
+<div id="tab-simple" class="tab-content active">
+
 <h1>build-loop — Autonomous Build System</h1>
-<p class="subtitle">WasteHero Platform · Zero human input after start · Fully resumable from disk</p>
+<p class="subtitle">WasteHero Platform · Zero human input after start · Fully resumable</p>
+
+<div class="s-wrap">
+
+  <!-- ── LEFT: MAIN FLOW ── -->
+  <div>
+
+    <!-- User -->
+    <div class="s-user">
+      <div class="s-user-label">YOU DO 3 THINGS — THEN WALK AWAY</div>
+      <div class="s-user-actions">
+        <div class="s-action">
+          <div class="s-action-num">1</div>
+          <div class="s-action-title">Shape requirements</div>
+          <div class="s-action-sub">Run /spec-shaping to produce structured specs with acceptance criteria</div>
+        </div>
+        <div class="s-action">
+          <div class="s-action-num">2</div>
+          <div class="s-action-title">Write prd.json</div>
+          <div class="s-action-sub">List of requirements — id, summary, criteria, squad, skills</div>
+        </div>
+        <div class="s-action">
+          <div class="s-action-num">3</div>
+          <div class="s-action-title">Run /build-loop</div>
+          <div class="s-action-sub">Drop BE + FE repos in folder. Loop runs overnight.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="s-down"><div class="s-down-line"></div><div class="s-down-head">▼</div><div class="s-down-label">runs once</div></div>
+
+    <!-- Context scan -->
+    <div class="s-once s-once-scan">
+      <div class="s-once-tag">PHASE A — RUNS ONCE</div>
+      <div class="s-once-title">Context scan</div>
+      <div class="s-once-desc">Reads the entire BE and FE codebase. Extracts framework, packages, naming conventions, existing components, API patterns. Writes architecture context files — every subsequent agent reads these, so no agent ever invents a pattern that already exists.</div>
+    </div>
+
+    <div class="s-down"><div class="s-down-line"></div><div class="s-down-head">▼</div><div class="s-down-label">runs once</div></div>
+
+    <!-- Graph analysis -->
+    <div class="s-once s-once-graph">
+      <div class="s-once-tag">PHASE B — RUNS ONCE</div>
+      <div class="s-once-title">Graph analysis</div>
+      <div class="s-once-desc">Reads all requirements together. Maps dependencies between them. Tags each as FRESH / PARTIAL / COVERED based on existing code. Identifies where each feature lives in the app. Produces a dependency-sorted build queue — foundations are always built before the features that depend on them.</div>
+    </div>
+
+    <div class="s-down"><div class="s-down-line"></div><div class="s-down-head">▼</div><div class="s-down-label">one requirement at a time</div></div>
+
+    <!-- Requirement loop -->
+    <div class="s-loop">
+      <div class="s-loop-pill">PHASE C — REPEATS FOR EVERY REQUIREMENT IN THE SORTED QUEUE</div>
+
+      <!-- Pre-flight -->
+      <div class="s-phase s-ph-preflight">
+        <div class="s-phase-tag">PRE-FLIGHT</div>
+        <div class="s-phase-title">Spec quality check</div>
+        <div class="s-phase-desc">Checks 3 rules before any work starts: <strong style="color:#e2e8f0">Silence</strong> (does it have acceptance criteria?), <strong style="color:#e2e8f0">Ambiguity</strong> (are criteria measurable?), <strong style="color:#e2e8f0">Wishful thinking</strong> (are criteria actually testable?). If any fail → flag the requirement, skip it, move to the next. No iterations wasted on a bad spec.</div>
+      </div>
+
+      <div class="s-phase-arrow">↓</div>
+
+      <!-- Design -->
+      <div class="s-phase s-ph-design">
+        <div class="s-phase-tag">PHASE 1 — /BL-DESIGN</div>
+        <div class="s-phase-title">Design</div>
+        <div class="s-phase-desc">Reads the graph entry for this requirement: coverage tag, dependencies already built, where in the app it lives. Loads domain knowledge (business rules) and Oliver's UX patterns. Writes a full implementation plan — which files to create or edit, BE logic, FE components, routing. <em style="color:#4ade80">Design runs once per requirement only. Retries go straight to Build.</em></div>
+      </div>
+
+      <div class="s-phase-arrow">↓</div>
+
+      <!-- Build -->
+      <div class="s-phase s-ph-build">
+        <div class="s-phase-tag">PHASE 2 — /BL-BUILD</div>
+        <div class="s-phase-title">Build</div>
+        <div class="s-phase-desc">Implements the plan (or fixes gaps on retry). Backend first, then frontend. Runs the build to check for compile errors and auto-fixes up to 3 rounds.</div>
+        <div class="s-hook-callout"><strong>Oliver's brand hook fires here</strong> — every time a .jsx or .css file is edited, brand-check.sh loads the WasteHero brand skill. Claude can only use design tokens from Oliver's Figma system. This happens automatically, not by the orchestrator.</div>
+      </div>
+
+      <div class="s-phase-arrow">↓</div>
+
+      <!-- Verify -->
+      <div class="s-phase s-ph-verify">
+        <div class="s-phase-tag">PHASE 3 — /BL-GAP-CHECK</div>
+        <div class="s-phase-title">Verify</div>
+        <div class="s-phase-desc">First checks the build compiles. Then scans the code against every acceptance criterion — reads the actual files, doesn't just grep. Returns PASSES or GAPS_FOUND. Updates prd.json. Writes a gap report with exactly what's missing and which files to fix.</div>
+      </div>
+
+      <!-- Exits -->
+      <div class="s-exits">
+        <div class="s-exit s-exit-pass">
+          <div class="s-exit-title">✅ PASSES</div>
+          All criteria implemented. Build compiles. Marked passes: true. Manual test path written to summary. Next requirement begins.
+        </div>
+        <div class="s-exit s-exit-gaps">
+          <div class="s-exit-title">🔁 GAPS FOUND</div>
+          Gap report fed back into Build. Iteration counter increments. Loops back to Build — skips Design. Repeats until passes or max iterations hit.
+        </div>
+        <div class="s-exit s-exit-flag">
+          <div class="s-exit-title">⚠️ MAX ITERATIONS REACHED</div>
+          Marked needs_review: true with notes. Last gap report preserved. Loop does not stop — next requirement begins immediately.
+        </div>
+      </div>
+    </div>
+
+    <div class="s-down"><div class="s-down-line"></div><div class="s-down-head">▼</div><div class="s-down-label">all requirements processed</div></div>
+
+    <!-- Output -->
+    <div class="s-output">
+      <div class="s-output-title">📄 loop-summary.md — your morning briefing</div>
+      <div class="s-output-row">
+        <div class="s-output-card s-oc-pass">
+          <div class="s-output-card-title">✅ Built & verified</div>
+          What was built, what files changed, and exactly where to test it manually: route → what to click → what to expect. UI is guaranteed on-brand.
+        </div>
+        <div class="s-output-card s-oc-flag">
+          <div class="s-output-card-title">⚠️ Needs review</div>
+          Which criteria still failed, what the last gap report said, how many iterations were attempted. Nothing is stuck.
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── RIGHT: OLIVER'S LOOP ── -->
+  <div class="s-oliver">
+    <div class="s-oliver-inner">
+      <div class="s-oliver-title">OLIVER'S DESIGNER LOOP<br>PARALLEL · RUNS ANY TIME</div>
+
+      <div class="s-os">
+        <div class="s-os-title">🎨 Figma Design System</div>
+        <div class="s-os-desc">WasteHero Design System — single source of truth for all tokens, components, and color scales</div>
+      </div>
+      <div class="s-o-arr">↓</div>
+      <div class="s-os">
+        <div class="s-os-title">Sync design tokens</div>
+        <div class="s-os-desc">.claude/skills/wastehero-brand/wastehero-design-system.md — every color, size, and spacing value Claude is allowed to use</div>
+      </div>
+      <div class="s-o-arr">↓</div>
+      <div class="s-os">
+        <div class="s-os-title">Update brand rules</div>
+        <div class="s-os-desc">.claude/skills/wastehero-brand/SKILL.md — dark mode patterns, component templates, copy voice</div>
+      </div>
+      <div class="s-o-arr">↓</div>
+      <div class="s-os">
+        <div class="s-os-title">Update UX patterns</div>
+        <div class="s-os-desc">build-loop/skills/ux-patterns.md — nav, tables, forms, modals, empty states. Loaded during Design phase.</div>
+      </div>
+      <div class="s-o-arr">↓</div>
+      <div class="s-o-hook">
+        <div class="s-o-hook-title">🔒 Enforced at Build</div>
+        <div class="s-o-hook-desc">brand-check.sh fires before every .jsx / .css edit. Claude cannot write UI code without loading the brand skill first.</div>
+      </div>
+
+      <div class="s-o-note">
+        Oliver updates these files whenever Figma changes. The next build run picks it up automatically — no code changes, no PRs needed.<br><br>
+        <strong style="color:#d97706;">Note:</strong> brand tokens are only present at Build time. The Design phase uses ux-patterns only.
+      </div>
+    </div>
+  </div>
+
+</div><!-- end s-wrap -->
+</div><!-- end simple tab -->
+
+
+<!-- ══════════════════════════════════════════════════
+     DETAILED TAB
+══════════════════════════════════════════════════ -->
+<div id="tab-detailed" class="tab-content">
+
+<h1>build-loop — Autonomous Build System</h1>
+<p class="subtitle">WasteHero Platform · Detailed reference · Zero human input after start</p>
 
 <div class="diagram">
 
-<!-- ══════════════════════════════════
-     SECTION 1 — USER INPUT
-══════════════════════════════════ -->
 <div class="sec">① What the user provides — only 3 actions, ever</div>
 <div class="row row-3">
   <div class="box c-user">
@@ -208,9 +459,6 @@ h1 { text-align: center; font-size: 1.5rem; color: #a78bfa; margin-bottom: 4px; 
 
 <div class="down"><div class="down-line"></div><div class="down-arrow">▼</div><div class="down-text">loop begins — autonomous from here</div></div>
 
-<!-- ══════════════════════════════════
-     SECTION 2 — BOOTSTRAP
-══════════════════════════════════ -->
 <div class="sec">② Bootstrap — runs once, before anything is built</div>
 <div class="box c-boot">
   <div class="box-cmd">/bl-context-scan</div>
@@ -224,27 +472,20 @@ h1 { text-align: center; font-size: 1.5rem; color: #a78bfa; margin-bottom: 4px; 
 
 <div class="down"><div class="down-line"></div><div class="down-arrow">▼</div></div>
 
-<!-- ══════════════════════════════════
-     SECTION 3 — REQUIREMENT GRAPH (NEW)
-══════════════════════════════════ -->
 <div class="sec">③ Requirement graph analysis <span class="new-badge">NEW</span> — runs once, before queue starts</div>
 <div class="graph-block">
   <div style="font-size:0.8rem; font-weight:700; color:#d8b4fe; margin-bottom:4px;">/bl-graph-analysis — reads all requirements together before building any of them</div>
-  <div style="font-size:0.72rem; color:#6b7280; line-height:1.5;">
-    This is the step that makes the loop intelligent. Before a single line of code is written, the agent understands the full picture.
-  </div>
-
+  <div style="font-size:0.72rem; color:#6b7280; line-height:1.5;">Before a single line of code is written, the agent understands the full picture.</div>
   <div class="graph-grid">
     <div class="graph-item">
       <div class="graph-item-title">1. Existing Code Coverage</div>
       <div class="graph-item-cmd">scans codebase per requirement</div>
       <div class="graph-item-desc">
-        For each requirement, scans the existing codebase to find partial implementations.<br><br>
-        Tags each requirement as:<br>
+        Tags each requirement:<br>
         <strong style="color:#4ade80">FRESH</strong> — nothing exists yet<br>
         <strong style="color:#fbbf24">PARTIAL</strong> — something exists, build on top<br>
         <strong style="color:#38bdf8">COVERED</strong> — may already be done<br><br>
-        Prevents the build agent from creating a duplicate service or component when one already exists at 80%.
+        Prevents creating a duplicate service or component when one already exists at 80%.
       </div>
     </div>
     <div class="graph-item">
@@ -252,35 +493,31 @@ h1 { text-align: center; font-size: 1.5rem; color: #a78bfa; margin-bottom: 4px; 
       <div class="graph-item-cmd">reads prd.json relationships</div>
       <div class="graph-item-desc">
         Maps which requirements depend on others.<br><br>
-        Example: REQ-004 needs the data model from REQ-001. If REQ-004 is built first, it will invent the model and conflict later.<br><br>
-        Produces a dependency graph so the queue is sorted in the right build order — foundations first, features on top.
+        Example: REQ-004 needs the data model from REQ-001. If built first, it invents the model and conflicts later.<br><br>
+        Produces a dependency graph — sorted so foundations are built first.
       </div>
     </div>
     <div class="graph-item">
       <div class="graph-item-title">3. App Location Mapping</div>
       <div class="graph-item-cmd">maps to routes + pages</div>
       <div class="graph-item-desc">
-        For each requirement, identifies where in the app it lives:<br><br>
+        For each requirement:<br>
         — Which route/URL it appears at<br>
-        — Which page or component renders it<br>
+        — Which page renders it<br>
         — What user role accesses it<br>
         — What action triggers it<br><br>
-        Stored in the graph so the final summary can say exactly where to manually test each feature.
+        Used in the final summary so you know exactly where to manually test.
       </div>
     </div>
   </div>
-
   <div class="graph-output">
-    <strong>Output:</strong> <code>build-loop/req-graph.json</code> — dependency order, coverage tags, app locations, existing file pointers per requirement.<br>
-    The orchestrator re-sorts the queue using this graph. The design and build agents read it so they know what came before, what comes after, and what already exists.
+    <strong>Output:</strong> <code>build-loop/req-graph.json</code> (machine-readable, used by orchestrator + agents) and <code>build-loop/req-graph.md</code> (human-readable summary with dependency tree).<br>
+    The orchestrator re-sorts the queue using sorted_order from the json. Design and build agents read the json to know what came before, what comes after, and what already exists.
   </div>
 </div>
 
-<div class="down"><div class="down-line"></div><div class="down-arrow">▼</div><div class="down-text">queue is now sorted by dependency order — not just priority</div></div>
+<div class="down"><div class="down-line"></div><div class="down-arrow">▼</div><div class="down-text">queue sorted by dependency order — not just priority</div></div>
 
-<!-- ══════════════════════════════════
-     SECTION 4 — QUEUE
-══════════════════════════════════ -->
 <div class="sec">④ Requirement queue — sorted by dependency graph, processed one at a time</div>
 <div class="queue-block">
   <div style="font-size:0.7rem; color:#475569;">Example queue after graph analysis re-sorts by dependency order:</div>
@@ -301,25 +538,20 @@ h1 { text-align: center; font-size: 1.5rem; color: #a78bfa; margin-bottom: 4px; 
     <div class="ql-item"><div class="ql-dot" style="background:#fbbf24"></div>Waiting on dependency</div>
     <div class="ql-item"><div class="ql-dot" style="background:#334155"></div>Queued</div>
   </div>
-  <div style="font-size:0.66rem; color:#334155; margin-top:8px;">Only one requirement is active at a time. It does not exit until it PASSES or is FLAGGED. Only then does the next one begin.</div>
+  <div style="font-size:0.66rem; color:#334155; margin-top:8px;">Only one requirement is active at a time. It does not exit until it PASSES or is FLAGGED.</div>
 </div>
 
 <div class="down"><div class="down-line"></div><div class="down-arrow">▼</div><div class="down-text">one requirement enters the lifecycle</div></div>
 
-<!-- ══════════════════════════════════
-     SECTION 5 — LIFECYCLE
-══════════════════════════════════ -->
 <div class="sec">⑤ Requirement lifecycle — what happens to each requirement</div>
 <div class="lifecycle">
   <div class="lifecycle-label">REQUIREMENT LIFECYCLE — repeats for every requirement in the queue</div>
 
-  <!-- ENTRY -->
   <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px; flex-wrap:wrap;">
     <div style="background:#0f2010; border:1px solid #166534; border-radius:6px; padding:6px 14px; font-size:0.72rem; font-weight:700; color:#4ade80;">▶ ENTER: REQ-003</div>
-    <div style="font-size:0.65rem; color:#334155;">coverage tag: PARTIAL (service exists, no FE) · depends on: REQ-001 ✓ · needed by: REQ-002 · location: /routes/collections/schedule</div>
+    <div style="font-size:0.65rem; color:#334155;">coverage: PARTIAL · depends on: REQ-001 ✓ · needed by: REQ-002 · location: /routes/collections/schedule</div>
   </div>
 
-  <!-- PHASES -->
   <div class="phases">
 
     <div class="phase phase-plain">
@@ -327,7 +559,13 @@ h1 { text-align: center; font-size: 1.5rem; color: #a78bfa; margin-bottom: 4px; 
       <div class="phase-num">PHASE 1</div>
       <div class="phase-name">Pre-flight</div>
       <div class="phase-cmd">orchestrator</div>
-      <div class="phase-desc">Validates against Meyer's Seven Sins. If ambiguous or untestable → flag immediately, skip, next req. No iterations wasted on a bad spec.</div>
+      <div class="phase-desc">
+        Checks 3 spec quality rules — not all of Meyer's Seven Sins, only:<br><br>
+        <strong style="color:#e2e8f0">Silence</strong> — at least one acceptance criterion?<br>
+        <strong style="color:#e2e8f0">Ambiguity</strong> — criteria measurable, not vague ("user-friendly", "fast")?<br>
+        <strong style="color:#e2e8f0">Wishful thinking</strong> — criteria actually testable?<br><br>
+        Any fail → flag immediately, skip, next req.
+      </div>
     </div>
     <div class="phase-arrow">→</div>
 
@@ -337,23 +575,24 @@ h1 { text-align: center; font-size: 1.5rem; color: #a78bfa; margin-bottom: 4px; 
       <div class="phase-name">Design</div>
       <div class="phase-cmd">/bl-design</div>
       <div class="phase-desc">
-        Reads req-graph for this req:<br>
-        — Coverage tag → extends existing service instead of creating new one<br>
-        — Dependencies → reuses models built by REQ-001<br>
-        — Future reqs → exposes what REQ-002 will need<br>
-        — App location → knows which page/route to wire FE into<br><br>
-        Loads: domain skill + architecture context + relevant skills.<br>
-        Writes implementation plan to <code>plans/REQ-003.md</code>.
+        Reads req-graph for this req. Uses coverage tag, dependencies, app location.<br><br>
+        Loads: domain skill + architecture context + ux-patterns (Oliver's interaction file).<br><br>
+        <strong style="color:#f87171">Brand tokens are NOT loaded here</strong> — they only enter at Build time via the hook.<br><br>
+        Writes <code>plans/REQ-003.md</code>. Design runs once only — retries skip this phase.
       </div>
     </div>
     <div class="phase-arrow">→</div>
 
-    <div class="phase phase-plain">
-      <div class="phase-tag tag-existing">EXISTING</div>
+    <div class="phase phase-design">
+      <div class="phase-tag tag-brand">+ OLIVER'S HOOK</div>
       <div class="phase-num">PHASE 3</div>
       <div class="phase-name">Build</div>
       <div class="phase-cmd">/bl-build</div>
-      <div class="phase-desc">Implements from plan (or gap report on retry). BE first, then FE. Runs build check. Auto-fixes compile errors. On iteration: reads gap report, targets only what failed.</div>
+      <div class="phase-desc">
+        Implements from plan (first run) or gap report (retry). BE first, then FE.<br><br>
+        <strong style="color:#fbbf24">On every .jsx / .css edit:</strong> brand-check.sh fires → wastehero-brand skill loads → only design system tokens reach the code.<br><br>
+        Runs build check. Auto-fixes compile errors up to 3 rounds.
+      </div>
     </div>
     <div class="phase-arrow">→</div>
 
@@ -362,7 +601,7 @@ h1 { text-align: center; font-size: 1.5rem; color: #a78bfa; margin-bottom: 4px; 
       <div class="phase-num">PHASE 4</div>
       <div class="phase-name">Verify</div>
       <div class="phase-cmd">/bl-gap-check</div>
-      <div class="phase-desc">Scans code against every acceptance criterion. Build must compile. Writes gap report. Outputs PASSES or GAPS_FOUND.</div>
+      <div class="phase-desc">Step 1: runs build check. Step 2: scans code against every acceptance criterion — reads files, not just greps. Step 3: writes gap report. Outputs PASSES or GAPS_FOUND. Updates prd.json.</div>
     </div>
     <div class="phase-arrow">→</div>
 
@@ -372,152 +611,198 @@ h1 { text-align: center; font-size: 1.5rem; color: #a78bfa; margin-bottom: 4px; 
       <div class="phase-name">Exit</div>
       <div class="phase-cmd">orchestrator</div>
       <div class="phase-desc">
-        PASSES → writes test location to summary:<br>
-        <em style="color:#4ade80">"Go to /collections/schedule, click Add → see new approval UI"</em><br><br>
-        MAX ITERS → flags with note, moves on.<br><br>
-        Either way: requirement exits, next one begins.
+        PASSES → test location written to summary:<br>
+        <em style="color:#4ade80">"Go to /collections/schedule, click Add → see approval UI"</em><br><br>
+        MAX ITERS → flags with note.<br><br>
+        Either way: next requirement begins.
       </div>
     </div>
 
   </div>
 
-  <!-- OUTCOMES -->
-  <div style="font-size:0.64rem; color:#334155; margin: 14px 0 8px 0;">Three possible exits from the lifecycle:</div>
+  <div style="font-size:0.64rem; color:#334155; margin: 14px 0 8px 0;">Three possible exits:</div>
   <div class="outcomes">
     <div class="outcome o-pass">
       <div class="outcome-title">✅ PASSES</div>
-      Mark passes: true in prd.json.<br>
-      Write manual test location to summary.<br>
-      <strong style="color:#4ade80">→ EXIT. Next requirement begins.</strong>
+      All criteria IMPLEMENTED, build compiles. Mark passes: true in prd.json. Write test path to summary.<br>
+      <strong style="color:#4ade80">→ EXIT. Next requirement.</strong>
     </div>
     <div class="outcome o-iter">
-      <div class="outcome-title">🔁 GAPS_FOUND (under max iters)</div>
-      Gap report feeds back into Build phase.<br>
-      Iteration counter increments.<br>
-      <strong style="color:#c4b5fd">→ Loop back to Phase 3. Same requirement.</strong>
+      <div class="outcome-title">🔁 GAPS_FOUND (under max)</div>
+      Gap report → /bl-build. Iteration counter increments. Skips Design phase.<br>
+      <strong style="color:#c4b5fd">→ Back to Phase 3. Same requirement.</strong>
     </div>
     <div class="outcome o-flag">
       <div class="outcome-title">⚠️ MAX ITERATIONS</div>
-      Set needs_review: true. Write note.<br>
-      Nothing blocks — loop continues.<br>
-      <strong style="color:#f87171">→ EXIT. Next requirement begins.</strong>
+      Set needs_review: true. Last gap report preserved.<br>
+      <strong style="color:#f87171">→ EXIT. Next requirement.</strong>
     </div>
   </div>
 
   <div class="iter-back">
     <span style="color:#6d28d9">↺</span>
-    <span style="font-size:0.68rem; color:#8b5cf6;"><strong style="color:#c4b5fd">ITERATE PATH:</strong> GAPS_FOUND → gap report into /bl-build → re-verify → repeat until PASSES or max hit</span>
+    <span style="font-size:0.68rem; color:#8b5cf6;"><strong style="color:#c4b5fd">ITERATE:</strong> GAPS_FOUND → gap report into /bl-build → re-verify → repeat until PASSES or max iterations hit</span>
   </div>
   <div class="next-req">
     <span style="color:#16a34a">→</span>
-    <span style="font-size:0.68rem; color:#4ade80;"><strong>EXIT:</strong> Requirement resolved (pass or flag) → removed from active slot → next requirement in dependency-sorted queue enters</span>
+    <span style="font-size:0.68rem; color:#4ade80;"><strong>EXIT:</strong> Resolved (pass or flag) → removed from active slot → next requirement in sorted queue enters</span>
   </div>
 </div>
 
 <div class="down"><div class="down-line"></div><div class="down-arrow">▼</div><div class="down-text">all requirements processed</div></div>
 
-<!-- ══════════════════════════════════
-     SECTION 6 — SKILLS
-══════════════════════════════════ -->
-<div class="sec">⑥ Skills — plug-and-play, loaded per requirement during Design</div>
-<div class="skills">
-  <div class="skill">
-    <div class="skill-name">Domain Skill</div>
-    <div class="skill-src">Auto-loaded · from spec-shaping</div>
-    <div class="skill-desc">domain-nexus.md, domain-ledger.md etc. Business rules, entity definitions. Loaded based on squad routing in prd.json.</div>
+<!-- OLIVER -->
+<div class="sec" style="color:#b45309; margin-top:40px;">Oliver's designer loop — parallel track · runs independently at any time · enforced at Phase 3 (Build)</div>
+<div class="designer-block">
+  <div class="designer-pill">DESIGNER LOOP — OLIVER · ONGOING · NOT A SEQUENTIAL STEP</div>
+  <div class="designer-flow">
+    <div class="designer-node">
+      <div class="designer-node-title">Figma Design System</div>
+      <div class="designer-node-sub">🎨 WasteHero Design System<br>All tokens, components, color scales — defined and maintained by Oliver.</div>
+    </div>
+    <div class="designer-arr">→</div>
+    <div class="designer-node">
+      <div class="designer-node-title">Sync design tokens</div>
+      <div class="designer-node-sub">.claude/skills/wastehero-brand/wastehero-design-system.md<br><br>Colors, typography, spacing, radius, shadows — every value Claude is allowed to use.</div>
+    </div>
+    <div class="designer-arr">→</div>
+    <div class="designer-node">
+      <div class="designer-node-title">Update brand rules</div>
+      <div class="designer-node-sub">.claude/skills/wastehero-brand/SKILL.md<br><br>Dark mode patterns, component templates, copy rules. Teaches Claude how to apply the tokens.</div>
+    </div>
+    <div class="designer-arr">→</div>
+    <div class="designer-node">
+      <div class="designer-node-title">Update UX patterns</div>
+      <div class="designer-node-sub">build-loop/skills/ux-patterns.md<br><br>Nav, forms, tables, modals, loading states. Loaded by bl-design during Design phase (not Build).</div>
+    </div>
+    <div class="designer-arr">→</div>
+    <div class="designer-node-highlight">
+      <div class="designer-node-title">🔒 Enforced at Phase 3</div>
+      <div class="designer-node-sub">brand-check.sh fires before every .jsx / .css edit.<br><br>Forces wastehero-brand skill to load. Claude can only output values from the design system.</div>
+    </div>
   </div>
-  <div class="skill">
-    <div class="skill-name">Architecture Skill</div>
-    <div class="skill-src">Auto-generated · bootstrap</div>
-    <div class="skill-desc">BE + FE context from context scan. Build agent uses real conventions, real packages. Never invents new ones.</div>
-  </div>
-  <div class="skill">
-    <div class="skill-name">UX / UI Skill</div>
-    <div class="skill-src">Designer-authored template</div>
-    <div class="skill-desc">build-loop/skills/ux-patterns.md. Loaded when req touches UI. Designer maintains this file.</div>
-  </div>
-  <div class="skill">
-    <div class="skill-name">Testing Skill</div>
-    <div class="skill-src">Team-authored</div>
-    <div class="skill-desc">build-loop/skills/testing.md. Test structure, coverage rules. Loaded when tests are required.</div>
+  <div class="designer-footer">
+    <strong style="color:#d97706;">Key distinction:</strong> ux-patterns is loaded at Design time (interaction rules, nav structure, form behaviour). The brand skill (tokens) is loaded at Build time via hook (colors, spacing, typography). They are separate files loaded at different phases.
+    <br><br>
+    <span class="hook-badge">HOOK</span>&nbsp;
+    <code style="color:#d97706; font-size:0.68rem;">.claude/settings.json → PreToolUse → brand-check.sh</code>
+    &nbsp;— fires on Edit/Write targeting .jsx or .css. Once per session — subsequent edits skip it after the skill is loaded.
   </div>
 </div>
 
 <div class="down"><div class="down-line"></div><div class="down-arrow">▼</div></div>
 
-<!-- ══════════════════════════════════
-     SECTION 7 — STATE FILES
-══════════════════════════════════ -->
+<div class="sec">⑥ Skills — what gets loaded and when</div>
+<div class="skills">
+  <div class="skill">
+    <div class="skill-name">Domain Skill</div>
+    <div class="skill-src">Auto-loaded · Design phase</div>
+    <div class="skill-desc">domain-nexus.md etc. Business rules, entity definitions. Loaded from squad field in prd.json.</div>
+  </div>
+  <div class="skill">
+    <div class="skill-name">Architecture Skill</div>
+    <div class="skill-src">Auto-generated · Design + Build</div>
+    <div class="skill-desc">be-architecture.md + fe-architecture.md. Real conventions, real packages. No invented patterns.</div>
+  </div>
+  <div class="skill-brand">
+    <div class="skill-name">WasteHero Brand 🎨</div>
+    <div class="skill-src">Oliver-maintained · Build phase only (hook)</div>
+    <div class="skill-desc">
+      .claude/skills/wastehero-brand/<br><br>
+      Loaded via hook on every .jsx / .css edit — not by bl-design. Brand tokens only enter at Build time.
+    </div>
+  </div>
+  <div class="skill-brand">
+    <div class="skill-name">UX Patterns 🎨</div>
+    <div class="skill-src">Oliver-maintained · Design phase</div>
+    <div class="skill-desc">
+      build-loop/skills/ux-patterns.md<br><br>
+      Interaction patterns — nav, forms, tables, modals. Loaded by bl-design when ux-patterns is in skills[].
+    </div>
+  </div>
+  <div class="skill" style="grid-column:span 2; max-width:50%;">
+    <div class="skill-name">Testing Skill</div>
+    <div class="skill-src">Team-authored · Design phase</div>
+    <div class="skill-desc">build-loop/skills/testing.md. Test structure and coverage rules. Loaded when testing is in skills[].</div>
+  </div>
+</div>
+
+<div class="down"><div class="down-line"></div><div class="down-arrow">▼</div></div>
+
 <div class="sec">⑦ State files — everything on disk, resume at any point</div>
 <div class="files">
   <div class="file">
     <div class="file-name">prd.json</div>
-    <div class="file-desc">Source of truth for all requirements. Updated after every phase — passes, needs_review, iteration count, notes.</div>
+    <div class="file-desc">Source of truth. Updated by gap-check after every verify — passes, needs_review, iteration count, notes.</div>
   </div>
   <div class="file file-new">
-    <div class="file-name">req-graph.json ★ new</div>
-    <div class="file-desc">Dependency order, coverage tags (FRESH/PARTIAL/COVERED), app locations, existing file pointers. Used by design and orchestrator.</div>
+    <div class="file-name">req-graph.json</div>
+    <div class="file-desc">Machine-readable graph. sorted_order used by orchestrator. Dependency + coverage + location data used by design + build agents.</div>
+  </div>
+  <div class="file file-new">
+    <div class="file-name">req-graph.md</div>
+    <div class="file-desc">Human-readable summary of the graph. Build order list, dependency tree, coverage breakdown, warnings (circular deps etc.).</div>
   </div>
   <div class="file">
     <div class="file-name">state.json</div>
     <div class="file-desc">Active requirement, current phase, iteration count. Loop resumes exactly here if interrupted.</div>
   </div>
   <div class="file">
-    <div class="file-name">context/</div>
-    <div class="file-desc">be-architecture.md + fe-architecture.md from bootstrap. Shared across all requirements.</div>
-  </div>
-  <div class="file">
     <div class="file-name">plans/{id}.md</div>
-    <div class="file-desc">Implementation plan from /bl-design. One per requirement. Input to /bl-build.</div>
+    <div class="file-desc">Implementation plan from /bl-design. One per requirement. Input to /bl-build on first run.</div>
   </div>
   <div class="file">
     <div class="file-name">gaps/{id}.md</div>
-    <div class="file-desc">Gap report per requirement. Which criteria pass/fail, what to fix. Input to next /bl-build iteration.</div>
+    <div class="file-desc">Gap report per requirement. Final line is PASSES or GAPS_FOUND. Input to /bl-build on retry iterations.</div>
   </div>
 </div>
 
 <div class="down"><div class="down-line"></div><div class="down-arrow">▼</div></div>
 
-<!-- ══════════════════════════════════
-     SECTION 8 — OUTPUT
-══════════════════════════════════ -->
 <div class="sec">⑧ What you see when you come back in the morning</div>
 <div class="output-grid">
   <div class="output-card o-green">
     <div class="output-card-title">✅ Built & Verified</div>
     <div class="output-card-body">
-      Code is written, build compiles, gap scan passed.<br><br>
-      Each entry includes:<br>
-      — What was built<br>
-      — <strong style="color:#4ade80">Where to test it manually:</strong> route, page, what to click, what to expect<br><br>
-      Ready for your review and PR.
+      Code written, build compiles, gap scan passed.<br><br>
+      — What was built or extended<br>
+      — <strong style="color:#4ade80">Where to test manually:</strong> route, what to click, what to expect<br><br>
+      UI is on-brand — every value came from Oliver's design system.
     </div>
   </div>
   <div class="output-card o-red">
     <div class="output-card-title">⚠️ Needs Manual Review</div>
     <div class="output-card-body">
-      Hit max iterations or had an underspecified requirement.<br><br>
-      Each entry includes:<br>
-      — Which acceptance criteria still failed<br>
-      — What the last gap report said<br>
-      — How many iterations were attempted<br><br>
-      Nothing is stuck. Loop moved on.
+      Hit max iterations or failed pre-flight.<br><br>
+      — Which criteria still failed<br>
+      — Last gap report content<br>
+      — Iterations attempted<br><br>
+      Loop did not stop. It moved on.
     </div>
   </div>
   <div class="output-card o-teal">
     <div class="output-card-title">📄 loop-summary.md</div>
     <div class="output-card-body">
-      Full run report with counts.<br><br>
-      Per-requirement breakdown with:<br>
-      — Status (pass / flag)<br>
-      — What was built or extended<br>
-      — <strong style="color:#2dd4bf">Manual test path</strong> for every passing requirement<br>
-      — Dependency relationships resolved<br><br>
+      Full run report.<br><br>
+      — Pass / flag counts<br>
+      — Per-requirement breakdown<br>
+      — <strong style="color:#2dd4bf">Manual test path</strong> for every passing req<br>
+      — Dependencies resolved<br><br>
       Your morning briefing.
     </div>
   </div>
 </div>
 
 </div><!-- end diagram -->
+</div><!-- end detailed tab -->
+
+<script>
+function showTab(name) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
 </body>
 </html>

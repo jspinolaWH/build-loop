@@ -1,0 +1,39 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p /mnt/c/Users/drasm/Desktop/build-loop/.claude/hooks)",
+      "Bash(mkdir -p /mnt/c/Users/drasm/Desktop/build-loop/.claude/skills/wastehero-brand)",
+      "Bash(cp /mnt/c/Users/drasm/Desktop/build-loop/jack/hooks/brand-check.sh /mnt/c/Users/drasm/Desktop/build-loop/.claude/hooks/brand-check.sh)",
+      "Bash(chmod +x /mnt/c/Users/drasm/Desktop/build-loop/.claude/hooks/brand-check.sh)",
+      "Bash(cp /mnt/c/Users/drasm/Desktop/build-loop/jack/wastehero-brand/SKILL.md /mnt/c/Users/drasm/Desktop/build-loop/.claude/skills/wastehero-brand/SKILL.md)",
+      "Bash(cp /mnt/c/Users/drasm/Desktop/build-loop/jack/wastehero-brand/wastehero-design-system.md /mnt/c/Users/drasm/Desktop/build-loop/.claude/skills/wastehero-brand/wastehero-design-system.md)",
+      "mcp__claude_ai_Figma__get_metadata",
+      "mcp__claude_ai_Figma__whoami",
+      "Bash(yarn --version)",
+      "Bash(npm list *)",
+      "Bash(npm install *)",
+      "Bash(export PATH=\"$PATH:/home/jack/.nvm/versions/node/v24.13.0/bin\")",
+      "Bash(/home/jack/.nvm/versions/node/v24.13.0/bin/yarn install *)",
+      "Bash(nvm ls *)",
+      "Read(//home/jack/.nvm/versions/node/**)",
+      "Bash(/home/jack/.nvm/versions/node/v24.13.0/bin/yarn codegen *)",
+      "Bash(/home/jack/.nvm/versions/node/v24.13.0/bin/yarn --ignore-engines codegen)",
+      "Bash(/home/jack/.nvm/versions/node/v24.13.0/bin/yarn *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/)",
+      "Bash(pkill -f \"vite\")",
+      "Bash(docker --version)",
+      "Bash(pyenv versions *)",
+      "Bash(python3.8 --version)",
+      "Bash(sudo add-apt-repository *)",
+      "Bash(sudo -S add-apt-repository ppa:deadsnakes/ppa -y)",
+      "Bash(sudo -S apt update)",
+      "Bash(sudo -S apt install -y python3.8 python3.8-venv python3.8-dev)",
+      "Bash(curl -fsSL https://pyenv.run)",
+      "Bash(bash)",
+      "Bash(sudo -S apt install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev)",
+      "Bash(/home/jack/.pyenv/versions/3.8.20/bin/python -m venv .venv)",
+      "Bash(.venv/bin/pip install *)",
+      "Bash(*)"
+    ]
+  }
+}

@@ -435,6 +435,16 @@ WasteHero owns the **smart waste management** category. Always:
 
 ### Cards
 
+**When to use:** Standalone discrete data objects — a notification item, a dashboard metric tile, a summary widget. Max 1 level of nesting.
+
+**When NOT to use — use these instead:**
+- Auth pages (`/login`, `/reset`, etc.) → `AuthLayout` wraps the form directly. No card inside it.
+- Main app pages → `LayoutWithFiltersV2`, `LayoutWithDividerv3`, or `LayoutWithBreadCrumbV2` from `src/layouts/`. These are the real page containers.
+- Sections within a page → `<Divider>` + `<Row>`/`<Col>`. Use `gray100` (`#F5F5F5`) background on filter bars, not a card.
+- Full-page forms → form sits directly inside the layout wrapper, no card around it.
+
+If you are building a page and find yourself wrapping the whole thing in a card, stop — use the appropriate layout wrapper instead.
+
 ```css
 .card {
   background: var(--bg-default, #FFFFFF);

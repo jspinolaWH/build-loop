@@ -46,6 +46,28 @@ Record: `build_passes: true/false` and capture the first 10 lines of any error o
 
 ---
 
+## Step 1.5 — Load FE Test Results (if available)
+
+Check if `$PROJECT_ROOT/build-loop/fe-tests/$ARGUMENTS.md` exists.
+
+If it exists, read it and extract:
+- `fe_verdict`: the final line (`PASSES` or `FAILS`)
+- `failed_operations`: every GraphQL operation listed under "Failed GraphQL Operations" — note the operation name, error message, and suggested fix
+- `console_errors`: any console errors listed
+
+If `fe_verdict = FAILS`: each failed GraphQL operation becomes an additional gap entry in the gap report (Step 4), labeled as:
+- **Layer**: Backend
+- **Criterion**: N/A — runtime error
+- **What exists**: The operation fires but the resolver returns a GraphQL error
+- **What is missing**: The specific fix described in the FE test report's "Fix needed" field
+- **Files to change**: relevant resolver / service / permission file based on the error message
+
+If `fe_verdict = PASSES` or file does not exist: no additional gaps from FE test.
+
+Record `fe_test_included: true/false` for the gap report header.
+
+---
+
 ## Step 2 — Scan Each Acceptance Criterion
 
 For each acceptance criterion in the requirement:
@@ -96,6 +118,7 @@ Write `$PROJECT_ROOT/build-loop/gaps/$ARGUMENTS.md`:
 **Scanned:** [ISO timestamp]
 **Verdict:** PASSES | GAPS_FOUND
 **Build:** PASSES | FAILS
+**FE Test:** PASSES | FAILS | SKIPPED | not run
 
 ## Acceptance Criteria Coverage
 

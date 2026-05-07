@@ -1,0 +1,10 @@
+{
+  "_comment": "Copy this file to config.json (same folder), fill in your local credentials. config.json is gitignored.",
+  "test_user": {
+    "username": "jspinola@wastehero.io",
+    "password": "YOUR_LOCAL_DEV_PASSWORD_HERE"
+  },
+  "fe_port": 3000,
+  "be_port": 8000,
+  "be_graphql_path": "/graph-api/"
+}

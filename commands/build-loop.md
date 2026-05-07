@@ -168,9 +168,27 @@ prompt: "Invoke the /bl-build skill using the Skill tool with argument [REQ_ID].
 ```
 
 Read last line starting with `BUILD_RESULT:`.
-- `BUILD_RESULT: DONE` → log BUILD_DONE, proceed to Step 3
-- `BUILD_RESULT: BUILD_FAILED` → log WARNING, proceed to Step 3 (gap check will catch it)
+- `BUILD_RESULT: DONE` → log BUILD_DONE, proceed to Step 2.5
+- `BUILD_RESULT: BUILD_FAILED` → log WARNING, proceed to Step 2.5 (fe-test and gap check will catch it)
 - `BUILD_RESULT: ERROR` → log ERROR, flag requirement, move to next
+
+**Step 2.5 — FE Runtime Test**
+
+Update state: `current_phase: "fe-test"`
+
+Invoke via **Agent tool**:
+```
+description: "BL FE test [REQ_ID] iter [n]"
+prompt: "Invoke the /bl-fe-test skill using the Skill tool with argument [REQ_ID]. Project root: [PROJECT_ROOT]. prd.json at: [PRD_PATH]. Iteration: [n]. Log in, navigate to the requirement route, intercept all GraphQL responses, and fail if any contain errors. Your final output line must be exactly one of: FE_TEST_RESULT: PASSES or FE_TEST_RESULT: FAILS or FE_TEST_RESULT: SKIPPED [reason] or FE_TEST_RESULT: ERROR [reason]"
+```
+
+Read last line starting with `FE_TEST_RESULT:`.
+- `FE_TEST_RESULT: PASSES` → log FE_TEST_PASS, proceed to Step 3
+- `FE_TEST_RESULT: SKIPPED` → log FE_TEST_SKIPPED (backend-only or no route), proceed to Step 3
+- `FE_TEST_RESULT: ERROR` → log FE_TEST_ERROR (infra issue — servers couldn't start, config missing, etc.), proceed to Step 3 anyway (don't block the loop on infra)
+- `FE_TEST_RESULT: FAILS` → log FE_TEST_FAIL:
+  - If iterations < MAX_ITERATIONS: increment iteration in state.json, loop back to Step 2 (skip design — gap report + fe-test report both inform the fix)
+  - If iterations >= MAX_ITERATIONS: set `needs_review: true`, `notes: "FE test failed after max iterations [timestamp] — see build-loop/fe-tests/[req-id].md"`, log MAX_ITERATIONS, move to next requirement
 
 **Step 3 — Verify**
 
@@ -194,7 +212,7 @@ Every action appends to `$PROJECT_ROOT/build-loop/loop.log`:
 ```
 [ISO timestamp] [LEVEL] [req-id] [message]
 ```
-Levels: `START`, `PASS`, `PREFLIGHT_FAIL`, `DESIGN_DONE`, `BUILD_DONE`, `FIX_APPLIED`, `MAX_ITERATIONS`, `SKIPPED`, `WARNING`, `ERROR`
+Levels: `START`, `PASS`, `PREFLIGHT_FAIL`, `DESIGN_DONE`, `BUILD_DONE`, `FE_TEST_PASS`, `FE_TEST_FAIL`, `FE_TEST_SKIPPED`, `FE_TEST_ERROR`, `FIX_APPLIED`, `MAX_ITERATIONS`, `SKIPPED`, `WARNING`, `ERROR`
 
 ---
 
@@ -226,13 +244,16 @@ Write `$PROJECT_ROOT/build-loop/loop-summary.md`:
 - **What was built:** [brief description]
 - **Where to test manually:** [route/page] → [what to click] → [what to expect]
 - **Iterations needed:** [n]
+- **FE test:** PASSES / SKIPPED / not run
 
 ## ⚠️ Needs Manual Review
 
 [For each flagged requirement:]
 ### [req-id] — [summary]
-- **Reason:** [preflight fail reason / max iterations / error]
+- **Reason:** [preflight fail reason / max iterations / FE test failed / error]
 - **Last gap report:** build-loop/gaps/[req-id].md
+- **Last FE test report:** build-loop/fe-tests/[req-id].md (if exists)
+- **Screenshots:** build-loop/screenshots/[req-id]-*.png (if exists)
 - **Iterations attempted:** [n]
 ```
 

@@ -197,6 +197,59 @@ Write `$PROJECT_ROOT/build-loop/context/fe-architecture.md`:
 
 ---
 
+## Step 5 — Detect dev server configuration
+
+This information is used by `bl-fe-test` to start and health-check servers.
+
+### 5a. Frontend dev server
+
+- Read `package.json` `scripts` — find `"dev"` or `"start:app"` command
+- Check for a `vite.config.*` or `next.config.*` for the server port
+  - Vite: look for `server.port` in config; fall back to env var `PORT`; default 3000
+  - Next.js: default 3000
+- Health check URL: `http://localhost:[FE_PORT]/` — expect 200 or 304
+
+### 5b. Backend dev server
+
+- **Django**: command is `python manage.py runserver [BE_PORT]`
+  - Check `settings/local.py` or `.env` for the port; default 8000
+  - Health check: `POST http://localhost:[BE_PORT]/graph-api/ {"query":"{ __typename }"}` — expect 200
+- **FastAPI/Uvicorn/Daphne**: check for `daphne`, `uvicorn`, or `hypercorn` in start scripts; detect port from the script
+- **Node**: `npm start` or `node server.js`; default 3001
+
+### 5c. GraphQL path
+
+- Look for the base GraphQL endpoint path in the BE URL config or Django urls.py
+- Common pattern for this project: `/graph-api/`
+- Record as `GQL_PATH`
+
+### 5d. Append to fe-architecture.md
+
+Append a new section at the bottom of `$PROJECT_ROOT/build-loop/context/fe-architecture.md`:
+
+```markdown
+## Dev Server
+
+- **Start command:** yarn dev
+- **Port:** [FE_PORT]
+- **Health check URL:** http://localhost:[FE_PORT]/
+```
+
+### 5e. Append to be-architecture.md
+
+Append a new section at the bottom of `$PROJECT_ROOT/build-loop/context/be-architecture.md`:
+
+```markdown
+## Dev Server
+
+- **Start command:** python manage.py runserver [BE_PORT]
+- **Port:** [BE_PORT]
+- **GraphQL path:** [GQL_PATH]
+- **Health check:** POST http://localhost:[BE_PORT][GQL_PATH] {"query":"{ __typename }"}
+```
+
+---
+
 ## Output
 
 After writing both files, output exactly:

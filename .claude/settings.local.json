@@ -48,7 +48,13 @@
       "Bash(echo \"PID: $!\")",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:8000/graph-api/)",
       "Bash(pkill -f \"manage.py runserver\")",
-      "Bash(awk '{print $1}')"
+      "Bash(awk '{print $1}')",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\('scripts:', json.dumps\\(d.get\\('scripts',{}\\), indent=2\\)\\); print\\('devDeps playwright:', 'playwright' in str\\(d.get\\('devDependencies',''\\)\\)\\)\")",
+      "Bash(xargs cat)",
+      "Bash(*)",
+      "mcp__claude_ai_Figma__get_design_context",
+      "mcp__claude_ai_Figma__search_design_system",
+      "mcp__claude_ai_Figma__get_screenshot"
     ]
   }
 }

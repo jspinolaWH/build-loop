@@ -61,6 +61,7 @@ h1 { text-align: center; font-size: 1.5rem; color: #a78bfa; margin-bottom: 4px; 
 
 .row   { display: grid; gap: 12px; }
 .row-3 { grid-template-columns: 1fr 1fr 1fr; }
+.row-4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
 
 .designer-block { background: #120d00; border: 2px solid #b45309; border-radius: 14px; padding: 20px; position: relative; }
 .designer-pill  { position: absolute; top: -11px; left: 18px; background: #0d0f16; padding: 0 10px; font-size: 0.65rem; font-weight: 700; color: #d97706; letter-spacing: 0.12em; }
@@ -101,12 +102,14 @@ h1 { text-align: center; font-size: 1.5rem; color: #a78bfa; margin-bottom: 4px; 
 .phase-plain  { background: #111827; border: 1px solid #1e293b; }
 .phase-updated{ background: #0a1a10; border: 2px solid #16a34a; }
 .phase-design { background: #130d00; border: 2px solid #b45309; }
+.phase-fetest { background: #071a14; border: 2px solid #0d9488; }
 .phase-num    { font-size: 0.6rem; font-weight: 700; color: #6366f1; letter-spacing: 0.1em; }
 .phase-name   { font-size: 0.8rem; font-weight: 700; color: #e2e8f0; }
 .phase-cmd    { font-size: 0.68rem; color: #8b5cf6; font-family: monospace; }
 .phase-desc   { font-size: 0.67rem; color: #4b5563; line-height: 1.4; margin-top: 3px; }
 .phase-tag    { display: inline-block; font-size: 0.55rem; font-weight: 700; padding: 1px 6px; border-radius: 10px; margin-bottom: 3px; letter-spacing: 0.06em; }
 .tag-updated  { background: #15803d; color: #fff; }
+.tag-new      { background: #0d9488; color: #fff; }
 .tag-existing { background: #1e293b; color: #64748b; }
 .tag-brand    { background: #92400e; color: #fbbf24; }
 .phase-arrow  { display: flex; align-items: center; color: #1e293b; font-size: 1.3rem; flex-shrink: 0; padding-bottom: 8px; }
@@ -132,14 +135,21 @@ h1 { text-align: center; font-size: 1.5rem; color: #a78bfa; margin-bottom: 4px; 
 .skill-brand .skill-name { color: #fbbf24; }
 .skill-brand .skill-src  { color: #92400e; }
 .skill-brand .skill-desc { color: #78350f; }
+.skill-new { background: #071a14; border: 2px solid #0d9488; border-radius: 8px; padding: 10px 12px; }
+.skill-new .skill-name { color: #2dd4bf; }
+.skill-new .skill-src  { color: #0f766e; }
+.skill-new .skill-desc { color: #134e4a; }
 
 .files { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
 .file { background: #080e0c; border: 1px solid #134e4a; border-radius: 8px; padding: 10px 12px; }
 .file-name { font-size: 0.72rem; font-weight: 700; color: #2dd4bf; font-family: monospace; }
 .file-new  { border-color: #6d28d9; background: #0c0818; }
 .file-new .file-name { color: #c4b5fd; }
+.file-today { border-color: #0d9488; background: #071a14; }
+.file-today .file-name { color: #2dd4bf; }
 .file-desc { font-size: 0.65rem; color: #3d5c58; line-height: 1.4; margin-top: 3px; }
 .file-new .file-desc { color: #4c3a6e; }
+.file-today .file-desc { color: #0f766e; }
 
 .output-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
 .output-card { border-radius: 10px; padding: 14px 16px; border: 1px solid; }
@@ -152,14 +162,14 @@ h1 { text-align: center; font-size: 1.5rem; color: #a78bfa; margin-bottom: 4px; 
 .o-teal  { background: #071a14; border-color: #0d9488; }
 .o-teal  .output-card-title { color: #2dd4bf; }
 
-.new-badge { display: inline-block; font-size: 0.6rem; font-weight: 700; padding: 1px 7px; border-radius: 10px; background: #7c3aed; color: #fff; margin-left: 8px; vertical-align: middle; }
+.new-badge       { display: inline-block; font-size: 0.6rem; font-weight: 700; padding: 1px 7px; border-radius: 10px; background: #7c3aed; color: #fff; margin-left: 8px; vertical-align: middle; }
+.today-badge     { display: inline-block; font-size: 0.6rem; font-weight: 700; padding: 1px 7px; border-radius: 10px; background: #0d9488; color: #fff; margin-left: 8px; vertical-align: middle; }
 
 /* ══════════════════════════════════════════════════
    SIMPLE TAB STYLES
 ══════════════════════════════════════════════════ */
 .s-wrap { max-width: 960px; margin: 0 auto; display: grid; grid-template-columns: 1fr 248px; gap: 24px; align-items: start; }
 
-/* User actions */
 .s-user { background: #13113a; border: 2px solid #4f46e5; border-radius: 14px; padding: 20px 22px; }
 .s-user-label { font-size: 0.65rem; font-weight: 700; color: #6366f1; letter-spacing: 0.12em; margin-bottom: 14px; }
 .s-user-actions { display: flex; gap: 10px; }
@@ -167,14 +177,14 @@ h1 { text-align: center; font-size: 1.5rem; color: #a78bfa; margin-bottom: 4px; 
 .s-action-num   { font-size: 1.4rem; font-weight: 700; color: #818cf8; line-height: 1; }
 .s-action-title { font-size: 0.84rem; font-weight: 600; color: #e2e8f0; margin-top: 6px; }
 .s-action-sub   { font-size: 0.7rem; color: #475569; margin-top: 4px; line-height: 1.4; }
+.s-action-today { border-color: #0d9488; }
+.s-action-today .s-action-num { color: #2dd4bf; }
 
-/* Down arrows */
 .s-down { display: flex; flex-direction: column; align-items: center; padding: 6px 0; }
 .s-down-line  { width: 2px; height: 18px; background: #334155; }
 .s-down-head  { color: #475569; font-size: 1rem; }
 .s-down-label { font-size: 0.63rem; color: #475569; margin-top: 2px; }
 
-/* Once-off steps */
 .s-once { border-radius: 12px; padding: 16px 20px; }
 .s-once-scan  { background: #071a2e; border: 2px solid #0284c7; }
 .s-once-graph { background: #1a0e2a; border: 2px solid #7c3aed; }
@@ -186,7 +196,6 @@ h1 { text-align: center; font-size: 1.5rem; color: #a78bfa; margin-bottom: 4px; 
 .s-once-graph .s-once-title { color: #d8b4fe; }
 .s-once-desc  { font-size: 0.76rem; color: #475569; margin-top: 6px; line-height: 1.55; }
 
-/* Requirement loop container */
 .s-loop { background: #0a0d14; border: 2px solid #22303f; border-radius: 14px; padding: 20px; position: relative; margin-top: 0; }
 .s-loop-pill { position: absolute; top: -12px; left: 16px; background: #0d0f16; padding: 0 10px; font-size: 0.62rem; font-weight: 700; color: #4ade80; letter-spacing: 0.1em; }
 
@@ -196,35 +205,37 @@ h1 { text-align: center; font-size: 1.5rem; color: #a78bfa; margin-bottom: 4px; 
 .s-ph-preflight { background: #111827; border: 1px solid #1e293b; }
 .s-ph-design    { background: #071e10; border: 1px solid #166534; }
 .s-ph-build     { background: #130e00; border: 2px solid #d97706; }
+.s-ph-fetest    { background: #071a14; border: 2px solid #0d9488; }
 .s-ph-verify    { background: #111827; border: 1px solid #1e293b; }
 
 .s-phase-tag   { font-size: 0.58rem; font-weight: 700; letter-spacing: 0.1em; margin-bottom: 4px; }
 .s-ph-preflight .s-phase-tag { color: #475569; }
 .s-ph-design    .s-phase-tag { color: #16a34a; }
 .s-ph-build     .s-phase-tag { color: #d97706; }
+.s-ph-fetest    .s-phase-tag { color: #0d9488; }
 .s-ph-verify    .s-phase-tag { color: #475569; }
 
 .s-phase-title { font-size: 0.95rem; font-weight: 700; color: #e2e8f0; }
 .s-phase-desc  { font-size: 0.76rem; color: #475569; margin-top: 5px; line-height: 1.55; }
-
 .s-phase-arrow { text-align: center; color: #334155; padding: 3px 0; font-size: 0.85rem; }
 
-/* Oliver hook callout inside Build */
 .s-hook-callout { background: #1a1100; border: 1px solid #92400e; border-radius: 7px; padding: 8px 12px; margin-top: 10px; font-size: 0.7rem; color: #d97706; line-height: 1.5; }
 .s-hook-callout strong { color: #fbbf24; }
+.s-fe-callout   { background: #071a14; border: 1px solid #0d9488; border-radius: 7px; padding: 8px 12px; margin-top: 10px; font-size: 0.7rem; color: #2dd4bf; line-height: 1.5; }
+.s-fe-callout strong { color: #5eead4; }
 
-/* Exit outcomes */
 .s-exits { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
 .s-exit { border-radius: 8px; padding: 11px 14px; border: 1px solid; font-size: 0.76rem; line-height: 1.5; }
 .s-exit-title { font-weight: 700; margin-bottom: 3px; font-size: 0.8rem; }
-.s-exit-pass { background: #062010; border-color: #166534; }
-.s-exit-pass .s-exit-title { color: #4ade80; }
-.s-exit-gaps { background: #1a0e2e; border-color: #6d28d9; }
-.s-exit-gaps .s-exit-title { color: #c4b5fd; }
-.s-exit-flag { background: #1f0a0a; border-color: #991b1b; grid-column: span 2; }
-.s-exit-flag .s-exit-title { color: #f87171; }
+.s-exit-pass   { background: #062010; border-color: #166534; }
+.s-exit-pass .s-exit-title   { color: #4ade80; }
+.s-exit-gaps   { background: #1a0e2e; border-color: #6d28d9; }
+.s-exit-gaps .s-exit-title   { color: #c4b5fd; }
+.s-exit-fetest { background: #071a14; border-color: #0d9488; }
+.s-exit-fetest .s-exit-title { color: #2dd4bf; }
+.s-exit-flag   { background: #1f0a0a; border-color: #991b1b; grid-column: span 2; }
+.s-exit-flag .s-exit-title   { color: #f87171; }
 
-/* Output */
 .s-output { background: #071a14; border: 2px solid #0d9488; border-radius: 12px; padding: 18px 22px; }
 .s-output-title { font-size: 0.98rem; font-weight: 700; color: #2dd4bf; margin-bottom: 10px; }
 .s-output-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
@@ -235,7 +246,6 @@ h1 { text-align: center; font-size: 1.5rem; color: #a78bfa; margin-bottom: 4px; 
 .s-oc-flag { background: #1f0a0a; border-color: #991b1b; }
 .s-oc-flag .s-output-card-title { color: #f87171; }
 
-/* Oliver sidebar */
 .s-oliver { position: relative; }
 .s-oliver-inner { background: #120d00; border: 2px solid #b45309; border-radius: 12px; padding: 16px; position: sticky; top: 24px; }
 .s-oliver-title { font-size: 0.62rem; font-weight: 700; color: #d97706; letter-spacing: 0.12em; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid #2a1800; }
@@ -247,6 +257,12 @@ h1 { text-align: center; font-size: 1.5rem; color: #a78bfa; margin-bottom: 4px; 
 .s-o-hook-title { font-size: 0.76rem; font-weight: 700; color: #fbbf24; }
 .s-o-hook-desc  { font-size: 0.65rem; color: #92400e; margin-top: 3px; line-height: 1.4; }
 .s-o-note { font-size: 0.64rem; color: #57534e; margin-top: 12px; padding-top: 10px; border-top: 1px dashed #2a1800; line-height: 1.6; }
+
+/* setup box */
+.s-setup { background: #0c0818; border: 2px solid #4f46e5; border-radius: 10px; padding: 12px 16px; margin-top: 12px; }
+.s-setup-title { font-size: 0.65rem; font-weight: 700; color: #818cf8; letter-spacing: 0.1em; margin-bottom: 8px; }
+.s-setup-item { font-size: 0.7rem; color: #475569; line-height: 1.6; }
+.s-setup-item code { color: #a5b4fc; font-size: 0.68rem; }
 </style>
 </head>
 <body>
@@ -272,7 +288,7 @@ h1 { text-align: center; font-size: 1.5rem; color: #a78bfa; margin-bottom: 4px; 
 
     <!-- User -->
     <div class="s-user">
-      <div class="s-user-label">YOU DO 3 THINGS — THEN WALK AWAY</div>
+      <div class="s-user-label">YOU DO 4 THINGS — THEN WALK AWAY</div>
       <div class="s-user-actions">
         <div class="s-action">
           <div class="s-action-num">1</div>
@@ -284,10 +300,15 @@ h1 { text-align: center; font-size: 1.5rem; color: #a78bfa; margin-bottom: 4px; 
           <div class="s-action-title">Write prd.json</div>
           <div class="s-action-sub">List of requirements — id, summary, criteria, squad, skills</div>
         </div>
-        <div class="s-action">
+        <div class="s-action s-action-today">
           <div class="s-action-num">3</div>
+          <div class="s-action-title">Fill config.json</div>
+          <div class="s-action-sub">Copy config.json.example → config.json. Add your local dev password. The FE test logs in as you.</div>
+        </div>
+        <div class="s-action">
+          <div class="s-action-num">4</div>
           <div class="s-action-title">Run /build-loop</div>
-          <div class="s-action-sub">Drop BE + FE repos in folder. Loop runs overnight.</div>
+          <div class="s-action-sub">Drop BE + FE repos in folder. Loop runs overnight. No permission prompts — Bash(*) is pre-approved.</div>
         </div>
       </div>
     </div>
@@ -298,7 +319,7 @@ h1 { text-align: center; font-size: 1.5rem; color: #a78bfa; margin-bottom: 4px; 
     <div class="s-once s-once-scan">
       <div class="s-once-tag">PHASE A — RUNS ONCE</div>
       <div class="s-once-title">Context scan</div>
-      <div class="s-once-desc">Reads the entire BE and FE codebase. Extracts framework, packages, naming conventions, existing components, API patterns. Writes architecture context files — every subsequent agent reads these, so no agent ever invents a pattern that already exists.</div>
+      <div class="s-once-desc">Reads the entire BE and FE codebase. Extracts framework, packages, naming conventions, existing components, API patterns. Also detects dev server start commands and ports — so the FE test phase knows how to start the servers if they're not already running. Writes architecture context files — every subsequent agent reads these.</div>
     </div>
 
     <div class="s-down"><div class="s-down-line"></div><div class="s-down-head">▼</div><div class="s-down-label">runs once</div></div>
@@ -320,50 +341,64 @@ h1 { text-align: center; font-size: 1.5rem; color: #a78bfa; margin-bottom: 4px; 
       <div class="s-phase s-ph-preflight">
         <div class="s-phase-tag">PRE-FLIGHT</div>
         <div class="s-phase-title">Spec quality check</div>
-        <div class="s-phase-desc">Checks 3 rules before any work starts: <strong style="color:#e2e8f0">Silence</strong> (does it have acceptance criteria?), <strong style="color:#e2e8f0">Ambiguity</strong> (are criteria measurable?), <strong style="color:#e2e8f0">Wishful thinking</strong> (are criteria actually testable?). If any fail → flag the requirement, skip it, move to the next. No iterations wasted on a bad spec.</div>
+        <div class="s-phase-desc">Checks 3 rules before any work starts: <strong style="color:#e2e8f0">Silence</strong> (does it have acceptance criteria?), <strong style="color:#e2e8f0">Ambiguity</strong> (are criteria measurable?), <strong style="color:#e2e8f0">Wishful thinking</strong> (are criteria actually testable?). If any fail → flag the requirement, skip it, move to the next.</div>
       </div>
 
       <div class="s-phase-arrow">↓</div>
 
       <!-- Design -->
       <div class="s-phase s-ph-design">
-        <div class="s-phase-tag">PHASE 1 — /BL-DESIGN</div>
+        <div class="s-phase-tag">STEP 1 — /BL-DESIGN</div>
         <div class="s-phase-title">Design</div>
-        <div class="s-phase-desc">Reads the graph entry for this requirement: coverage tag, dependencies already built, where in the app it lives. Loads domain knowledge (business rules) and Oliver's UX patterns. Writes a full implementation plan — which files to create or edit, BE logic, FE components, routing. <em style="color:#4ade80">Design runs once per requirement only. Retries go straight to Build.</em></div>
+        <div class="s-phase-desc">Reads graph entry, domain skills, architecture context, Figma design specs, and UX patterns. Writes a full implementation plan — which files to create or edit, BE logic, FE components, routing. <em style="color:#4ade80">Runs once per requirement. Retries skip this and go straight to Build.</em></div>
       </div>
 
       <div class="s-phase-arrow">↓</div>
 
       <!-- Build -->
       <div class="s-phase s-ph-build">
-        <div class="s-phase-tag">PHASE 2 — /BL-BUILD</div>
+        <div class="s-phase-tag">STEP 2 — /BL-BUILD</div>
         <div class="s-phase-title">Build</div>
-        <div class="s-phase-desc">Implements the plan (or fixes gaps on retry). Backend first, then frontend. Runs the build to check for compile errors and auto-fixes up to 3 rounds.</div>
-        <div class="s-hook-callout"><strong>Oliver's brand hook fires here</strong> — every time a .jsx or .css file is edited, brand-check.sh loads the WasteHero brand skill. Claude can only use design tokens from Oliver's Figma system. This happens automatically, not by the orchestrator.</div>
+        <div class="s-phase-desc">Implements the plan (first run) or fixes gaps and FE test failures (retries). Backend first, then frontend. Runs build check and auto-fixes compile errors up to 3 rounds. Snapshots every file touched before editing so /bl-reset can undo it.</div>
+        <div class="s-hook-callout"><strong>Brand hook fires here</strong> — every time a .jsx or .css file is edited, brand-check.sh loads the WasteHero brand skill. Claude can only use design tokens from the design system. Card guards also enforce when to use LayoutWithFilters vs a card.</div>
+      </div>
+
+      <div class="s-phase-arrow">↓</div>
+
+      <!-- FE Test — NEW -->
+      <div class="s-phase s-ph-fetest">
+        <div class="s-phase-tag">STEP 2.5 — /BL-FE-TEST · NEW</div>
+        <div class="s-phase-title">FE Runtime Test</div>
+        <div class="s-phase-desc">Starts the FE and BE dev servers if not already running. Runs Playwright headless — logs in as your user, navigates to the requirement's route, and intercepts every GraphQL call to <code style="color:#5eead4">/graph-api/</code>. Parses the response body and <strong style="color:#5eead4">fails if any operation returns an <code>errors</code> array</strong>. That's the GraphQL equivalent of a 500/400 — the HTTP status is always 200. Takes screenshots at every stage.</div>
+        <div class="s-fe-callout"><strong>Why not HTTP status codes?</strong> The FE talks to Django via GraphQL. GraphQL always returns HTTP 200 — errors are in the response body: <code>{"errors": [{"message": "..."}]}</code>. This test catches resolver failures, permission errors, and null data that static code scans miss entirely.</div>
       </div>
 
       <div class="s-phase-arrow">↓</div>
 
       <!-- Verify -->
       <div class="s-phase s-ph-verify">
-        <div class="s-phase-tag">PHASE 3 — /BL-GAP-CHECK</div>
+        <div class="s-phase-tag">STEP 3 — /BL-GAP-CHECK</div>
         <div class="s-phase-title">Verify</div>
-        <div class="s-phase-desc">First checks the build compiles. Then scans the code against every acceptance criterion — reads the actual files, doesn't just grep. Returns PASSES or GAPS_FOUND. Updates prd.json. Writes a gap report with exactly what's missing and which files to fix.</div>
+        <div class="s-phase-desc">Checks build compiles. Reads the FE test report — any failed GraphQL operations become explicit gaps (pointing at the resolver that needs fixing). Then scans code against every acceptance criterion. Writes a gap report combining static + runtime findings. Returns PASSES or GAPS_FOUND.</div>
       </div>
 
       <!-- Exits -->
       <div class="s-exits">
         <div class="s-exit s-exit-pass">
           <div class="s-exit-title">✅ PASSES</div>
-          All criteria implemented. Build compiles. Marked passes: true. Manual test path written to summary. Next requirement begins.
+          Build compiles. FE test found no GraphQL errors. All criteria implemented. Marked passes: true. Screenshots + manual test path written to summary.
+        </div>
+        <div class="s-exit s-exit-fetest">
+          <div class="s-exit-title">🌐 FE TEST FAILS</div>
+          A GraphQL operation returned errors. The failing operation + error message fed into the next Build iteration. Loops back to Build — skips Design.
         </div>
         <div class="s-exit s-exit-gaps">
           <div class="s-exit-title">🔁 GAPS FOUND</div>
-          Gap report fed back into Build. Iteration counter increments. Loops back to Build — skips Design. Repeats until passes or max iterations hit.
+          Static gap report + any FE test failures fed back into Build. Iteration counter increments. Loops until passes or max iterations hit.
         </div>
         <div class="s-exit s-exit-flag">
           <div class="s-exit-title">⚠️ MAX ITERATIONS REACHED</div>
-          Marked needs_review: true with notes. Last gap report preserved. Loop does not stop — next requirement begins immediately.
+          Marked needs_review: true. Last gap report + FE test report + screenshots preserved. Loop does not stop — next requirement begins immediately.
         </div>
       </div>
     </div>
@@ -376,21 +411,21 @@ h1 { text-align: center; font-size: 1.5rem; color: #a78bfa; margin-bottom: 4px; 
       <div class="s-output-row">
         <div class="s-output-card s-oc-pass">
           <div class="s-output-card-title">✅ Built & verified</div>
-          What was built, what files changed, and exactly where to test it manually: route → what to click → what to expect. UI is guaranteed on-brand.
+          Code written, build compiles, FE test clean (no GraphQL errors), gap scan passed. Where to test: route → what to click → what to expect. Screenshots at build-loop/screenshots/. UI is on-brand — card guards enforced layout patterns.
         </div>
         <div class="s-output-card s-oc-flag">
           <div class="s-output-card-title">⚠️ Needs review</div>
-          Which criteria still failed, what the last gap report said, how many iterations were attempted. Nothing is stuck.
+          Which criteria still failed, which GraphQL operations errored and why, what the last gap + FE test reports said, screenshots of the broken state, iterations attempted.
         </div>
       </div>
     </div>
 
   </div>
 
-  <!-- ── RIGHT: OLIVER'S LOOP ── -->
+  <!-- ── RIGHT: DESIGNER LOOP ── -->
   <div class="s-oliver">
     <div class="s-oliver-inner">
-      <div class="s-oliver-title">OLIVER'S DESIGNER LOOP<br>PARALLEL · RUNS ANY TIME</div>
+      <div class="s-oliver-title">DESIGNER LOOP<br>PARALLEL · RUNS ANY TIME</div>
 
       <div class="s-os">
         <div class="s-os-title">🎨 Figma Design System</div>
@@ -399,12 +434,17 @@ h1 { text-align: center; font-size: 1.5rem; color: #a78bfa; margin-bottom: 4px; 
       <div class="s-o-arr">↓</div>
       <div class="s-os">
         <div class="s-os-title">Sync design tokens</div>
-        <div class="s-os-desc">.claude/skills/wastehero-brand/wastehero-design-system.md — every color, size, and spacing value Claude is allowed to use</div>
+        <div class="s-os-desc">wastehero-design-system.md — every color, size, and spacing value Claude is allowed to use</div>
       </div>
       <div class="s-o-arr">↓</div>
       <div class="s-os">
         <div class="s-os-title">Update brand rules</div>
-        <div class="s-os-desc">.claude/skills/wastehero-brand/SKILL.md — dark mode patterns, component templates, copy voice</div>
+        <div class="s-os-desc">SKILL.md — dark mode patterns, component templates, copy voice, and <strong style="color:#fbbf24">card usage guards</strong></div>
+      </div>
+      <div class="s-o-arr">↓</div>
+      <div class="s-os">
+        <div class="s-os-title">Card guards <span class="today-badge">UPDATED</span></div>
+        <div class="s-os-desc">Both skill files now say: use cards for standalone data objects only. Auth pages → AuthLayout. App pages → LayoutWithFiltersV2 / LayoutWithDivider. Sections → Divider + Row/Col.</div>
       </div>
       <div class="s-o-arr">↓</div>
       <div class="s-os">
@@ -414,12 +454,12 @@ h1 { text-align: center; font-size: 1.5rem; color: #a78bfa; margin-bottom: 4px; 
       <div class="s-o-arr">↓</div>
       <div class="s-o-hook">
         <div class="s-o-hook-title">🔒 Enforced at Build</div>
-        <div class="s-o-hook-desc">brand-check.sh fires before every .jsx / .css edit. Claude cannot write UI code without loading the brand skill first.</div>
+        <div class="s-o-hook-desc">brand-check.sh fires before every .jsx / .css edit. Claude cannot write UI code without loading the brand skill — including the card guards — first.</div>
       </div>
 
       <div class="s-o-note">
-        Oliver updates these files whenever Figma changes. The next build run picks it up automatically — no code changes, no PRs needed.<br><br>
-        <strong style="color:#d97706;">Note:</strong> brand tokens are only present at Build time. The Design phase uses ux-patterns only.
+        Update these files when Figma changes. The next build run picks it up automatically — no code changes, no PRs.<br><br>
+        <strong style="color:#d97706;">Permissions:</strong> Bash(*) + Figma MCP tools pre-approved in settings.local.json — the loop runs overnight without any permission prompts.
       </div>
     </div>
   </div>
@@ -438,8 +478,8 @@ h1 { text-align: center; font-size: 1.5rem; color: #a78bfa; margin-bottom: 4px; 
 
 <div class="diagram">
 
-<div class="sec">① What the user provides — only 3 actions, ever</div>
-<div class="row row-3">
+<div class="sec">① What the user provides — 4 actions, then walk away</div>
+<div class="row row-4">
   <div class="box c-user">
     <div class="box-cmd">USER ACTION 1</div>
     <div class="box-title">Shape requirements with /spec-shaping</div>
@@ -450,10 +490,15 @@ h1 { text-align: center; font-size: 1.5rem; color: #a78bfa; margin-bottom: 4px; 
     <div class="box-title">Populate build-loop/prd.json</div>
     <div class="box-sub">Requirements list. Each entry: id, summary, acceptance criteria, squad, skills[], priority, passes: false.</div>
   </div>
+  <div class="box" style="background:#071a14; border-color:#0d9488;">
+    <div class="box-cmd" style="color:#0d9488;">USER ACTION 3 · NEW</div>
+    <div class="box-title" style="color:#2dd4bf;">Fill build-loop/config.json</div>
+    <div class="box-sub">Copy config.json.example → config.json. Add your local dev password for jspinola@wastehero.io. Gitignored. Read by bl-fe-test to log into the app during Playwright tests.</div>
+  </div>
   <div class="box c-user">
-    <div class="box-cmd">USER ACTION 3</div>
+    <div class="box-cmd">USER ACTION 4</div>
     <div class="box-title">Drop BE + FE repos in folder. Run /build-loop.</div>
-    <div class="box-sub">Walk away. The loop runs overnight and resolves every requirement autonomously.</div>
+    <div class="box-sub">Bash(*) pre-approved in settings.local.json. Figma MCP tools pre-approved. Loop runs overnight with zero permission prompts.</div>
   </div>
 </div>
 
@@ -462,17 +507,18 @@ h1 { text-align: center; font-size: 1.5rem; color: #a78bfa; margin-bottom: 4px; 
 <div class="sec">② Bootstrap — runs once, before anything is built</div>
 <div class="box c-boot">
   <div class="box-cmd">/bl-context-scan</div>
-  <div class="box-title">Scan the entire codebase and generate architecture context</div>
+  <div class="box-title">Scan the entire codebase and generate architecture context <span class="today-badge">UPDATED</span></div>
   <div class="box-sub">
     Reads BE → extracts framework, package list, naming conventions, API patterns, service/controller structure.<br>
     Reads FE → extracts component library, routing, state management, existing UI components, hook conventions.<br>
-    Writes <code>context/be-architecture.md</code> + <code>context/fe-architecture.md</code>. Every build agent reads these — no agent ever invents a pattern or installs a package that already exists.
+    <strong style="color:#2dd4bf;">New in Step 5:</strong> detects dev server start commands and ports (FE: <code>yarn dev</code> on port 3000, BE: <code>python manage.py runserver 8000</code>) and the GraphQL health check path (<code>/graph-api/</code>). Appended to both architecture files so bl-fe-test always knows how to start servers.<br><br>
+    Writes <code>context/be-architecture.md</code> + <code>context/fe-architecture.md</code>. Every build agent reads these — no agent invents a pattern or installs a package that already exists.
   </div>
 </div>
 
 <div class="down"><div class="down-line"></div><div class="down-arrow">▼</div></div>
 
-<div class="sec">③ Requirement graph analysis <span class="new-badge">NEW</span> — runs once, before queue starts</div>
+<div class="sec">③ Requirement graph analysis — runs once, before queue starts</div>
 <div class="graph-block">
   <div style="font-size:0.8rem; font-weight:700; color:#d8b4fe; margin-bottom:4px;">/bl-graph-analysis — reads all requirements together before building any of them</div>
   <div style="font-size:0.72rem; color:#6b7280; line-height:1.5;">Before a single line of code is written, the agent understands the full picture.</div>
@@ -506,17 +552,17 @@ h1 { text-align: center; font-size: 1.5rem; color: #a78bfa; margin-bottom: 4px; 
         — Which page renders it<br>
         — What user role accesses it<br>
         — What action triggers it<br><br>
-        Used in the final summary so you know exactly where to manually test.
+        Used by bl-fe-test to know which route to navigate to during Playwright tests.
       </div>
     </div>
   </div>
   <div class="graph-output">
-    <strong>Output:</strong> <code>build-loop/req-graph.json</code> (machine-readable, used by orchestrator + agents) and <code>build-loop/req-graph.md</code> (human-readable summary with dependency tree).<br>
-    The orchestrator re-sorts the queue using sorted_order from the json. Design and build agents read the json to know what came before, what comes after, and what already exists.
+    <strong>Output:</strong> <code>build-loop/req-graph.json</code> (machine-readable) and <code>build-loop/req-graph.md</code> (human-readable).<br>
+    The orchestrator re-sorts the queue using sorted_order. Design, build, and FE test agents read the json to know what came before, what already exists, and where in the app to navigate.
   </div>
 </div>
 
-<div class="down"><div class="down-line"></div><div class="down-arrow">▼</div><div class="down-text">queue sorted by dependency order — not just priority</div></div>
+<div class="down"><div class="down-line"></div><div class="down-arrow">▼</div><div class="down-text">queue sorted by dependency order</div></div>
 
 <div class="sec">④ Requirement queue — sorted by dependency graph, processed one at a time</div>
 <div class="queue-block">
@@ -556,52 +602,70 @@ h1 { text-align: center; font-size: 1.5rem; color: #a78bfa; margin-bottom: 4px; 
 
     <div class="phase phase-plain">
       <div class="phase-tag tag-existing">EXISTING</div>
-      <div class="phase-num">PHASE 1</div>
+      <div class="phase-num">STEP 1</div>
       <div class="phase-name">Pre-flight</div>
       <div class="phase-cmd">orchestrator</div>
       <div class="phase-desc">
-        Checks 3 spec quality rules — not all of Meyer's Seven Sins, only:<br><br>
-        <strong style="color:#e2e8f0">Silence</strong> — at least one acceptance criterion?<br>
-        <strong style="color:#e2e8f0">Ambiguity</strong> — criteria measurable, not vague ("user-friendly", "fast")?<br>
-        <strong style="color:#e2e8f0">Wishful thinking</strong> — criteria actually testable?<br><br>
-        Any fail → flag immediately, skip, next req.
+        3 spec quality checks:<br><br>
+        <strong style="color:#e2e8f0">Silence</strong> — criteria exist?<br>
+        <strong style="color:#e2e8f0">Ambiguity</strong> — measurable?<br>
+        <strong style="color:#e2e8f0">Wishful thinking</strong> — testable?<br><br>
+        Any fail → flag, skip, next req.
       </div>
     </div>
     <div class="phase-arrow">→</div>
 
     <div class="phase phase-updated">
-      <div class="phase-tag tag-updated">UPDATED</div>
-      <div class="phase-num">PHASE 2</div>
+      <div class="phase-tag tag-updated">EXISTING</div>
+      <div class="phase-num">STEP 2</div>
       <div class="phase-name">Design</div>
       <div class="phase-cmd">/bl-design</div>
       <div class="phase-desc">
-        Reads req-graph for this req. Uses coverage tag, dependencies, app location.<br><br>
-        Loads: domain skill + architecture context + ux-patterns (Oliver's interaction file).<br><br>
-        <strong style="color:#f87171">Brand tokens are NOT loaded here</strong> — they only enter at Build time via the hook.<br><br>
-        Writes <code>plans/REQ-003.md</code>. Design runs once only — retries skip this phase.
+        Reads graph, domain skill, architecture context, UX patterns. Pulls Figma design context for FE components.<br><br>
+        <strong style="color:#f87171">Brand tokens NOT loaded here</strong> — hook handles that at Build.<br><br>
+        Writes <code>plans/REQ.md</code>. Once only — retries skip this.
       </div>
     </div>
     <div class="phase-arrow">→</div>
 
     <div class="phase phase-design">
-      <div class="phase-tag tag-brand">+ OLIVER'S HOOK</div>
-      <div class="phase-num">PHASE 3</div>
+      <div class="phase-tag tag-brand">+ BRAND HOOK</div>
+      <div class="phase-num">STEP 3</div>
       <div class="phase-name">Build</div>
       <div class="phase-cmd">/bl-build</div>
       <div class="phase-desc">
-        Implements from plan (first run) or gap report (retry). BE first, then FE.<br><br>
-        <strong style="color:#fbbf24">On every .jsx / .css edit:</strong> brand-check.sh fires → wastehero-brand skill loads → only design system tokens reach the code.<br><br>
-        Runs build check. Auto-fixes compile errors up to 3 rounds.
+        Plan (first run) or gap + FE test report (retry). BE first, then FE.<br><br>
+        <strong style="color:#fbbf24">On every .jsx/.css edit:</strong> brand-check.sh fires → brand skill loads → card guards enforce correct layout patterns.<br><br>
+        Snapshots every file. Auto-fixes compile errors 3 rounds.
+      </div>
+    </div>
+    <div class="phase-arrow">→</div>
+
+    <div class="phase phase-fetest">
+      <div class="phase-tag tag-new">NEW</div>
+      <div class="phase-num">STEP 3.5</div>
+      <div class="phase-name">FE Test</div>
+      <div class="phase-cmd">/bl-fe-test</div>
+      <div class="phase-desc">
+        Reads <code>config.json</code> for credentials. Starts servers if needed. Installs Playwright/Chromium.<br><br>
+        Logs in → navigates to req route → intercepts all <code>/graph-api/</code> calls → checks response JSON for <code>errors</code> array.<br><br>
+        Screenshots at every stage. PASSES or FAILS.
       </div>
     </div>
     <div class="phase-arrow">→</div>
 
     <div class="phase phase-plain">
-      <div class="phase-tag tag-existing">EXISTING</div>
-      <div class="phase-num">PHASE 4</div>
+      <div class="phase-tag tag-updated">UPDATED</div>
+      <div class="phase-num">STEP 4</div>
       <div class="phase-name">Verify</div>
       <div class="phase-cmd">/bl-gap-check</div>
-      <div class="phase-desc">Step 1: runs build check. Step 2: scans code against every acceptance criterion — reads files, not just greps. Step 3: writes gap report. Outputs PASSES or GAPS_FOUND. Updates prd.json.</div>
+      <div class="phase-desc">
+        Step 1: build compiles?<br>
+        Step 1.5: reads FE test report — failed operations become explicit gaps.<br>
+        Step 2: scans code vs every acceptance criterion.<br>
+        Step 3: writes combined gap report.<br>
+        PASSES or GAPS_FOUND.
+      </div>
     </div>
     <div class="phase-arrow">→</div>
 
@@ -611,37 +675,41 @@ h1 { text-align: center; font-size: 1.5rem; color: #a78bfa; margin-bottom: 4px; 
       <div class="phase-name">Exit</div>
       <div class="phase-cmd">orchestrator</div>
       <div class="phase-desc">
-        PASSES → test location written to summary:<br>
-        <em style="color:#4ade80">"Go to /collections/schedule, click Add → see approval UI"</em><br><br>
-        MAX ITERS → flags with note.<br><br>
-        Either way: next requirement begins.
+        PASSES → test path + FE test status + screenshot paths written to summary.<br><br>
+        FE FAILS or GAPS → loop back to Build with combined report.<br><br>
+        MAX ITERS → flag. Next requirement begins.
       </div>
     </div>
 
   </div>
 
-  <div style="font-size:0.64rem; color:#334155; margin: 14px 0 8px 0;">Three possible exits:</div>
+  <div style="font-size:0.64rem; color:#334155; margin: 14px 0 8px 0;">Four possible exits:</div>
   <div class="outcomes">
     <div class="outcome o-pass">
       <div class="outcome-title">✅ PASSES</div>
-      All criteria IMPLEMENTED, build compiles. Mark passes: true in prd.json. Write test path to summary.<br>
+      Build compiles. FE test: no GraphQL errors. All criteria IMPLEMENTED. Mark passes: true. Screenshot paths + test location written to summary.<br>
       <strong style="color:#4ade80">→ EXIT. Next requirement.</strong>
+    </div>
+    <div class="outcome o-iter" style="border-color:#0d9488; background:#071a14;">
+      <div class="outcome-title" style="color:#2dd4bf;">🌐 FE TEST FAILS</div>
+      Failed GraphQL operations + error messages → /bl-build as input. Iteration increments. Design skipped.<br>
+      <strong style="color:#2dd4bf">→ Back to Step 3. Same requirement.</strong>
     </div>
     <div class="outcome o-iter">
       <div class="outcome-title">🔁 GAPS_FOUND (under max)</div>
-      Gap report → /bl-build. Iteration counter increments. Skips Design phase.<br>
-      <strong style="color:#c4b5fd">→ Back to Phase 3. Same requirement.</strong>
+      Combined gap + FE test report → /bl-build. Iteration increments. Design skipped.<br>
+      <strong style="color:#c4b5fd">→ Back to Step 3. Same requirement.</strong>
     </div>
     <div class="outcome o-flag">
       <div class="outcome-title">⚠️ MAX ITERATIONS</div>
-      Set needs_review: true. Last gap report preserved.<br>
+      Set needs_review: true. Last gap report, FE test report, and screenshots all preserved.<br>
       <strong style="color:#f87171">→ EXIT. Next requirement.</strong>
     </div>
   </div>
 
   <div class="iter-back">
     <span style="color:#6d28d9">↺</span>
-    <span style="font-size:0.68rem; color:#8b5cf6;"><strong style="color:#c4b5fd">ITERATE:</strong> GAPS_FOUND → gap report into /bl-build → re-verify → repeat until PASSES or max iterations hit</span>
+    <span style="font-size:0.68rem; color:#8b5cf6;"><strong style="color:#c4b5fd">ITERATE:</strong> FE FAILS or GAPS_FOUND → combined report into /bl-build → re-test → re-verify → repeat until PASSES or max hit</span>
   </div>
   <div class="next-req">
     <span style="color:#16a34a">→</span>
@@ -651,42 +719,44 @@ h1 { text-align: center; font-size: 1.5rem; color: #a78bfa; margin-bottom: 4px; 
 
 <div class="down"><div class="down-line"></div><div class="down-arrow">▼</div><div class="down-text">all requirements processed</div></div>
 
-<!-- OLIVER -->
-<div class="sec" style="color:#b45309; margin-top:40px;">Oliver's designer loop — parallel track · runs independently at any time · enforced at Phase 3 (Build)</div>
+<!-- DESIGNER LOOP -->
+<div class="sec" style="color:#b45309; margin-top:40px;">Designer loop — parallel track · runs independently at any time · enforced at Step 3 (Build)</div>
 <div class="designer-block">
-  <div class="designer-pill">DESIGNER LOOP — OLIVER · ONGOING · NOT A SEQUENTIAL STEP</div>
+  <div class="designer-pill">DESIGNER LOOP — ONGOING · NOT A SEQUENTIAL STEP</div>
   <div class="designer-flow">
     <div class="designer-node">
       <div class="designer-node-title">Figma Design System</div>
-      <div class="designer-node-sub">🎨 WasteHero Design System<br>All tokens, components, color scales — defined and maintained by Oliver.</div>
+      <div class="designer-node-sub">🎨 WasteHero Design System<br>All tokens, components, color scales — defined and maintained.</div>
     </div>
     <div class="designer-arr">→</div>
     <div class="designer-node">
       <div class="designer-node-title">Sync design tokens</div>
-      <div class="designer-node-sub">.claude/skills/wastehero-brand/wastehero-design-system.md<br><br>Colors, typography, spacing, radius, shadows — every value Claude is allowed to use.</div>
+      <div class="designer-node-sub">wastehero-design-system.md<br><br>Colors, typography, spacing, radius, shadows + card CSS spec.</div>
     </div>
     <div class="designer-arr">→</div>
     <div class="designer-node">
-      <div class="designer-node-title">Update brand rules</div>
-      <div class="designer-node-sub">.claude/skills/wastehero-brand/SKILL.md<br><br>Dark mode patterns, component templates, copy rules. Teaches Claude how to apply the tokens.</div>
+      <div class="designer-node-title">Update brand rules + card guards</div>
+      <div class="designer-node-sub">SKILL.md<br><br>Dark mode patterns, copy rules, and: <strong style="color:#fbbf24">when to use a card vs LayoutWithFilters vs AuthLayout vs Divider.</strong> Updated to prevent over-wrapping.</div>
     </div>
     <div class="designer-arr">→</div>
     <div class="designer-node">
       <div class="designer-node-title">Update UX patterns</div>
-      <div class="designer-node-sub">build-loop/skills/ux-patterns.md<br><br>Nav, forms, tables, modals, loading states. Loaded by bl-design during Design phase (not Build).</div>
+      <div class="designer-node-sub">build-loop/skills/ux-patterns.md<br><br>Nav, forms, tables, modals, loading states. Loaded by bl-design during Design phase.</div>
     </div>
     <div class="designer-arr">→</div>
     <div class="designer-node-highlight">
-      <div class="designer-node-title">🔒 Enforced at Phase 3</div>
-      <div class="designer-node-sub">brand-check.sh fires before every .jsx / .css edit.<br><br>Forces wastehero-brand skill to load. Claude can only output values from the design system.</div>
+      <div class="designer-node-title">🔒 Enforced at Step 3</div>
+      <div class="designer-node-sub">brand-check.sh fires before every .jsx / .css edit.<br><br>Forces brand skill load. Card guards and design tokens both enforced — Claude cannot use off-system values.</div>
     </div>
   </div>
   <div class="designer-footer">
-    <strong style="color:#d97706;">Key distinction:</strong> ux-patterns is loaded at Design time (interaction rules, nav structure, form behaviour). The brand skill (tokens) is loaded at Build time via hook (colors, spacing, typography). They are separate files loaded at different phases.
+    <strong style="color:#d97706;">Key distinction:</strong> ux-patterns is loaded at Design time (interaction rules). The brand skill (tokens + card guards) is loaded at Build time via hook. Separate files, different phases.
+    <br><br>
+    <strong style="color:#d97706;">Card guards added:</strong> Both SKILL.md and wastehero-design-system.md now specify: use cards for standalone discrete objects only. Auth pages → AuthLayout (no card). App pages → LayoutWithFiltersV2 / LayoutWithDividerv3 / LayoutWithBreadCrumbV2. Sections → Divider + Row/Col. Full-page forms → directly inside layout, no card wrapper.
     <br><br>
     <span class="hook-badge">HOOK</span>&nbsp;
     <code style="color:#d97706; font-size:0.68rem;">.claude/settings.json → PreToolUse → brand-check.sh</code>
-    &nbsp;— fires on Edit/Write targeting .jsx or .css. Once per session — subsequent edits skip it after the skill is loaded.
+    &nbsp;— fires on Edit/Write targeting .jsx or .css.
   </div>
 </div>
 
@@ -702,25 +772,33 @@ h1 { text-align: center; font-size: 1.5rem; color: #a78bfa; margin-bottom: 4px; 
   <div class="skill">
     <div class="skill-name">Architecture Skill</div>
     <div class="skill-src">Auto-generated · Design + Build</div>
-    <div class="skill-desc">be-architecture.md + fe-architecture.md. Real conventions, real packages. No invented patterns.</div>
+    <div class="skill-desc">be-architecture.md + fe-architecture.md. Real conventions, real packages, dev server commands. No invented patterns.</div>
   </div>
   <div class="skill-brand">
     <div class="skill-name">WasteHero Brand 🎨</div>
-    <div class="skill-src">Oliver-maintained · Build phase only (hook)</div>
+    <div class="skill-src">Designer-maintained · Build phase (hook)</div>
     <div class="skill-desc">
       .claude/skills/wastehero-brand/<br><br>
-      Loaded via hook on every .jsx / .css edit — not by bl-design. Brand tokens only enter at Build time.
+      Loaded via hook on every .jsx/.css edit. Includes card guards: when to use cards vs layout wrappers.
     </div>
   </div>
   <div class="skill-brand">
     <div class="skill-name">UX Patterns 🎨</div>
-    <div class="skill-src">Oliver-maintained · Design phase</div>
+    <div class="skill-src">Designer-maintained · Design phase</div>
     <div class="skill-desc">
       build-loop/skills/ux-patterns.md<br><br>
       Interaction patterns — nav, forms, tables, modals. Loaded by bl-design when ux-patterns is in skills[].
     </div>
   </div>
-  <div class="skill" style="grid-column:span 2; max-width:50%;">
+  <div class="skill-new" style="grid-column: span 2;">
+    <div class="skill-name">FE Test (bl-fe-test) 🌐 NEW</div>
+    <div class="skill-src">Auto-run · Step 3.5 after every build</div>
+    <div class="skill-desc">
+      commands/bl-fe-test.md<br><br>
+      Reads config.json for credentials. Starts Vite + Django dev servers if not running. Playwright headless — logs in, navigates to route, intercepts all /graph-api/ calls, parses JSON for errors array. Screenshots at each stage. Outputs FE_TEST_RESULT: PASSES or FAILS. Failing operations become gap entries pointing at the resolver to fix.
+    </div>
+  </div>
+  <div class="skill" style="grid-column: span 2; max-width: none;">
     <div class="skill-name">Testing Skill</div>
     <div class="skill-src">Team-authored · Design phase</div>
     <div class="skill-desc">build-loop/skills/testing.md. Test structure and coverage rules. Loaded when testing is in skills[].</div>
@@ -737,7 +815,7 @@ h1 { text-align: center; font-size: 1.5rem; color: #a78bfa; margin-bottom: 4px; 
   </div>
   <div class="file file-new">
     <div class="file-name">req-graph.json</div>
-    <div class="file-desc">Machine-readable graph. sorted_order used by orchestrator. Dependency + coverage + location data used by design + build agents.</div>
+    <div class="file-desc">Machine-readable graph. sorted_order used by orchestrator. Dependency + coverage + location data used by design, build, and FE test agents.</div>
   </div>
   <div class="file file-new">
     <div class="file-name">req-graph.md</div>
@@ -745,7 +823,7 @@ h1 { text-align: center; font-size: 1.5rem; color: #a78bfa; margin-bottom: 4px; 
   </div>
   <div class="file">
     <div class="file-name">state.json</div>
-    <div class="file-desc">Active requirement, current phase, iteration count. Loop resumes exactly here if interrupted.</div>
+    <div class="file-desc">Active requirement, current phase (now includes "fe-test"), iteration count. Loop resumes exactly here if interrupted.</div>
   </div>
   <div class="file">
     <div class="file-name">plans/{id}.md</div>
@@ -753,7 +831,27 @@ h1 { text-align: center; font-size: 1.5rem; color: #a78bfa; margin-bottom: 4px; 
   </div>
   <div class="file">
     <div class="file-name">gaps/{id}.md</div>
-    <div class="file-desc">Gap report per requirement. Final line is PASSES or GAPS_FOUND. Input to /bl-build on retry iterations.</div>
+    <div class="file-desc">Gap report. Now includes FE test verdict header and failed GraphQL operations as explicit gap entries. Final line: PASSES or GAPS_FOUND.</div>
+  </div>
+  <div class="file file-today">
+    <div class="file-name">fe-tests/{id}.md</div>
+    <div class="file-desc">FE test report per requirement. Lists every GraphQL operation intercepted, which ones had errors, the error messages, and suggested fix. Final line: PASSES or FAILS.</div>
+  </div>
+  <div class="file file-today">
+    <div class="file-name">screenshots/{id}-*.png</div>
+    <div class="file-desc">Playwright screenshots: after-login, page-load, final state. Preserved even when the test fails — so you can see exactly what the app looked like when it broke.</div>
+  </div>
+  <div class="file file-today">
+    <div class="file-name">config.json</div>
+    <div class="file-desc">Local credentials for FE tests. Gitignored. Fields: test_user (username + password), fe_port (3000), be_port (8000), be_graphql_path (/graph-api/). Copy from config.json.example.</div>
+  </div>
+  <div class="file file-today">
+    <div class="file-name">logs/fe-server.log</div>
+    <div class="file-desc">Vite dev server stdout if bl-fe-test started it. Also be-server.log for Django. Inspect here if FE_TEST_RESULT: ERROR servers_not_ready.</div>
+  </div>
+  <div class="file">
+    <div class="file-name">snapshots/{id}/</div>
+    <div class="file-desc">File snapshots taken before bl-build edits. Used by /bl-reset to restore original state. manifest.json lists every file touched.</div>
   </div>
 </div>
 
@@ -764,18 +862,22 @@ h1 { text-align: center; font-size: 1.5rem; color: #a78bfa; margin-bottom: 4px; 
   <div class="output-card o-green">
     <div class="output-card-title">✅ Built & Verified</div>
     <div class="output-card-body">
-      Code written, build compiles, gap scan passed.<br><br>
+      Code written, build compiles, FE test clean, gap scan passed.<br><br>
       — What was built or extended<br>
-      — <strong style="color:#4ade80">Where to test manually:</strong> route, what to click, what to expect<br><br>
-      UI is on-brand — every value came from Oliver's design system.
+      — <strong style="color:#4ade80">Where to test manually:</strong> route → what to click → what to expect<br>
+      — <strong style="color:#4ade80">FE test status</strong> and screenshot paths<br>
+      — Iterations needed<br><br>
+      UI is on-brand. Card guards enforced correct layout pattern.
     </div>
   </div>
   <div class="output-card o-red">
     <div class="output-card-title">⚠️ Needs Manual Review</div>
     <div class="output-card-body">
       Hit max iterations or failed pre-flight.<br><br>
-      — Which criteria still failed<br>
-      — Last gap report content<br>
+      — Which static criteria still failed<br>
+      — Which GraphQL operations errored and why<br>
+      — Screenshots of the broken state<br>
+      — Last gap report + FE test report paths<br>
       — Iterations attempted<br><br>
       Loop did not stop. It moved on.
     </div>
@@ -784,9 +886,11 @@ h1 { text-align: center; font-size: 1.5rem; color: #a78bfa; margin-bottom: 4px; 
     <div class="output-card-title">📄 loop-summary.md</div>
     <div class="output-card-body">
       Full run report.<br><br>
-      — Pass / flag counts<br>
+      — Pass / flag / needs-review counts<br>
       — Per-requirement breakdown<br>
       — <strong style="color:#2dd4bf">Manual test path</strong> for every passing req<br>
+      — FE test verdict per requirement<br>
+      — Screenshot paths for passing and failing reqs<br>
       — Dependencies resolved<br><br>
       Your morning briefing.
     </div>

@@ -6,11 +6,17 @@ wastehero_frontend-development/
 build-loop/context/
 build-loop/plans/
 build-loop/gaps/
+build-loop/fe-tests/
+build-loop/screenshots/
+build-loop/logs/
 build-loop/state.json
 build-loop/loop.log
 build-loop/loop-summary.md
 build-loop/req-graph.json
 build-loop/req-graph.md
+
+# Local credentials for FE tests — never commit
+build-loop/config.json
 
 # OS
 .DS_Store
